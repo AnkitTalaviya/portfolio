@@ -39,7 +39,8 @@ function serveDemoDirectoryIndexes(): Plugin {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/portfolio/',
   plugins: [react(), serveDemoDirectoryIndexes()],
   build: {
     rollupOptions: {
@@ -50,4 +51,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

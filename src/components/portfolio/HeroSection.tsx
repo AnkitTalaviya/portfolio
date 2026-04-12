@@ -7,6 +7,7 @@ import {
 import { Maximize2, Minimize2 } from 'lucide-react';
 import type { AppCopy } from '../../i18n';
 import { outfitPalettes, type OutfitPalette, type OutfitPaletteId } from '../../data/outfitPalettes';
+import { documentUrl } from '../../lib/sitePaths';
 
 const LazyHeroScene = lazy(async () => {
   const module = await import('../HeroScene');
@@ -92,7 +93,7 @@ export const HeroSection = memo(function HeroSection({
                 </a>
                 <a
                   className="btn btn-ghost btn-lg"
-                  href="/documents/ankit-talaviya-resume.pdf"
+                  href={documentUrl('ankit-talaviya-resume.pdf')}
                   target="_blank"
                   rel="noreferrer"
                 >

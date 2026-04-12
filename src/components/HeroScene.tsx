@@ -29,10 +29,11 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { outfitPalettes, type OutfitPaletteId } from '../data/outfitPalettes';
+import { modelUrl } from '../lib/sitePaths';
 
 type SceneStatus = 'loading' | 'ready' | 'error';
 
-const heroModelPath = '/models/Landing.glb';
+const heroModelPath = modelUrl('Landing.glb');
 
 type HeroLocomotionMode =
   | 'landing'
@@ -53,39 +54,39 @@ const heroAnimationLibrary: Record<
   }
 > = {
   landing: {
-    path: '/models/Landing.glb',
+    path: modelUrl('Landing.glb'),
     aliases: ['landing', 'idle', 'breath', 'breathing', 'rest'],
   },
   walking: {
-    path: '/models/Walking.glb',
+    path: modelUrl('Walking.glb'),
     aliases: ['walking', 'walk', 'locomotion', 'move'],
   },
   running: {
-    path: '/models/Running.glb',
+    path: modelUrl('Running.glb'),
     aliases: ['running', 'run', 'sprint', 'jog'],
   },
   walkingBackward: {
-    path: '/models/Walking Backwards.glb',
+    path: modelUrl('Walking Backwards.glb'),
     aliases: ['walkingbackwards', 'walkbackwards', 'walkbackward', 'backward'],
   },
   runningBackward: {
-    path: '/models/Walking Backwards.glb',
+    path: modelUrl('Walking Backwards.glb'),
     aliases: ['walkingbackwards', 'walkbackwards', 'walkbackward', 'backward'],
   },
   forwardJump: {
-    path: '/models/Forward Jump.glb',
+    path: modelUrl('Forward Jump.glb'),
     aliases: ['forwardjump', 'jump', 'hop'],
   },
   runningJump: {
-    path: '/models/Running Jump.glb',
+    path: modelUrl('Running Jump.glb'),
     aliases: ['runningjump', 'runjump', 'jump'],
   },
   stumbleBackward: {
-    path: '/models/Stumble Backwards.glb',
+    path: modelUrl('Stumble Backwards.glb'),
     aliases: ['stumblebackwards', 'stumblebackward', 'stumble', 'fallback'],
   },
   kipUp: {
-    path: '/models/Kip Up.glb',
+    path: modelUrl('Kip Up.glb'),
     aliases: ['kipup', 'standup', 'getup', 'recover'],
   },
 };

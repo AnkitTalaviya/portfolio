@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import type { AppCopy } from '../../i18n';
+import { siteHref } from '../../lib/sitePaths';
 import { SectionHeading } from './SectionHeading';
 
 type EducationSectionProps = {
@@ -50,7 +51,12 @@ export const EducationSection = memo(function EducationSection({
                 <p>{educationCopy.documentsText}</p>
                 <div className="project-links">
                   {educationCopy.documents.map((document) => (
-                    <a href={document.href} key={document.href} target="_blank" rel="noreferrer">
+                    <a
+                      href={siteHref(document.href)}
+                      key={document.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {document.label}
                     </a>
                   ))}
