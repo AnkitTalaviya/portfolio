@@ -1,0 +1,55 @@
+export const outfitPalettes = [
+  {
+    id: 'midnight',
+    name: 'Midnight',
+    tone: 'Blue',
+    swatches: ['#4f6f88', '#6b87a0', '#c9a56a'],
+    cloth: '#4f6f88',
+    cloak: '#6b87a0',
+    armor: '#c9a56a',
+    metal: '#bfc8d2',
+  },
+  {
+    id: 'charcoal',
+    name: 'Charcoal',
+    tone: 'Neutral',
+    swatches: ['#505764', '#6b7380', '#d1bc97'],
+    cloth: '#505764',
+    cloak: '#6b7380',
+    armor: '#d1bc97',
+    metal: '#d8dde4',
+  },
+  {
+    id: 'crimson',
+    name: 'Crimson',
+    tone: 'Bold',
+    swatches: ['#7c4757', '#a6687b', '#d1a86a'],
+    cloth: '#7c4757',
+    cloak: '#a6687b',
+    armor: '#d1a86a',
+    metal: '#c7cbd3',
+  },
+  {
+    id: 'forest',
+    name: 'Forest',
+    tone: 'Green',
+    swatches: ['#4f6d57', '#6f8e74', '#c4a166'],
+    cloth: '#4f6d57',
+    cloak: '#6f8e74',
+    armor: '#c4a166',
+    metal: '#bfc8c1',
+  },
+  {
+    id: 'ivory',
+    name: 'Ivory',
+    tone: 'Light',
+    swatches: ['#d8d1c2', '#ece4d5', '#b48f5d'],
+    cloth: '#d8d1c2',
+    cloak: '#ece4d5',
+    armor: '#b48f5d',
+    metal: '#a8b1bb',
+  },
+] as const;
+
+export type OutfitPalette = (typeof outfitPalettes)[number];
+export type OutfitPaletteId = OutfitPalette['id'];

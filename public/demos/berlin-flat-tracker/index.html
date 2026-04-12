@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Berlin Flat Tracker Demo</title>
+    <meta
+      name="description"
+      content="Standalone demo website for Berlin Flat Tracker."
+    />
+    <link rel="stylesheet" href="../demo-shell.css" />
+  </head>
+  <body data-demo="flat">
+    <main class="demo-shell">
+      <header class="site-header">
+        <div class="brand-lockup">
+          <span class="brand-name">FlatTrack</span>
+          <span class="brand-tag">Housing search dashboard</span>
+        </div>
+        <nav class="nav-row">
+          <a class="nav-link" href="#pipeline">Pipeline</a>
+          <a class="nav-link" href="#documents">Documents</a>
+          <a class="nav-link" href="#signals">Signals</a>
+          <a class="nav-link" href="../../projects/berlin-flat-tracker.html">Project brief</a>
+        </nav>
+      </header>
+
+      <section class="hero-card">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Demo website</span>
+            <h1 class="hero-title">Organize apartment applications in one calm dashboard.</h1>
+            <p class="hero-copy">
+              Berlin Flat Tracker combines listings, landlord responses, documents, and viewing
+              notes into one search workflow. The demo focuses on decision support for fast-moving
+              rental markets where context disappears across too many tabs.
+            </p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="#pipeline">Open tracking board</a>
+              <a class="btn btn-ghost" href="../../projects/berlin-flat-tracker.html"
+                >Back to project brief</a
+              >
+            </div>
+            <div class="metric-grid">
+              <article class="metric-card">
+                <strong>27</strong>
+                <span>saved listings across 5 neighborhoods</span>
+              </article>
+              <article class="metric-card">
+                <strong>11</strong>
+                <span>active applications currently awaiting reply</span>
+              </article>
+              <article class="metric-card">
+                <strong>04</strong>
+                <span>viewings booked with documents already prepared</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="preview-stack">
+            <article class="panel">
+              <h2 class="panel-title">Application rhythm</h2>
+              <div class="pill-row">
+                <span class="status-pill status-pill--success">Documents ready</span>
+                <span class="status-pill status-pill--warning">3 follow-ups due</span>
+                <span class="status-pill">Budget match: strong</span>
+              </div>
+              <div class="chart-grid">
+                <div class="chart-row">
+                  <span class="chart-label">Reply rate</span>
+                  <div class="chart-bar"><span style="width: 64%"></span></div>
+                  <span class="chart-value">64%</span>
+                </div>
+                <div class="chart-row">
+                  <span class="chart-label">Budget fit</span>
+                  <div class="chart-bar"><span style="width: 82%"></span></div>
+                  <span class="chart-value">82%</span>
+                </div>
+                <div class="chart-row">
+                  <span class="chart-label">Commute score</span>
+                  <div class="chart-bar"><span style="width: 71%"></span></div>
+                  <span class="chart-value">71%</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel">
+              <h2 class="panel-title">Today's shortlist</h2>
+              <div class="compact-list">
+                <div class="compact-item">
+                  <strong>Neukolln - 2 rooms - EUR 1,240 warm</strong>
+                  <span>Viewing confirmed. Schufa and salary docs attached.</span>
+                </div>
+                <div class="compact-item">
+                  <strong>Moabit - 1.5 rooms - EUR 980 warm</strong>
+                  <span>Follow-up scheduled for tomorrow morning.</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pipeline">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Pipeline</span>
+            <h2 class="section-title">Track every listing from bookmark to decision.</h2>
+          </div>
+          <p class="section-copy">
+            The demo board turns rental search operations into a visible system instead of a loose
+            set of bookmarks and inbox threads.
+          </p>
+        </div>
+
+        <div class="three-up">
+          <article class="lane">
+            <h3>Saved listings</h3>
+            <p>Fresh apartment links waiting for a full application pass.</p>
+            <div class="task-list">
+              <div class="task">
+                <strong>Friedrichshain loft</strong>
+                <span>Excellent commute, but listing expires in 19 hours.</span>
+              </div>
+              <div class="task">
+                <strong>Tempelhof studio</strong>
+                <span>Low rent, but missing anmeldung note and elevator details.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lane">
+            <h3>Applied</h3>
+            <p>Applications submitted with document status and follow-up schedule.</p>
+            <div class="task-list">
+              <div class="task">
+                <strong>Prenzlauer Berg flat</strong>
+                <span>Application sent. Reply target in 48 hours.</span>
+              </div>
+              <div class="task">
+                <strong>Wedding 2-room</strong>
+                <span>Shortlisted because commute and budget scores stay balanced.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lane">
+            <h3>Viewing and decision</h3>
+            <p>Final stage with notes, landlord fit, and neighborhood confidence.</p>
+            <div class="task-list">
+              <div class="task">
+                <strong>Kreuzberg apartment</strong>
+                <span>Viewing complete. Waiting on contract timeline.</span>
+              </div>
+              <div class="task">
+                <strong>Charlottenburg flat</strong>
+                <span>Decision pending after second document request.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="documents">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Operations layer</span>
+            <h2 class="section-title">Keep the practical details ready.</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel">
+            <h2 class="panel-title">Document checklist</h2>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <strong>Schufa and income proof</strong>
+                <span>Marked reusable across all current applications.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Landlord letter template</strong>
+                <span>Saved as a fast-send version for same-day applications.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Viewing notes</strong>
+                <span>Centralized so apartment comparisons stay grounded after busy weeks.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel" id="signals">
+            <h2 class="panel-title">Decision signals</h2>
+            <div class="signal-list">
+              <div class="compact-item">
+                <strong>Neighborhood fit</strong>
+                <span>Filter by commute time, walkability, and rent pressure.</span>
+              </div>
+              <div class="compact-item">
+                <strong>Urgency score</strong>
+                <span>Replies due soon rise to the top automatically.</span>
+              </div>
+              <div class="compact-item">
+                <strong>Search clarity</strong>
+                <span>The dashboard reduces missed follow-ups during peak application periods.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="footer-card">
+        <span class="eyebrow">Demo outcome</span>
+        <p>
+          Berlin Flat Tracker is framed as a dedicated housing workflow product, not a generic task
+          board. The demo emphasizes urgency, document readiness, and better decisions under real
+          search pressure.
+        </p>
+        <div class="footer-actions">
+          <a class="btn btn-primary" href="#pipeline">Review the pipeline</a>
+          <a class="btn btn-ghost" href="../../projects/berlin-flat-tracker.html"
+            >Return to project brief</a
+          >
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

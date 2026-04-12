@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow Sprint Planner Demo</title>
+    <meta
+      name="description"
+      content="Standalone demo website for TaskFlow Sprint Planner."
+    />
+    <link rel="stylesheet" href="../demo-shell.css" />
+  </head>
+  <body data-demo="taskflow">
+    <main class="demo-shell">
+      <header class="site-header">
+        <div class="brand-lockup">
+          <span class="brand-name">TaskFlow</span>
+          <span class="brand-tag">Sprint planning workspace</span>
+        </div>
+        <nav class="nav-row">
+          <a class="nav-link" href="#planner">Planner</a>
+          <a class="nav-link" href="#insights">Insights</a>
+          <a class="nav-link" href="#team">Team Flow</a>
+          <a class="nav-link" href="../../projects/taskflow-sprint-planner.html">Project brief</a>
+        </nav>
+      </header>
+
+      <section class="hero-card">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Demo website</span>
+            <h1 class="hero-title">Plan calmer sprints with fewer hidden blockers.</h1>
+            <p class="hero-copy">
+              This demo shows a sprint-planning product that turns messy backlog inputs into
+              groomed delivery slices. Product, engineering, and QA share one planning flow with
+              clearer scope, visible risks, and release confidence before work enters a sprint.
+            </p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="#planner">Open planner view</a>
+              <a class="btn btn-ghost" href="../../projects/taskflow-sprint-planner.html"
+                >Back to project brief</a
+              >
+            </div>
+            <div class="metric-grid">
+              <article class="metric-card">
+                <strong>41</strong>
+                <span>backlog items grouped into 3 sprint candidates</span>
+              </article>
+              <article class="metric-card">
+                <strong>8</strong>
+                <span>dependency alerts surfaced before planning starts</span>
+              </article>
+              <article class="metric-card">
+                <strong>92%</strong>
+                <span>delivery confidence for the selected sprint slice</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="preview-stack">
+            <article class="panel">
+              <h2 class="panel-title">Release health</h2>
+              <div class="pill-row">
+                <span class="status-pill status-pill--success">6 stories ready</span>
+                <span class="status-pill status-pill--warning">2 risks open</span>
+                <span class="status-pill status-pill--danger">1 design review missing</span>
+              </div>
+              <div class="chart-grid">
+                <div class="chart-row">
+                  <span class="chart-label">Frontend</span>
+                  <div class="chart-bar"><span style="width: 74%"></span></div>
+                  <span class="chart-value">74%</span>
+                </div>
+                <div class="chart-row">
+                  <span class="chart-label">Backend</span>
+                  <div class="chart-bar"><span style="width: 62%"></span></div>
+                  <span class="chart-value">62%</span>
+                </div>
+                <div class="chart-row">
+                  <span class="chart-label">QA setup</span>
+                  <div class="chart-bar"><span style="width: 88%"></span></div>
+                  <span class="chart-value">88%</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel">
+              <h2 class="panel-title">Planning focus</h2>
+              <div class="pill-row">
+                <button class="pill-button is-active" type="button">This sprint</button>
+                <button class="pill-button" type="button">Next sprint</button>
+                <button class="pill-button" type="button">Release train</button>
+              </div>
+              <div class="compact-list">
+                <div class="compact-item">
+                  <strong>Checkout split complete</strong>
+                  <span>Cart rules and payment retry logic are now separately estimable.</span>
+                </div>
+                <div class="compact-item">
+                  <strong>API dependency flagged</strong>
+                  <span>Profile export work is blocked by auth scope confirmation.</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="planner">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Planner view</span>
+            <h2 class="section-title">From backlog intake to sprint shape.</h2>
+          </div>
+          <p class="section-copy">
+            The demo board keeps planning visible at every stage, from raw idea capture to
+            sprint-ready framing.
+          </p>
+        </div>
+
+        <div class="board-grid">
+          <div class="lane-stack">
+            <article class="lane">
+              <h3>Backlog triage</h3>
+              <p>Large tickets are split, tagged, and prepared for a planning pass.</p>
+              <div class="task-list">
+                <div class="task">
+                  <strong>Subscription settings refactor</strong>
+                  <span>Split billing UI from entitlement sync to reduce hidden scope.</span>
+                </div>
+                <div class="task">
+                  <strong>Search relevance tuning</strong>
+                  <span>Separate ranking work from analytics instrumentation.</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="lane">
+              <h3>Ready for sprint</h3>
+              <p>Stories that have clear estimates, dependencies, and QA notes stay together.</p>
+              <div class="task-list">
+                <div class="task">
+                  <strong>Checkout recovery banner</strong>
+                  <span>Frontend task with API contract confirmed and test case attached.</span>
+                </div>
+                <div class="task">
+                  <strong>Admin audit export</strong>
+                  <span>Delivery sliced into UI state, export job, and permission review.</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="panel">
+            <h2 class="panel-title">Sprint notes</h2>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <strong>Capacity signal</strong>
+                <span>Frontend capacity is tight on days 3-5 because of release QA overlap.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Recommended split</strong>
+                <span>Move one backend-heavy story into the next sprint to protect confidence.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Planning benefit</strong>
+                <span>Shared visibility reduces re-estimation during the sprint kickoff meeting.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="insights">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Core value</span>
+            <h2 class="section-title">Why teams keep the tool open.</h2>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Scope shaping</h3>
+            <p>Large efforts are broken into delivery slices before sprint planning becomes tense.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Risk visibility</h3>
+            <p>Design gaps, API blockers, and QA dependencies are surfaced before commitment.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Shared language</h3>
+            <p>Product, engineering, and QA review the same planning artifacts in one place.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="footer-card" id="team">
+        <span class="eyebrow">Demo outcome</span>
+        <p>
+          TaskFlow Sprint Planner is positioned as a focused planning surface, not another generic
+          task board. The demo frames it as a product that helps teams reduce ambiguity before work
+          enters the sprint.
+        </p>
+        <div class="footer-actions">
+          <a class="btn btn-primary" href="#planner">Review the planner board</a>
+          <a class="btn btn-ghost" href="../../projects/taskflow-sprint-planner.html"
+            >Return to project brief</a
+          >
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

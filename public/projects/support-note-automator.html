@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Note Automator</title>
+    <meta
+      name="description"
+      content="Standalone concept page for Support Note Automator."
+    />
+    <link rel="stylesheet" href="../project-pages.css" />
+  </head>
+  <body data-theme="support">
+    <main class="standalone-shell">
+      <section class="hero-panel">
+        <div class="detail-meta">
+          <span>Ops automation</span>
+          <span>Internal tool</span>
+        </div>
+        <h1 class="detail-title">Support Note Automator</h1>
+        <p class="detail-summary">
+          Support Note Automator is an internal workflow tool for teams that receive long ticket
+          threads, urgent chats, and repeated bug reports. It restructures messy conversations into
+          clear issue notes, engineering summaries, and release-ready language.
+        </p>
+        <div class="detail-actions">
+          <a
+            class="detail-button detail-button--primary"
+            href="../demos/support-note-automator/"
+            target="_blank"
+            rel="noreferrer"
+            >Check Demo</a
+          >
+          <a class="detail-button detail-button--ghost" href="../projects.html">All Projects</a>
+        </div>
+        <p class="detail-helper">Opens a standalone demo website for this project in a new tab.</p>
+
+        <div class="stat-row">
+          <article class="stat-card">
+            <strong>3 outputs</strong>
+            <span>bug summary, handoff note, release note draft</span>
+          </article>
+          <article class="stat-card">
+            <strong>Shared</strong>
+            <span>usable by support, QA, and engineering teams</span>
+          </article>
+          <article class="stat-card">
+            <strong>Pattern aware</strong>
+            <span>repeated issue tags stay visible across incidents</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-layout">
+        <div class="detail-stack">
+          <article class="detail-panel">
+            <h2>Working model</h2>
+            <p>
+              The tool ingests support messages, normalizes the content, and generates structured
+              records for different downstream audiences. Instead of rewriting the same context
+              three times, teams can start from a shared issue summary and adapt only the final
+              wording.
+            </p>
+            <ul class="detail-list">
+              <li>Summarizes long support tickets into reproducible issue descriptions.</li>
+              <li>Extracts environment hints, customer impact, and workaround details.</li>
+              <li>Creates a separate release-note tone for customer-facing updates.</li>
+            </ul>
+          </article>
+
+          <article class="detail-panel">
+            <h2>Delivery flow</h2>
+            <ol class="timeline-list">
+              <li>
+                <strong>Capture</strong>
+                Import help-desk tickets, tagged chats, or support escalation notes.
+              </li>
+              <li>
+                <strong>Normalize</strong>
+                Identify issue type, affected area, severity, and repeat frequency.
+              </li>
+              <li>
+                <strong>Publish</strong>
+                Send engineering summaries and release-note drafts into the next workflow step.
+              </li>
+            </ol>
+          </article>
+        </div>
+
+        <aside class="detail-stack">
+          <article class="detail-panel">
+            <h2>Stack</h2>
+            <div class="tag-row">
+              <span class="tag-chip">Python</span>
+              <span class="tag-chip">FastAPI</span>
+              <span class="tag-chip">OpenAI API</span>
+              <span class="tag-chip">Redis</span>
+              <span class="tag-chip">Slack webhooks</span>
+            </div>
+          </article>
+
+          <article class="detail-panel">
+            <h2>Value</h2>
+            <ul class="key-list">
+              <li>Less manual rewriting across support and engineering handoffs.</li>
+              <li>Faster release communication for resolved incidents.</li>
+              <li>Better visibility into recurring product pain points.</li>
+            </ul>
+          </article>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Snapshot Studio Demo</title>
+    <meta
+      name="description"
+      content="Standalone demo website for Market Snapshot Studio."
+    />
+    <link rel="stylesheet" href="../demo-shell.css" />
+  </head>
+  <body data-demo="market">
+    <main class="demo-shell">
+      <header class="site-header">
+        <div class="brand-lockup">
+          <span class="brand-name">Snapshot Studio</span>
+          <span class="brand-tag">Executive-ready reporting workspace</span>
+        </div>
+        <nav class="nav-row">
+          <a class="nav-link" href="#kpis">KPIs</a>
+          <a class="nav-link" href="#narrative">Narrative</a>
+          <a class="nav-link" href="#reporting">Reporting</a>
+          <a class="nav-link" href="../../projects/market-snapshot-studio.html">Project brief</a>
+        </nav>
+      </header>
+
+      <section class="hero-card">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Demo website</span>
+            <h1 class="hero-title">Turn raw exports into one clean reporting surface.</h1>
+            <p class="hero-copy">
+              Snapshot Studio helps teams move from CSV chaos to stakeholder-ready KPI stories. The
+              demo frames the product as a quick analytics layer for growth, revenue, and campaign
+              reporting that does not depend on spreadsheet cleanup every week.
+            </p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="#kpis">Open KPI board</a>
+              <a class="btn btn-ghost" href="../../projects/market-snapshot-studio.html"
+                >Back to project brief</a
+              >
+            </div>
+            <div class="metric-grid" data-range-group>
+              <article class="metric-card">
+                <strong data-range-value="revenue">EUR 182k</strong>
+                <span>quarter revenue snapshot</span>
+              </article>
+              <article class="metric-card">
+                <strong data-range-value="conversion">4.8%</strong>
+                <span>checkout conversion across paid traffic</span>
+              </article>
+              <article class="metric-card">
+                <strong data-range-value="roas">3.4x</strong>
+                <span>blended return on ad spend</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="preview-stack">
+            <article class="panel">
+              <h2 class="panel-title">Reporting range</h2>
+              <div class="pill-row">
+                <button class="pill-button is-active" type="button" data-range="quarter">
+                  Quarter
+                </button>
+                <button class="pill-button" type="button" data-range="month">Month</button>
+                <button class="pill-button" type="button" data-range="week">Week</button>
+              </div>
+              <div class="chart-grid">
+                <div class="chart-row">
+                  <span class="chart-label">Revenue delta</span>
+                  <div class="chart-bar"><span style="width: 78%"></span></div>
+                  <span class="chart-value">+18%</span>
+                </div>
+                <div class="chart-row">
+                  <span class="chart-label">CAC efficiency</span>
+                  <div class="chart-bar"><span style="width: 66%"></span></div>
+                  <span class="chart-value">stable</span>
+                </div>
+                <div class="chart-row">
+                  <span class="chart-label">Retention</span>
+                  <div class="chart-bar"><span style="width: 72%"></span></div>
+                  <span class="chart-value">+9%</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel">
+              <h2 class="panel-title">Headline narrative</h2>
+              <p id="narrative-copy">
+                Quarter growth is being driven by improved conversion on branded traffic, while
+                retention gains reduce pressure on paid acquisition efficiency.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="kpis">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">KPI board</span>
+            <h2 class="section-title">Make the numbers legible in under five minutes.</h2>
+          </div>
+          <p class="section-copy">
+            Instead of asking stakeholders to interpret spreadsheets, the demo uses KPI cards,
+            trend bars, and short narrative summaries on one page.
+          </p>
+        </div>
+
+        <div class="insight-grid">
+          <article class="insight-card">
+            <h3>Channel performance</h3>
+            <p>Paid search is efficient, organic is compounding, and affiliate remains uneven.</p>
+          </article>
+          <article class="insight-card">
+            <h3>Anomaly watch</h3>
+            <p>A mid-period spike in checkout exits appears tied to one mobile browser release.</p>
+          </article>
+          <article class="insight-card">
+            <h3>Stakeholder summary</h3>
+            <p>The reporting layer translates raw metrics into concise decision-ready language.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="narrative">
+        <div class="dashboard-grid">
+          <article class="panel">
+            <h2 class="panel-title">Trend view</h2>
+            <div class="chart-grid">
+              <div class="chart-row">
+                <span class="chart-label">Pipeline revenue</span>
+                <div class="chart-bar"><span style="width: 81%"></span></div>
+                <span class="chart-value">EUR 242k</span>
+              </div>
+              <div class="chart-row">
+                <span class="chart-label">Net retention</span>
+                <div class="chart-bar"><span style="width: 74%"></span></div>
+                <span class="chart-value">109%</span>
+              </div>
+              <div class="chart-row">
+                <span class="chart-label">Activation rate</span>
+                <div class="chart-bar"><span style="width: 69%"></span></div>
+                <span class="chart-value">61%</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel" id="reporting">
+            <h2 class="panel-title">One-page reporting value</h2>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <strong>CSV import</strong>
+                <span>Campaign, revenue, and funnel exports are normalized quickly.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Auto summary</strong>
+                <span>Key movement is converted into readable reporting language.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Executive view</strong>
+                <span>Decision makers get the headline without navigating multiple tools.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="footer-card">
+        <span class="eyebrow">Demo outcome</span>
+        <p>
+          Market Snapshot Studio is presented as a focused reporting website that sits between raw
+          data exports and leadership reporting. The demo shows how the product can feel polished
+          and decision-oriented rather than spreadsheet-heavy.
+        </p>
+        <div class="footer-actions">
+          <a class="btn btn-primary" href="#kpis">Review the KPI board</a>
+          <a class="btn btn-ghost" href="../../projects/market-snapshot-studio.html"
+            >Return to project brief</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const rangeButtons = document.querySelectorAll('[data-range]');
+      const revenueNode = document.querySelector('[data-range-value="revenue"]');
+      const conversionNode = document.querySelector('[data-range-value="conversion"]');
+      const roasNode = document.querySelector('[data-range-value="roas"]');
+      const narrativeNode = document.getElementById('narrative-copy');
+
+      const ranges = {
+        quarter: {
+          revenue: 'EUR 182k',
+          conversion: '4.8%',
+          roas: '3.4x',
+          narrative:
+            'Quarter growth is being driven by improved conversion on branded traffic, while retention gains reduce pressure on paid acquisition efficiency.',
+        },
+        month: {
+          revenue: 'EUR 63k',
+          conversion: '4.3%',
+          roas: '3.1x',
+          narrative:
+            'Monthly growth remains healthy, led by repeat purchases and a better-performing onboarding sequence on paid traffic.',
+        },
+        week: {
+          revenue: 'EUR 14k',
+          conversion: '4.1%',
+          roas: '2.8x',
+          narrative:
+            'Weekly results are steady, with one temporary mobile drop-off keeping conversion slightly below the monthly average.',
+        },
+      };
+
+      rangeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const rangeKey = button.getAttribute('data-range');
+          const nextRange = ranges[rangeKey];
+
+          if (!nextRange) {
+            return;
+          }
+
+          rangeButtons.forEach((item) => item.classList.remove('is-active'));
+          button.classList.add('is-active');
+          revenueNode.textContent = nextRange.revenue;
+          conversionNode.textContent = nextRange.conversion;
+          roasNode.textContent = nextRange.roas;
+          narrativeNode.textContent = nextRange.narrative;
+        });
+      });
+    </script>
+  </body>
+</html>
