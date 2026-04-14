@@ -1131,6 +1131,7 @@ export function HeroScene({
     const movementOffset = new Vector3();
     const movementDirection = new Vector3(0, 0, -1);
     const movementStep = new Vector3();
+    const cameraFacingDirection = new Vector3(0, 0, -1);
     const baseModelPosition = new Vector3();
     const heroFocusPoint = new Vector3();
     const panBoundsMin = new Vector3();
@@ -1151,7 +1152,6 @@ export function HeroScene({
     let modelRoot: Group | null = null;
     let animationMixer: AnimationMixer | null = null;
     let hasFramedModel = false;
-    let headingAngle = 0;
     let heroFocusNode: Object3D | null = null;
     let heroFocusOffsetY = 0;
 
@@ -1314,7 +1314,6 @@ export function HeroScene({
       heroFocusNode = resolveHeroFocusNode(model);
       heroFocusOffsetY = cameraLookTarget.y - baseModelPosition.y;
       followedLookTarget.copy(cameraLookTarget);
-      headingAngle = 0;
       cameraBaseOffset.set(fittedMaxAxis * 0.03, fittedHeight * 0.02, distance).sub(cameraLookTarget);
       cameraOffset.copy(cameraBaseOffset);
       camera.position.copy(cameraLookTarget).add(cameraOffset);
@@ -1361,7 +1360,6 @@ export function HeroScene({
       setGameState('playing');
       recoveryModeRef.current = null;
       jumpModeRef.current = null;
-      headingAngle = 0;
       
       if (modelRoot) {
         modelRoot.position.x = baseModelPosition.x;
@@ -1528,11 +1526,26 @@ export function HeroScene({
               ? 1
               : Math.max(0.45, Math.abs(touchMovement.x));
 
-          headingAngle += (isTurningLeft ? -1 : 1) * turnSpeed * turnIntensity * delta;
+          controls.rotateLeft((isTurningLeft ? 1 : -1) * turnSpeed * 0.42 * turnIntensity * delta);
+          controls.update();
+        }
+
+        cameraFacingDirection.copy(controls.target).sub(camera.position);
+        cameraFacingDirection.y = 0;
+
+        if (cameraFacingDirection.lengthSq() > 0.0001) {
+          cameraFacingDirection.normalize();
+        } else {
+          cameraFacingDirection.set(0, 0, -1);
         }
 
         if (isMoving) {
-          movementDirection.set(Math.sin(headingAngle), 0, -Math.cos(headingAngle));
+          movementDirection.copy(cameraFacingDirection);
+
+          if (shouldMoveBackward) {
+            movementDirection.multiplyScalar(-1);
+          }
+
           const movementSpeed = shouldMoveForward
             ? isRunningForward
               ? runSpeed
