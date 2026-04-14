@@ -4,14 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "npm run build:hero-animations && vite",
+    "build": "npm run build:hero-animations && tsc && vite build",
+    "build:hero-animations": "node scripts/build-hero-animation-pack.mjs",
     "preview": "vite preview",
     "install:all": "npm install && npm --prefix apps/react-crud-workspace install",
     "dev:crud-workspace": "npm --prefix apps/react-crud-workspace run dev",
     "build:crud-workspace": "npm --prefix apps/react-crud-workspace run build"
   },
   "devDependencies": {
+    "@gltf-transform/core": "^4.3.0",
+    "@gltf-transform/functions": "^4.3.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/three": "^0.183.1",

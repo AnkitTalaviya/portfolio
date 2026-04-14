@@ -34,6 +34,7 @@ import { modelUrl } from '../lib/sitePaths';
 type SceneStatus = 'loading' | 'ready' | 'error';
 
 const heroModelPath = modelUrl('Landing.glb');
+const heroAnimationPackPath = modelUrl('HeroAnimations.glb');
 
 type HeroLocomotionMode =
   | 'landing'
@@ -45,48 +46,38 @@ type HeroJumpMode = 'forwardJump' | 'runningJump';
 type HeroRecoveryMode = 'stumbleBackward' | 'kipUp';
 export type HeroAnimationMode = HeroLocomotionMode | HeroJumpMode | HeroRecoveryMode;
 
-// Landing is the visible base model; Walking and Running are loaded as animation sources.
+// Landing stays embedded in the visible base model. The rest come from a shared animation pack.
 const heroAnimationLibrary: Record<
   HeroAnimationMode,
   {
-    path: string;
     aliases: readonly string[];
   }
 > = {
   landing: {
-    path: modelUrl('Landing.glb'),
     aliases: ['landing', 'idle', 'breath', 'breathing', 'rest'],
   },
   walking: {
-    path: modelUrl('Walking.glb'),
     aliases: ['walking', 'walk', 'locomotion', 'move'],
   },
   running: {
-    path: modelUrl('Running.glb'),
     aliases: ['running', 'run', 'sprint', 'jog'],
   },
   walkingBackward: {
-    path: modelUrl('Walking Backwards.glb'),
     aliases: ['walkingbackwards', 'walkbackwards', 'walkbackward', 'backward'],
   },
   runningBackward: {
-    path: modelUrl('Walking Backwards.glb'),
     aliases: ['walkingbackwards', 'walkbackwards', 'walkbackward', 'backward'],
   },
   forwardJump: {
-    path: modelUrl('Forward Jump.glb'),
     aliases: ['forwardjump', 'jump', 'hop'],
   },
   runningJump: {
-    path: modelUrl('Running Jump.glb'),
     aliases: ['runningjump', 'runjump', 'jump'],
   },
   stumbleBackward: {
-    path: modelUrl('Stumble Backwards.glb'),
     aliases: ['stumblebackwards', 'stumblebackward', 'stumble', 'fallback'],
   },
   kipUp: {
-    path: modelUrl('Kip Up.glb'),
     aliases: ['kipup', 'standup', 'getup', 'recover'],
   },
 };
@@ -134,6 +125,33 @@ function resolveAnimationClip(
       return normalizedAliases.some((alias) => clipName.includes(alias));
     }) ?? null
   );
+}
+
+function resolvePackedAnimationClip(
+  clips: AnimationClip[],
+  mode: HeroAnimationMode,
+  aliases: readonly string[],
+) {
+  const normalizedMode = normalizeAnimationName(mode);
+  const exactMatch =
+    clips.find((clip) => normalizeAnimationName(clip.name) === normalizedMode) ?? null;
+
+  if (exactMatch) {
+    return exactMatch;
+  }
+
+  if (mode === 'runningBackward') {
+    const walkingBackwardMatch =
+      clips.find(
+        (clip) => normalizeAnimationName(clip.name) === normalizeAnimationName('walkingBackward'),
+      ) ?? null;
+
+    if (walkingBackwardMatch) {
+      return walkingBackwardMatch;
+    }
+  }
+
+  return resolveAnimationClip(clips, aliases);
 }
 
 function pickFallbackClip(clips: AnimationClip[]) {
@@ -449,24 +467,19 @@ async function loadHeroAnimationClips(
     return resolvedClips;
   }
 
-  const loadedAnimations = await Promise.all(
-    missingModes.map(async (mode) => {
-      const animationAsset = await loadOptionalGltf(loader, heroAnimationLibrary[mode].path);
-      if (!animationAsset?.animations.length) {
-        return [mode, null] as const;
-      }
+  const animationPack = await loadOptionalGltf(loader, heroAnimationPackPath);
+  if (!animationPack?.animations.length) {
+    return resolvedClips;
+  }
 
-      const matchedClip =
-        resolveAnimationClip(animationAsset.animations, heroAnimationLibrary[mode].aliases) ??
-        pickFallbackClip(animationAsset.animations);
-
-      return [mode, matchedClip] as const;
-    }),
-  );
-
-  loadedAnimations.forEach(([mode, clip]) => {
-    if (clip) {
-      resolvedClips[mode] = mode === 'landing' ? clip : makeClipInPlace(clip);
+  missingModes.forEach((mode) => {
+    const matchedClip = resolvePackedAnimationClip(
+      animationPack.animations,
+      mode,
+      heroAnimationLibrary[mode].aliases,
+    );
+    if (matchedClip) {
+      resolvedClips[mode] = mode === 'landing' ? matchedClip : makeClipInPlace(matchedClip);
     }
   });
 
