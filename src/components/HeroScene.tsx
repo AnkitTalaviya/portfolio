@@ -14,6 +14,7 @@ import {
   Group,
   InstancedMesh,
   Mesh,
+  MeshLambertMaterial,
   MeshStandardMaterial,
   Object3D,
   PerspectiveCamera,
@@ -101,6 +102,7 @@ type HeroSceneProps = {
   isExpanded?: boolean;
   isOutfitTransitioning?: boolean;
   onOutfitApplied?: () => void;
+  onReady?: () => void;
   labels: {
     loading: string;
     error: string;
@@ -610,6 +612,7 @@ export function HeroScene({
   isExpanded = false,
   isOutfitTransitioning = false,
   onOutfitApplied,
+  onReady,
   labels,
 }: HeroSceneProps) {
   const mountRef = useRef<HTMLDivElement | null>(null);
@@ -620,6 +623,7 @@ export function HeroScene({
   const animationModeRef = useRef<HeroAnimationMode>(animationMode);
   const requestedAnimationModeRef = useRef<HeroAnimationMode>(animationMode);
   const onOutfitAppliedRef = useRef(onOutfitApplied);
+  const onReadyRef = useRef(onReady);
   const animationMixerRef = useRef<AnimationMixer | null>(null);
   const animationActionsRef = useRef<Partial<Record<HeroAnimationMode, AnimationAction>>>({});
   const activeAnimationModeRef = useRef<HeroAnimationMode | null>(null);
@@ -916,6 +920,10 @@ export function HeroScene({
   }, [onOutfitApplied]);
 
   useEffect(() => {
+    onReadyRef.current = onReady;
+  }, [onReady]);
+
+  useEffect(() => {
     const mediaQuery = window.matchMedia('(pointer: coarse)');
     const syncHintMode = () => {
       setIsTouchHintMode(mediaQuery.matches);
@@ -1019,7 +1027,7 @@ export function HeroScene({
     }
 
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    const scenePixelRatioCap = isCoarsePointer ? 1.25 : 2;
+    const scenePixelRatioCap = isCoarsePointer ? 1 : 2;
 
     const scene = new Scene();
     scene.fog = new Fog(0x07141f, 40, 150);
@@ -1030,6 +1038,7 @@ export function HeroScene({
     const renderer = new WebGLRenderer({
       alpha: true,
       antialias: !isCoarsePointer,
+      powerPreference: isCoarsePointer ? 'low-power' : 'high-performance',
     });
     renderer.outputColorSpace = SRGBColorSpace;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, scenePixelRatioCap));
@@ -1079,16 +1088,20 @@ export function HeroScene({
     const loader = new GLTFLoader();
     
     const groundGeo = new PlaneGeometry(2000, 2000);
-    const groundMat = new MeshStandardMaterial({ color: 0x3b5323, roughness: 1, metalness: 0.1 });
+    const groundMat = isCoarsePointer
+      ? new MeshLambertMaterial({ color: 0x3b5323 })
+      : new MeshStandardMaterial({ color: 0x3b5323, roughness: 1, metalness: 0.1 });
     const ground = new Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     terrainGroup.add(ground);
 
     const dummy = new Object3D();
-    const grassCount = isCoarsePointer ? 5500 : 15000;
+    const grassCount = isCoarsePointer ? 1800 : 15000;
     const grassGeo = new ConeGeometry(0.1, 0.4, 3);
-    const grassMat = new MeshStandardMaterial({ color: 0x5a863e, roughness: 0.8 });
+    const grassMat = isCoarsePointer
+      ? new MeshLambertMaterial({ color: 0x5a863e })
+      : new MeshStandardMaterial({ color: 0x5a863e, roughness: 0.8 });
     const grassMesh = new InstancedMesh(grassGeo, grassMat, grassCount);
     grassMesh.receiveShadow = true;
     grassMesh.castShadow = true;
@@ -1106,9 +1119,11 @@ export function HeroScene({
     }
     terrainGroup.add(grassMesh);
 
-    const flowerCount = isCoarsePointer ? 900 : 3000;
+    const flowerCount = isCoarsePointer ? 180 : 3000;
     const flowerGeo = new SphereGeometry(0.15, isCoarsePointer ? 4 : 5, isCoarsePointer ? 3 : 4);
-    const flowerMat = new MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
+    const flowerMat = isCoarsePointer
+      ? new MeshLambertMaterial({ color: 0xffffff })
+      : new MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
     const flowerMesh = new InstancedMesh(flowerGeo, flowerMat, flowerCount);
     flowerMesh.receiveShadow = true;
     flowerMesh.castShadow = true;
@@ -1496,6 +1511,7 @@ export function HeroScene({
 
           model.visible = true;
           setStatus('ready');
+          onReadyRef.current?.();
           onOutfitAppliedRef.current?.();
         });
       },

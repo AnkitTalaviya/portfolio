@@ -1,5 +1,7 @@
 import {
   Suspense,
+  useEffect,
+  useState,
   lazy,
   memo,
   type CSSProperties,
@@ -27,9 +29,15 @@ type HeroSectionProps = {
   onToggleExpanded: () => void;
 };
 
-function SceneLoadingFallback({ loadingLabel }: { loadingLabel: string }) {
+function SceneLoadingFallback({
+  loadingLabel,
+  overlayOnly = false,
+}: {
+  loadingLabel: string;
+  overlayOnly?: boolean;
+}) {
   return (
-    <div className="scene-canvas" aria-hidden="true">
+    <div className={overlayOnly ? 'scene-loader-surface' : 'scene-canvas'} aria-hidden="true">
       <div className="scene-overlay">
         <div className="scene-loader" aria-hidden="true">
           <span className="scene-loader__ring scene-loader__ring--outer" />
@@ -56,10 +64,28 @@ export const HeroSection = memo(function HeroSection({
   onOutfitSelect,
   onToggleExpanded,
 }: HeroSectionProps) {
+  const [shouldMountHeroScene, setShouldMountHeroScene] = useState(false);
+  const [isHeroSceneReady, setIsHeroSceneReady] = useState(false);
   const sceneThemeStyle = {
     '--guardian-accent': activePalette.cloak,
     '--guardian-secondary': activePalette.armor,
   } as CSSProperties;
+
+  useEffect(() => {
+    let firstFrame = 0;
+    let secondFrame = 0;
+
+    firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        setShouldMountHeroScene(true);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
+  }, []);
 
   return (
     <section className="section hero-section" id="top">
@@ -138,16 +164,24 @@ export const HeroSection = memo(function HeroSection({
                   </button>
 
                   <div className="scene-stage__hero-shell">
-                    <Suspense fallback={<SceneLoadingFallback loadingLabel={sceneCopy.loading} />}>
-                      <LazyHeroScene
-                        outfitPaletteId={activeOutfitId}
-                        animationMode="landing"
-                        isExpanded={isExpanded}
-                        isOutfitTransitioning={isOutfitTransitioning}
-                        onOutfitApplied={onOutfitApplied}
-                        labels={sceneCopy}
-                      />
-                    </Suspense>
+                    {!isHeroSceneReady ? (
+                      <SceneLoadingFallback loadingLabel={sceneCopy.loading} overlayOnly />
+                    ) : null}
+                    {shouldMountHeroScene ? (
+                      <Suspense fallback={<SceneLoadingFallback loadingLabel={sceneCopy.loading} />}>
+                        <LazyHeroScene
+                          outfitPaletteId={activeOutfitId}
+                          animationMode="landing"
+                          isExpanded={isExpanded}
+                          isOutfitTransitioning={isOutfitTransitioning}
+                          onOutfitApplied={onOutfitApplied}
+                          onReady={() => setIsHeroSceneReady(true)}
+                          labels={sceneCopy}
+                        />
+                      </Suspense>
+                    ) : (
+                      <SceneLoadingFallback loadingLabel={sceneCopy.loading} />
+                    )}
                   </div>
 
                   <div className="scene-stage__palette-dock">
