@@ -815,6 +815,7 @@ p {
     radial-gradient(circle at 50% 8%, color-mix(in srgb, var(--guardian-accent) 18%, transparent), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
   isolation: isolate;
+  overscroll-behavior: contain;
 }
 
 .scene-stage__hero-shell {
@@ -1066,6 +1067,11 @@ p {
   min-width: 0;
   cursor: grab;
   z-index: 1;
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .scene-stage--expanded .scene-canvas {
@@ -1076,6 +1082,7 @@ p {
   display: block;
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 
 .scene-canvas:active {

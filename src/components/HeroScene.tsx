@@ -1018,6 +1018,9 @@ export function HeroScene({
       return undefined;
     }
 
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const scenePixelRatioCap = isCoarsePointer ? 1.25 : 2;
+
     const scene = new Scene();
     scene.fog = new Fog(0x07141f, 40, 150);
 
@@ -1026,13 +1029,17 @@ export function HeroScene({
 
     const renderer = new WebGLRenderer({
       alpha: true,
-      antialias: true,
+      antialias: !isCoarsePointer,
     });
     renderer.outputColorSpace = SRGBColorSpace;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, scenePixelRatioCap));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.display = 'block';
+    renderer.domElement.style.touchAction = 'none';
+    renderer.domElement.style.userSelect = 'none';
+    renderer.domElement.style.webkitUserSelect = 'none';
+    renderer.domElement.style.setProperty('-webkit-tap-highlight-color', 'transparent');
     mount.appendChild(renderer.domElement);
 
     const stage = new Group();
@@ -1079,7 +1086,7 @@ export function HeroScene({
     terrainGroup.add(ground);
 
     const dummy = new Object3D();
-    const grassCount = 15000;
+    const grassCount = isCoarsePointer ? 5500 : 15000;
     const grassGeo = new ConeGeometry(0.1, 0.4, 3);
     const grassMat = new MeshStandardMaterial({ color: 0x5a863e, roughness: 0.8 });
     const grassMesh = new InstancedMesh(grassGeo, grassMat, grassCount);
@@ -1099,8 +1106,8 @@ export function HeroScene({
     }
     terrainGroup.add(grassMesh);
 
-    const flowerCount = 3000;
-    const flowerGeo = new SphereGeometry(0.15, 5, 4);
+    const flowerCount = isCoarsePointer ? 900 : 3000;
+    const flowerGeo = new SphereGeometry(0.15, isCoarsePointer ? 4 : 5, isCoarsePointer ? 3 : 4);
     const flowerMat = new MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
     const flowerMesh = new InstancedMesh(flowerGeo, flowerMat, flowerCount);
     flowerMesh.receiveShadow = true;
@@ -1188,6 +1195,13 @@ export function HeroScene({
     let manualOrbitLastX = 0;
     let manualOrbitLastY = 0;
 
+    // Keep iPhone Safari from turning scene drags into page scroll gestures.
+    const preventSceneTouchScroll = (event: TouchEvent) => {
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+    };
+
     // OrbitControls maps Shift + left-drag to pan. Pan is disabled here, so we
     // provide a small capture-phase rotate handler to keep sprint + drag usable.
     const handleManualOrbitPointerDown = (event: PointerEvent) => {
@@ -1238,6 +1252,8 @@ export function HeroScene({
     };
 
     renderer.domElement.addEventListener('pointerdown', handleManualOrbitPointerDown, true);
+    renderer.domElement.addEventListener('touchstart', preventSceneTouchScroll, { passive: false });
+    renderer.domElement.addEventListener('touchmove', preventSceneTouchScroll, { passive: false });
     sceneDocument.addEventListener('pointermove', handleManualOrbitPointerMove, true);
     sceneDocument.addEventListener('pointerup', handleManualOrbitPointerEnd, true);
     sceneDocument.addEventListener('pointercancel', handleManualOrbitPointerEnd, true);
@@ -1689,6 +1705,8 @@ export function HeroScene({
       }
 
       renderer.domElement.removeEventListener('pointerdown', handleManualOrbitPointerDown, true);
+      renderer.domElement.removeEventListener('touchstart', preventSceneTouchScroll);
+      renderer.domElement.removeEventListener('touchmove', preventSceneTouchScroll);
       sceneDocument.removeEventListener('pointermove', handleManualOrbitPointerMove, true);
       sceneDocument.removeEventListener('pointerup', handleManualOrbitPointerEnd, true);
       sceneDocument.removeEventListener('pointercancel', handleManualOrbitPointerEnd, true);
