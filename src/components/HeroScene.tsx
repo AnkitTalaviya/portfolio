@@ -1152,6 +1152,7 @@ export function HeroScene({
     let modelRoot: Group | null = null;
     let animationMixer: AnimationMixer | null = null;
     let hasFramedModel = false;
+    let lastMovementFacingAngle = 0;
     let heroFocusNode: Object3D | null = null;
     let heroFocusOffsetY = 0;
 
@@ -1307,6 +1308,7 @@ export function HeroScene({
         cameraLookTarget.z + panRangeZ,
       );
       hasFramedModel = true;
+      lastMovementFacingAngle = 0;
       baseModelPosition.copy(model.position);
       baseModelPosition.y += heroVerticalLift;
       model.position.y = baseModelPosition.y;
@@ -1360,6 +1362,7 @@ export function HeroScene({
       setGameState('playing');
       recoveryModeRef.current = null;
       jumpModeRef.current = null;
+      lastMovementFacingAngle = 0;
       
       if (modelRoot) {
         modelRoot.position.x = baseModelPosition.x;
@@ -1526,7 +1529,7 @@ export function HeroScene({
               ? 1
               : Math.max(0.45, Math.abs(touchMovement.x));
 
-          controls.rotateLeft((isTurningLeft ? 1 : -1) * turnSpeed * 0.42 * turnIntensity * delta);
+          controls.rotateLeft((isTurningLeft ? -1 : 1) * turnSpeed * 0.42 * turnIntensity * delta);
           controls.update();
         }
 
@@ -1572,10 +1575,12 @@ export function HeroScene({
             ? Math.min(1, landingAction.time / Math.max(landingAction.getClip().duration, 0.0001))
             : 1;
         const landingLift = isLandingIntroActive ? (1 - landingProgress) ** 2 * landingDropHeight : 0;
-        const idleFacingAngle = 0;
-        const targetFacing = isMoving
-          ? Math.atan2(movementDirection.x, movementDirection.z)
-          : idleFacingAngle;
+
+        if (isMoving) {
+          lastMovementFacingAngle = Math.atan2(movementDirection.x, movementDirection.z);
+        }
+
+        const targetFacing = lastMovementFacingAngle;
         modelRoot.rotation.y = easeAngle(
           modelRoot.rotation.y,
           targetFacing,
