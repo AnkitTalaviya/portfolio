@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { SectionHeading } from '../portfolio/SectionHeading';
-
-type ProjectHubCopy = (typeof import('../../projectHubCopy').projectHubCopy)['en'];
+import { MetricGrid } from '../common/MetricGrid';
+import type { ProjectHubCopy } from '../../projectHubCopy';
 
 type ProjectHubHeroSectionProps = {
   copy: ProjectHubCopy;
@@ -23,14 +23,7 @@ export const ProjectHubHeroSection = memo(function ProjectHubHeroSection({
           textClassName="hero-text project-hub-text"
         />
 
-        <div className="metric-grid">
-          {copy.stats.map((item) => (
-            <div className="metric-card" key={item.label}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </div>
+        <MetricGrid items={copy.stats} />
       </div>
     </section>
   );

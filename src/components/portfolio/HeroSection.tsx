@@ -10,6 +10,8 @@ import { Maximize2, Minimize2 } from 'lucide-react';
 import type { AppCopy } from '../../i18n';
 import { outfitPalettes, type OutfitPalette, type OutfitPaletteId } from '../../data/outfitPalettes';
 import { documentUrl } from '../../lib/sitePaths';
+import { siteDocuments, siteProfile } from '../../data/siteConfig';
+import { MetricGrid } from '../common/MetricGrid';
 
 const LazyHeroScene = lazy(async () => {
   const module = await import('../HeroScene');
@@ -106,12 +108,12 @@ export const HeroSection = memo(function HeroSection({
               </div>
 
               <div className="d-flex flex-wrap gap-3 hero-actions">
-                <a className="btn btn-accent btn-lg" href="mailto:ankittalaviya.de@gmail.com">
+                <a className="btn btn-accent btn-lg" href={siteProfile.emailHref}>
                   {heroCopy.actions.email}
                 </a>
                 <a
                   className="btn btn-ghost btn-lg"
-                  href="https://www.linkedin.com/in/ankit-talaviya"
+                  href={siteProfile.linkedInUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -119,7 +121,7 @@ export const HeroSection = memo(function HeroSection({
                 </a>
                 <a
                   className="btn btn-ghost btn-lg"
-                  href={documentUrl('ankit-talaviya-resume.pdf')}
+                  href={documentUrl(siteDocuments.resume)}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -127,14 +129,7 @@ export const HeroSection = memo(function HeroSection({
                 </a>
               </div>
 
-              <div className="metric-grid">
-                {heroCopy.stats.map((item) => (
-                  <div className="metric-card" key={item.label}>
-                    <strong>{item.value}</strong>
-                    <span>{item.label}</span>
-                  </div>
-                ))}
-              </div>
+              <MetricGrid items={heroCopy.stats} />
             </div>
           </div>
 

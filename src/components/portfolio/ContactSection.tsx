@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import type { AppCopy } from '../../i18n';
+import { siteProfile } from '../../data/siteConfig';
 import { SectionHeading } from './SectionHeading';
 
 type ContactSectionProps = {
@@ -22,19 +23,19 @@ export const ContactSection = memo(function ContactSection({
               textClassName="section-text mb-0"
             />
             <div className="contact-list">
-              <a href="mailto:ankittalaviya.de@gmail.com">ankittalaviya.de@gmail.com</a>
-              <a href="tel:+4915560693724">+49 155 60693724</a>
+              <a href={siteProfile.emailHref}>{siteProfile.email}</a>
+              <a href={siteProfile.phoneHref}>{siteProfile.phoneLabel}</a>
               <span>{contactCopy.location}</span>
             </div>
           </div>
 
           <div className="cta-actions">
-            <a className="btn btn-accent" href="mailto:ankittalaviya.de@gmail.com">
+            <a className="btn btn-accent" href={siteProfile.emailHref}>
               {contactCopy.actions.email}
             </a>
             <a
               className="btn btn-ghost"
-              href="https://www.linkedin.com/in/ankit-talaviya"
+              href={siteProfile.linkedInUrl}
               target="_blank"
               rel="noreferrer"
             >

@@ -4,7 +4,7 @@ A multi-page portfolio site built with React, TypeScript, Vite, and Three.js.
 
 Live site: https://ankittalaviya.github.io/portfolio/
 
-This project is designed as a portfolio experience rather than a single static landing page. It combines a customizable 3D hero scene, multilingual content, theme switching, project detail pages, and interactive demo surfaces that showcase product thinking as well as frontend execution.
+This project is designed as a portfolio experience rather than a single static landing page. It combines a customizable 3D hero scene, multilingual content, theme switching, and project detail pages that showcase product thinking as well as frontend execution.
 
 ## What This Includes
 
@@ -15,7 +15,6 @@ This project is designed as a portfolio experience rather than a single static l
 - Outfit palette switching for the hero character
 - Multilingual content support for English, German, French, and Spanish
 - A separate project hub page with focused project cards and detail links
-- A standalone React CRUD workspace demo
 - GitHub Pages deployment from the `development` branch
 
 ## Experience Highlights
@@ -30,9 +29,6 @@ This project is designed as a portfolio experience rather than a single static l
 
 - `/` or `index.html`: main portfolio site
 - `/projects.html`: project hub with concept builds and workflow projects
-- `/crud-workspace.html`: standalone CRUD workspace demo
-- `/demos/*`: static demo pages used by project cards
-
 ## Stack
 
 - React 19
@@ -58,9 +54,6 @@ npm run dev
 npm run build
 npm run preview
 npm run build:hero-animations
-npm run install:all
-npm run dev:crud-workspace
-npm run build:crud-workspace
 ```
 
 ## Project Structure
@@ -69,7 +62,6 @@ npm run build:crud-workspace
 .
 |-- public/
 |   |-- documents/
-|   |-- demos/
 |   |-- models/
 |   `-- projects/
 |-- scripts/
@@ -83,8 +75,6 @@ npm run build:crud-workspace
 |   |-- App.tsx
 |   |-- HeroScene.tsx
 |   `-- ProjectsPage.tsx
-|-- apps/
-|   `-- react-crud-workspace/
 `-- .github/workflows/deploy.yml
 ```
 
@@ -105,5 +95,4 @@ This repo is configured for GitHub Pages.
 
 ## Why This Portfolio Is Different
 
-This portfolio is built to feel like a product, not just a resume page. The goal is to present engineering work through interaction, motion, demos, and system design choices that show both implementation skill and product thinking.
-
+This portfolio is built to feel like a product, not just a resume page. The goal is to present engineering work through interaction, motion, case studies, and system design choices that show both implementation skill and product thinking.

@@ -1,4 +1,5 @@
 import { languageOptions, type AppCopy, type LanguageCode } from '../i18n';
+import { siteProfile } from '../data/siteConfig';
 
 type SiteHeaderProps = {
   activeLanguage: LanguageCode;
@@ -44,7 +45,7 @@ export function SiteHeader({
       <nav className="navbar navbar-expand-lg">
         <div className="container py-3 py-lg-4">
           <a className="navbar-brand brand-pill" href={brandHref}>
-            Ankit Talaviya
+            {siteProfile.name}
           </a>
           <button
             className="nav-toggle d-lg-none"

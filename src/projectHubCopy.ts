@@ -1,11 +1,11 @@
 import type { LanguageCode } from './i18n';
 
-type ProjectHubStat = {
+export type ProjectHubStat = {
   value: string;
   label: string;
 };
 
-type ProjectHubCard = {
+export type ProjectHubCard = {
   category: string;
   kind: string;
   title: string;
@@ -13,38 +13,32 @@ type ProjectHubCard = {
   highlights: string[];
   tech: string[];
   href: string;
-  demoHref: string;
   cta: string;
 };
 
-type ProjectHubCopy = {
+export type ProjectHubCopy = {
   kicker: string;
   title: string;
   text: string;
   stats: ProjectHubStat[];
-  demoCta: string;
   cards: ProjectHubCard[];
 };
 
 const sharedCards = {
   taskflow: {
     href: './projects/taskflow-sprint-planner.html',
-    demoHref: './crud-workspace.html',
     tech: ['React', 'TypeScript', 'LocalStorage'],
   },
   housing: {
     href: './projects/berlin-flat-tracker.html',
-    demoHref: './demos/berlin-flat-tracker/',
     tech: ['Next.js', 'PostgreSQL', 'Maps API'],
   },
   support: {
     href: './projects/support-note-automator.html',
-    demoHref: './demos/support-note-automator/',
     tech: ['Python', 'FastAPI', 'OpenAI API'],
   },
   analytics: {
     href: './projects/market-snapshot-studio.html',
-    demoHref: './demos/market-snapshot-studio/',
     tech: ['Vue', 'D3', 'Serverless'],
   },
 } as const;
@@ -60,7 +54,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       { value: 'Web', label: 'dashboards, automation, and reporting tools' },
       { value: 'New Tab', label: 'each card opens an isolated detail page' },
     ],
-    demoCta: 'Open preview',
     cards: [
       {
         category: 'Frontend application',
@@ -75,7 +68,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
-        demoHref: sharedCards.taskflow.demoHref,
         cta: 'Open project page',
       },
       {
@@ -91,7 +83,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.housing.tech],
         href: sharedCards.housing.href,
-        demoHref: sharedCards.housing.demoHref,
         cta: 'Open project page',
       },
       {
@@ -107,7 +98,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.support.tech],
         href: sharedCards.support.href,
-        demoHref: sharedCards.support.demoHref,
         cta: 'Open project page',
       },
       {
@@ -123,7 +113,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.analytics.tech],
         href: sharedCards.analytics.href,
-        demoHref: sharedCards.analytics.demoHref,
         cta: 'Open project page',
       },
     ],
@@ -138,7 +127,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       { value: 'Web', label: 'Dashboards, Automatisierung und Reporting-Tools' },
       { value: 'Neuer Tab', label: 'jede Karte oeffnet eine isolierte Detailseite' },
     ],
-    demoCta: 'Vorschau oeffnen',
     cards: [
       {
         category: 'Frontend-Anwendung',
@@ -153,7 +141,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
-        demoHref: sharedCards.taskflow.demoHref,
         cta: 'Projektseite oeffnen',
       },
       {
@@ -169,7 +156,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.housing.tech],
         href: sharedCards.housing.href,
-        demoHref: sharedCards.housing.demoHref,
         cta: 'Projektseite oeffnen',
       },
       {
@@ -185,7 +171,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.support.tech],
         href: sharedCards.support.href,
-        demoHref: sharedCards.support.demoHref,
         cta: 'Projektseite oeffnen',
       },
       {
@@ -201,7 +186,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.analytics.tech],
         href: sharedCards.analytics.href,
-        demoHref: sharedCards.analytics.demoHref,
         cta: 'Projektseite oeffnen',
       },
     ],
@@ -216,7 +200,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       { value: 'Web', label: 'tableaux de bord, automatisation et reporting' },
       { value: 'Nouvel onglet', label: 'chaque carte ouvre une page detaillee isolee' },
     ],
-    demoCta: 'Ouvrir l apercu',
     cards: [
       {
         category: 'Application frontend',
@@ -231,7 +214,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
-        demoHref: sharedCards.taskflow.demoHref,
         cta: 'Ouvrir la page projet',
       },
       {
@@ -247,7 +229,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.housing.tech],
         href: sharedCards.housing.href,
-        demoHref: sharedCards.housing.demoHref,
         cta: 'Ouvrir la page projet',
       },
       {
@@ -263,7 +244,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.support.tech],
         href: sharedCards.support.href,
-        demoHref: sharedCards.support.demoHref,
         cta: 'Ouvrir la page projet',
       },
       {
@@ -279,7 +259,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.analytics.tech],
         href: sharedCards.analytics.href,
-        demoHref: sharedCards.analytics.demoHref,
         cta: 'Ouvrir la page projet',
       },
     ],
@@ -294,7 +273,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       { value: 'Web', label: 'dashboards, automatizacion y herramientas de reporte' },
       { value: 'Nueva pestana', label: 'cada tarjeta abre una pagina aislada' },
     ],
-    demoCta: 'Abrir vista previa',
     cards: [
       {
         category: 'Aplicacion frontend',
@@ -309,7 +287,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
-        demoHref: sharedCards.taskflow.demoHref,
         cta: 'Abrir pagina del proyecto',
       },
       {
@@ -325,7 +302,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.housing.tech],
         href: sharedCards.housing.href,
-        demoHref: sharedCards.housing.demoHref,
         cta: 'Abrir pagina del proyecto',
       },
       {
@@ -341,7 +317,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.support.tech],
         href: sharedCards.support.href,
-        demoHref: sharedCards.support.demoHref,
         cta: 'Abrir pagina del proyecto',
       },
       {
@@ -357,7 +332,6 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.analytics.tech],
         href: sharedCards.analytics.href,
-        demoHref: sharedCards.analytics.demoHref,
         cta: 'Abrir pagina del proyecto',
       },
     ],

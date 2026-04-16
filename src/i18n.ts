@@ -1,8 +1,8 @@
 ﻿export const languageOptions = [
-  { code: 'en', label: 'English', nativeLabel: 'English' },
-  { code: 'de', label: 'German', nativeLabel: 'Deutsch' },
-  { code: 'fr', label: 'French', nativeLabel: 'Francais' },
-  { code: 'es', label: 'Spanish', nativeLabel: 'Espanol' },
+  { code: 'en', nativeLabel: 'English' },
+  { code: 'de', nativeLabel: 'Deutsch' },
+  { code: 'fr', nativeLabel: 'Francais' },
+  { code: 'es', nativeLabel: 'Espanol' },
 ] as const;
 
 export type LanguageCode = (typeof languageOptions)[number]['code'];
@@ -53,24 +53,6 @@ type EducationItem = {
   place: string;
   period: string;
   notes: string[];
-};
-
-type GuardianNodeId =
-  | 'top'
-  | 'about'
-  | 'experience'
-  | 'portfolio'
-  | 'skills'
-  | 'education'
-  | 'contact';
-
-type GuardianNodeCopy = {
-  label: string;
-  mode: string;
-  title: string;
-  description: string;
-  signals: string[];
-  cta: string;
 };
 
 export type AppCopy = {
@@ -151,22 +133,6 @@ export type AppCopy = {
       linkedIn: string;
       backToTop: string;
     };
-  };
-  guardian: {
-    badge: string;
-    syncLabel: string;
-    syncOn: string;
-    syncOff: string;
-    autoDescription: string;
-    manualDescription: string;
-    orbitHint: string;
-    progressLabel: string;
-    progressComplete: string;
-    visitedLabel: string;
-    jumpLabel: string;
-    paletteLabel: string;
-    signalLabel: string;
-    nodes: Record<GuardianNodeId, GuardianNodeCopy>;
   };
   scene: {
     paletteAriaLabel: string;
@@ -539,88 +505,6 @@ const englishCopy: AppCopy = {
       backToTop: 'Back to top',
     },
   },
-  guardian: {
-    badge: 'Portfolio Guardian',
-    syncLabel: 'Scroll sync',
-    syncOn: 'Linked to sections',
-    syncOff: 'Manual palette override',
-    autoDescription:
-      'The guardian retunes outfit colors and mission data as visitors move through the portfolio.',
-    manualDescription:
-      'Manual palette control is active. Re-enable sync to let the guardian react to each chapter.',
-    orbitHint: 'Drag to orbit the guardian. Use beacons to jump between chapters.',
-    progressLabel: 'Coverage',
-    progressComplete: 'All chapters mapped',
-    visitedLabel: 'chapters mapped',
-    jumpLabel: 'Jump beacons',
-    paletteLabel: 'Outfit matrix',
-    signalLabel: 'Signal',
-    nodes: {
-      top: {
-        label: 'Arrival',
-        mode: 'Prime Watch',
-        title: 'Opening the gate',
-        description:
-          "The guardian frames Ankit's profile, role focus, and live portfolio status as a cinematic first contact.",
-        signals: ['role scan', 'availability', 'hero stats'],
-        cta: 'Recenter on the opening',
-      },
-      about: {
-        label: 'Origin',
-        mode: 'Identity Layer',
-        title: 'Reading the builder profile',
-        description:
-          'This layer explains who Ankit is, what he builds, and the product instincts behind the technical work.',
-        signals: ['motivation', 'product sense', 'full-stack lens'],
-        cta: 'Inspect background',
-      },
-      experience: {
-        label: 'Career',
-        mode: 'Field Archive',
-        title: 'Reviewing shipped work',
-        description:
-          'Professional milestones, team leadership, debugging depth, and delivery ownership come online in this archive.',
-        signals: ['delivery history', 'team leadership', 'debugging'],
-        cta: 'Open experience archive',
-      },
-      portfolio: {
-        label: 'Projects',
-        mode: 'Showcase Array',
-        title: 'Highlighting flagship builds',
-        description:
-          'The guardian spotlights real products, implementation detail, and proof of practical engineering range.',
-        signals: ['3D interfaces', 'desktop apps', 'production features'],
-        cta: 'Open project showcase',
-      },
-      skills: {
-        label: 'Toolkit',
-        mode: 'Systems Grid',
-        title: 'Displaying the active stack',
-        description:
-          'Core technologies are organized into a clean systems map so visitors can scan frontend, backend, and tooling range quickly.',
-        signals: ['frontend', 'backend', 'tooling'],
-        cta: 'Review skill grid',
-      },
-      education: {
-        label: 'Archive',
-        mode: 'Knowledge Vault',
-        title: 'Tracing education and languages',
-        description:
-          'This vault links academic progress, language growth, and supporting documents into the wider professional story.',
-        signals: ['M.Sc. path', 'documents', 'languages'],
-        cta: 'Open knowledge vault',
-      },
-      contact: {
-        label: 'Signal',
-        mode: 'Handshake Protocol',
-        title: 'Preparing the contact channel',
-        description:
-          'The guardian shifts from presentation to action with direct paths for hiring conversations and collaboration.',
-        signals: ['email', 'LinkedIn', 'availability'],
-        cta: 'Open contact channel',
-      },
-    },
-  },
   scene: {
     paletteAriaLabel: 'Avatar clothes colors',
     paletteSuffix: 'palette',
@@ -928,88 +812,6 @@ const germanCopy: AppCopy = {
       backToTop: 'Nach oben',
     },
   },
-  guardian: {
-    badge: 'Portfolio Guardian',
-    syncLabel: 'Scroll Sync',
-    syncOn: 'Mit Sektionen verbunden',
-    syncOff: 'Manuelle Farbpalette',
-    autoDescription:
-      'Der Guardian passt Outfitfarben und Missionsdaten an, wahrend Besucher durch das Portfolio scrollen.',
-    manualDescription:
-      'Die manuelle Farbsteuerung ist aktiv. Aktiviere den Sync erneut, damit der Guardian auf jeden Abschnitt reagiert.',
-    orbitHint: 'Zum Drehen ziehen. Mit den Beacons springst du zwischen den Abschnitten.',
-    progressLabel: 'Abdeckung',
-    progressComplete: 'Alle Kapitel erfasst',
-    visitedLabel: 'Kapitel erfasst',
-    jumpLabel: 'Jump Beacons',
-    paletteLabel: 'Outfit Matrix',
-    signalLabel: 'Signal',
-    nodes: {
-      top: {
-        label: 'Ankunft',
-        mode: 'Prime Watch',
-        title: 'Das Tor offnen',
-        description:
-          'Der Guardian prasentiert Ankits Profil, Rollenfokus und den Live Status des Portfolios als starken ersten Eindruck.',
-        signals: ['Rollen Scan', 'Verfugbarkeit', 'Hero Stats'],
-        cta: 'Zur Einleitung springen',
-      },
-      about: {
-        label: 'Profil',
-        mode: 'Identity Layer',
-        title: 'Das Entwicklerprofil lesen',
-        description:
-          'Diese Ebene zeigt, wer Ankit ist, was er baut und welche Produktinstinkte hinter seiner Technik stehen.',
-        signals: ['Motivation', 'Produktsinn', 'Full Stack Blick'],
-        cta: 'Hintergrund offnen',
-      },
-      experience: {
-        label: 'Karriere',
-        mode: 'Field Archive',
-        title: 'Gelieferte Arbeit prufen',
-        description:
-          'Berufliche Meilensteine, Teamleitung, Debugging Tiefe und Delivery Verantwortung werden hier sichtbar.',
-        signals: ['Delivery', 'Teamleitung', 'Debugging'],
-        cta: 'Erfahrungsarchiv offnen',
-      },
-      portfolio: {
-        label: 'Projekte',
-        mode: 'Showcase Array',
-        title: 'Flaggschiff Projekte hervorheben',
-        description:
-          'Der Guardian zeigt reale Produkte, Implementierungsdetails und den praktischen Engineering Umfang.',
-        signals: ['3D Interfaces', 'Desktop Apps', 'Produktfeatures'],
-        cta: 'Projekt Showcase offnen',
-      },
-      skills: {
-        label: 'Toolkit',
-        mode: 'Systems Grid',
-        title: 'Den aktiven Stack zeigen',
-        description:
-          'Die Kerntechnologien werden als sauberes Systembild dargestellt, damit Besucher Frontend, Backend und Tools schnell erfassen.',
-        signals: ['Frontend', 'Backend', 'Tooling'],
-        cta: 'Skill Grid offnen',
-      },
-      education: {
-        label: 'Archiv',
-        mode: 'Knowledge Vault',
-        title: 'Studium und Sprachen verfolgen',
-        description:
-          'Dieses Archiv verbindet akademischen Fortschritt, Sprachentwicklung und Dokumente mit der gesamten Story.',
-        signals: ['M.Sc. Weg', 'Dokumente', 'Sprachen'],
-        cta: 'Knowledge Vault offnen',
-      },
-      contact: {
-        label: 'Kontakt',
-        mode: 'Handshake Protocol',
-        title: 'Den Kontaktkanal vorbereiten',
-        description:
-          'Der Guardian wechselt von der Prasentation in den Handlungsmodus und offnet direkte Wege fur Gesprache.',
-        signals: ['E-Mail', 'LinkedIn', 'Verfugbarkeit'],
-        cta: 'Kontaktkanal offnen',
-      },
-    },
-  },
   scene: {
     paletteAriaLabel: 'Farbpaletten fÃ¼r den Avatar',
     paletteSuffix: 'Palette',
@@ -1148,88 +950,6 @@ const frenchCopy: AppCopy = {
       backToTop: 'Retour en haut',
     },
   },
-  guardian: {
-    badge: 'Portfolio Guardian',
-    syncLabel: 'Sync scroll',
-    syncOn: 'Lie aux sections',
-    syncOff: 'Palette manuelle',
-    autoDescription:
-      'Le guardian adapte la palette et les donnees de mission quand les visiteurs avancent dans le portfolio.',
-    manualDescription:
-      'Le controle manuel est actif. Reactivez le sync pour laisser le guardian repondre a chaque section.',
-    orbitHint: 'Faites glisser pour tourner. Utilisez les beacons pour changer de chapitre.',
-    progressLabel: 'Couverture',
-    progressComplete: 'Tous les chapitres sont cartographies',
-    visitedLabel: 'chapitres cartographies',
-    jumpLabel: 'Jump beacons',
-    paletteLabel: 'Matrice tenue',
-    signalLabel: 'Signal',
-    nodes: {
-      top: {
-        label: 'Arrivee',
-        mode: 'Prime Watch',
-        title: 'Ouvrir la porte',
-        description:
-          "Le guardian presente le profil d'Ankit, son focus de role et le statut vivant du portfolio comme premiere impression.",
-        signals: ['scan role', 'disponibilite', 'hero stats'],
-        cta: 'Revenir a louverture',
-      },
-      about: {
-        label: 'Profil',
-        mode: 'Identity Layer',
-        title: 'Lire le profil du builder',
-        description:
-          "Cette couche explique qui est Ankit, ce qu'il construit et les instincts produit derriere son travail technique.",
-        signals: ['motivation', 'sens produit', 'vision full stack'],
-        cta: 'Voir le contexte',
-      },
-      experience: {
-        label: 'Experience',
-        mode: 'Field Archive',
-        title: 'Verifier le travail livre',
-        description:
-          "Les jalons professionnels, le leadership, la profondeur de debug et la responsabilite delivery s'activent ici.",
-        signals: ['delivery', 'leadership', 'debug'],
-        cta: 'Ouvrir larchive experience',
-      },
-      portfolio: {
-        label: 'Projets',
-        mode: 'Showcase Array',
-        title: 'Mettre en avant les projets phares',
-        description:
-          'Le guardian souligne des produits reels, les details implementation et une vraie amplitude dingenerie pratique.',
-        signals: ['interfaces 3D', 'apps desktop', 'features produit'],
-        cta: 'Ouvrir le showcase',
-      },
-      skills: {
-        label: 'Stack',
-        mode: 'Systems Grid',
-        title: 'Afficher la stack active',
-        description:
-          'Les technologies principales sont organisees comme une carte systeme lisible pour scanner frontend, backend et tooling.',
-        signals: ['frontend', 'backend', 'tooling'],
-        cta: 'Voir la grille skills',
-      },
-      education: {
-        label: 'Archive',
-        mode: 'Knowledge Vault',
-        title: 'Tracer la formation et les langues',
-        description:
-          'Ce vault relie progression academique, evolution linguistique et documents a lhistoire globale.',
-        signals: ['parcours M.Sc.', 'documents', 'langues'],
-        cta: 'Ouvrir le vault',
-      },
-      contact: {
-        label: 'Contact',
-        mode: 'Handshake Protocol',
-        title: 'Preparer le canal de contact',
-        description:
-          'Le guardian passe de la presentation a laction avec des chemins directs vers les echanges et opportunites.',
-        signals: ['email', 'LinkedIn', 'disponibilite'],
-        cta: 'Ouvrir le canal contact',
-      },
-    },
-  },
   scene: {
     paletteAriaLabel: "Couleurs des vetements de l'avatar",
     paletteSuffix: 'palette',
@@ -1365,88 +1085,6 @@ const spanishCopy: AppCopy = {
       email: 'Enviar email',
       linkedIn: 'LinkedIn',
       backToTop: 'Volver arriba',
-    },
-  },
-  guardian: {
-    badge: 'Portfolio Guardian',
-    syncLabel: 'Sync de scroll',
-    syncOn: 'Ligado a secciones',
-    syncOff: 'Paleta manual',
-    autoDescription:
-      'El guardian ajusta colores de atuendo y datos de mision mientras la persona recorre el portafolio.',
-    manualDescription:
-      'El control manual esta activo. Reactiva el sync para que el guardian responda a cada seccion.',
-    orbitHint: 'Arrastra para orbitar. Usa los beacons para saltar entre capitulos.',
-    progressLabel: 'Cobertura',
-    progressComplete: 'Todos los capitulos mapeados',
-    visitedLabel: 'capitulos mapeados',
-    jumpLabel: 'Jump beacons',
-    paletteLabel: 'Matriz de atuendo',
-    signalLabel: 'Senal',
-    nodes: {
-      top: {
-        label: 'Llegada',
-        mode: 'Prime Watch',
-        title: 'Abrir la entrada',
-        description:
-          'El guardian presenta el perfil de Ankit, su enfoque profesional y el estado vivo del portafolio como primer contacto.',
-        signals: ['scan rol', 'disponibilidad', 'hero stats'],
-        cta: 'Volver a la apertura',
-      },
-      about: {
-        label: 'Perfil',
-        mode: 'Identity Layer',
-        title: 'Leer el perfil del builder',
-        description:
-          'Esta capa explica quien es Ankit, que construye y que intuicion de producto sostiene su trabajo tecnico.',
-        signals: ['motivacion', 'sentido producto', 'vision full stack'],
-        cta: 'Ver contexto',
-      },
-      experience: {
-        label: 'Carrera',
-        mode: 'Field Archive',
-        title: 'Revisar trabajo entregado',
-        description:
-          'Hitos profesionales, liderazgo, profundidad de debugging y ownership de delivery aparecen en este archivo.',
-        signals: ['delivery', 'liderazgo', 'debugging'],
-        cta: 'Abrir archivo de experiencia',
-      },
-      portfolio: {
-        label: 'Proyectos',
-        mode: 'Showcase Array',
-        title: 'Destacar proyectos clave',
-        description:
-          'El guardian destaca productos reales, detalle de implementacion y evidencia de rango practico de ingenieria.',
-        signals: ['interfaces 3D', 'apps desktop', 'features producto'],
-        cta: 'Abrir showcase de proyectos',
-      },
-      skills: {
-        label: 'Stack',
-        mode: 'Systems Grid',
-        title: 'Mostrar la stack activa',
-        description:
-          'Las tecnologias principales se organizan como un mapa de sistemas para escanear frontend, backend y tooling rapidamente.',
-        signals: ['frontend', 'backend', 'tooling'],
-        cta: 'Ver grid de habilidades',
-      },
-      education: {
-        label: 'Archivo',
-        mode: 'Knowledge Vault',
-        title: 'Seguir educacion e idiomas',
-        description:
-          'Este vault conecta progreso academico, crecimiento en idiomas y documentos con la historia profesional completa.',
-        signals: ['ruta M.Sc.', 'documentos', 'idiomas'],
-        cta: 'Abrir knowledge vault',
-      },
-      contact: {
-        label: 'Contacto',
-        mode: 'Handshake Protocol',
-        title: 'Preparar el canal de contacto',
-        description:
-          'El guardian cambia de presentacion a accion con caminos directos hacia conversaciones y oportunidades.',
-        signals: ['email', 'LinkedIn', 'disponibilidad'],
-        cta: 'Abrir canal de contacto',
-      },
     },
   },
   scene: {
