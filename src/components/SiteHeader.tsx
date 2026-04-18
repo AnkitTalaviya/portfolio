@@ -1,5 +1,6 @@
 import { languageOptions, type AppCopy, type LanguageCode } from '../i18n';
 import { siteProfile } from '../data/siteConfig';
+import { Link } from 'react-router-dom';
 
 type SiteHeaderProps = {
   activeLanguage: LanguageCode;
@@ -44,9 +45,9 @@ export function SiteHeader({
     <header className="site-header">
       <nav className="navbar navbar-expand-lg">
         <div className="container py-3 py-lg-4">
-          <a className="navbar-brand brand-pill" href={brandHref}>
+          <Link className="navbar-brand brand-pill" to={brandHref} onClick={onCloseNav}>
             {siteProfile.name}
-          </a>
+          </Link>
           <button
             className="nav-toggle d-lg-none"
             type="button"
@@ -58,15 +59,15 @@ export function SiteHeader({
           </button>
           <div className={`ms-auto nav-cluster ${isNavOpen ? 'is-open' : ''}`} id="site-navigation">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.id}
                 className={`nav-link ${activeNav === item.id ? 'is-active' : ''}`}
-                href={item.href}
+                to={item.href}
                 aria-current={activeNav === item.id ? 'page' : undefined}
                 onClick={onCloseNav}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <div className="language-switcher" aria-label={copy.languageSwitcher.ariaLabel}>
               <span className="language-switcher__label">{copy.languageSwitcher.label}</span>

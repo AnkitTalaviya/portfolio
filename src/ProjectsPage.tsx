@@ -15,7 +15,7 @@ function ProjectsPage() {
     <SiteScaffold
         activeLanguage={activeLanguage}
         activeNav="project"
-        brandHref="index.html#top"
+      brandHref="/#top"
         copy={copy}
         hrefs={projectPageNavHrefs}
         onLanguageSelect={setActiveLanguage}

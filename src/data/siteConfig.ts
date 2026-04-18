@@ -13,19 +13,19 @@ export const siteDocuments = {
 } as const;
 
 export const portfolioNavHrefs = {
-  about: '#about',
-  experience: '#experience',
-  portfolio: '#portfolio',
-  project: 'projects.html',
-  skills: '#skills',
-  contact: '#contact',
+  about: '/#about',
+  experience: '/#experience',
+  portfolio: '/#portfolio',
+  project: '/projects',
+  skills: '/#skills',
+  contact: '/#contact',
 } as const;
 
 export const projectPageNavHrefs = {
-  about: 'index.html#about',
-  experience: 'index.html#experience',
-  portfolio: 'index.html#portfolio',
-  project: 'projects.html',
-  skills: 'index.html#skills',
-  contact: 'index.html#contact',
+  about: '/#about',
+  experience: '/#experience',
+  portfolio: '/#portfolio',
+  project: '/projects',
+  skills: '/#skills',
+  contact: '/#contact',
 } as const;

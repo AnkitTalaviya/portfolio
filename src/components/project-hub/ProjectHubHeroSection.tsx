@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import { SectionHeading } from '../portfolio/SectionHeading';
-import { MetricGrid } from '../common/MetricGrid';
 import type { ProjectHubCopy } from '../../projectHubCopy';
 
 type ProjectHubHeroSectionProps = {
@@ -23,7 +22,24 @@ export const ProjectHubHeroSection = memo(function ProjectHubHeroSection({
           textClassName="hero-text project-hub-text"
         />
 
-        <MetricGrid items={copy.stats} />
+        <article className="project-card project-stack-panel">
+          <h3>{copy.skillsHeading}</h3>
+          <p>{copy.skillsText}</p>
+          <div className="project-skill-groups">
+            {copy.skillGroups.map((group) => (
+              <section className="project-skill-group" key={group.title}>
+                <h4>{group.title}</h4>
+                <div className="tag-row">
+                  {group.items.map((skill) => (
+                    <span className="tag-chip" key={skill}>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </article>
       </div>
     </section>
   );

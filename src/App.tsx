@@ -48,7 +48,7 @@ function App() {
     <SiteScaffold
       activeLanguage={activeLanguage}
       activeNav="portfolio"
-      brandHref="#top"
+      brandHref="/#top"
       copy={copy}
       hrefs={portfolioNavHrefs}
       onLanguageSelect={setActiveLanguage}

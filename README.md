@@ -28,7 +28,7 @@ This project is designed as a portfolio experience rather than a single static l
 ## Pages
 
 - `/` or `index.html`: main portfolio site
-- `/projects.html`: project hub with concept builds and workflow projects
+- `/projects` route: project hub with concept builds and workflow projects
 ## Stack
 
 - React 19

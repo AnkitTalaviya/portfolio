@@ -412,11 +412,11 @@ p {
 
 .section {
   position: relative;
-  padding: 6rem 0;
+  padding: 4.6rem 0;
 }
 
 .hero-section {
-  padding-top: 5rem;
+  padding-top: 4rem;
 }
 
 .hero-copy {
@@ -466,7 +466,7 @@ p {
 }
 
 .display-title {
-  margin-top: 1.2rem;
+  margin-top: 0.95rem;
   max-width: 14ch;
   font-size: clamp(2.35rem, 5.2vw, 4.1rem);
   letter-spacing: -0.06em;
@@ -475,7 +475,7 @@ p {
 
 .hero-text {
   max-width: 34rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   font-size: 1.1rem;
   line-height: 1.75;
 }
@@ -483,8 +483,8 @@ p {
 .hero-pill-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+  gap: 0.6rem;
+  margin-top: 1.05rem;
 }
 
 .hero-pill {
@@ -499,7 +499,7 @@ p {
 }
 
 .hero-actions {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 .hero-actions .btn {
@@ -1395,7 +1395,7 @@ p {
 
 .section-heading {
   max-width: 48rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.7rem;
 }
 
 .section-heading--compact {
@@ -1414,14 +1414,41 @@ p {
   max-width: 42rem;
 }
 
+.project-stack-panel {
+  margin-top: 1.15rem;
+}
+
+.project-stack-panel h3 {
+  margin-top: 0;
+}
+
+.project-skill-groups {
+  margin-top: 0.95rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.project-skill-group h4 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.project-skill-group .tag-row {
+  margin-top: 0.45rem;
+}
+
 .section-title {
-  margin-top: 0.85rem;
+  margin-top: 0.6rem;
   font-size: clamp(2.15rem, 5vw, 3.35rem);
   letter-spacing: -0.05em;
 }
 
 .section-text {
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   font-size: 1.02rem;
   line-height: 1.75;
 }
@@ -1434,7 +1461,7 @@ p {
 .language-card,
 .document-card {
   height: 100%;
-  padding: 1.8rem;
+  padding: 1.45rem;
   border-radius: var(--radius-lg);
   background: linear-gradient(180deg, var(--card-top), var(--card-bottom));
   transition:
@@ -1462,7 +1489,7 @@ p {
 .education-card h3,
 .language-card h3,
 .document-card h3 {
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   font-size: 1.55rem;
 }
 
@@ -1473,7 +1500,7 @@ p {
 .education-card p,
 .language-card p,
 .document-card p {
-  margin-top: 0.95rem;
+  margin-top: 0.7rem;
   line-height: 1.7;
 }
 
@@ -1481,7 +1508,7 @@ p {
 .project-card__top {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: flex-start;
   flex-wrap: wrap;
 }
@@ -1500,15 +1527,15 @@ p {
 }
 
 .detail-list {
-  margin: 1.15rem 0 0;
+  margin: 0.9rem 0 0;
   padding-left: 1.1rem;
   color: var(--muted);
   display: grid;
-  gap: 0.9rem;
+  gap: 0.7rem;
 }
 
 .detail-list--tight {
-  gap: 0.75rem;
+  gap: 0.55rem;
 }
 
 .detail-list li::marker {
@@ -1518,8 +1545,8 @@ p {
 .tag-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.4rem;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .tag-chip {
@@ -1536,8 +1563,8 @@ p {
 .project-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-top: 1.4rem;
+  gap: 0.65rem;
+  margin-top: 1rem;
 }
 
 .project-links a {
@@ -1567,12 +1594,12 @@ p {
 
 .stacked-panel {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .education-entry + .education-entry {
-  margin-top: 1.8rem;
-  padding-top: 1.8rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -1580,8 +1607,8 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
-  padding: 2rem;
+  gap: 1rem;
+  padding: 1.45rem;
   border-radius: var(--radius-xl);
   background:
     radial-gradient(circle at top right, var(--cta-glow), transparent 32%),
@@ -1591,14 +1618,14 @@ p {
 .cta-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 0.6rem;
 }
 
 .contact-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
-  margin-top: 1.5rem;
+  gap: 0.6rem 0.8rem;
+  margin-top: 1rem;
   color: var(--text);
 }
 
@@ -1683,7 +1710,7 @@ p {
   }
 
   .hero-section {
-    padding-top: 3.75rem;
+    padding-top: 3.1rem;
   }
 
   .hero-copy,
@@ -1787,7 +1814,7 @@ p {
 
 @media (max-width: 767.98px) {
   .section {
-    padding: 4rem 0;
+    padding: 3.35rem 0;
   }
 
   .eyebrow,
@@ -1946,7 +1973,7 @@ p {
   .language-card,
   .document-card,
   .cta-panel {
-    padding: 1.4rem;
+    padding: 1.15rem;
   }
 }
 
@@ -1956,7 +1983,7 @@ p {
   }
 
   .section {
-    padding: 3.5rem 0;
+    padding: 2.9rem 0;
   }
 
   .brand-pill {

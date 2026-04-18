@@ -1,4 +1,5 @@
 import { siteHref } from '../../lib/sitePaths';
+import { Link } from 'react-router-dom';
 
 type ProjectCardLink = {
   label: string;
@@ -24,6 +25,12 @@ export function ProjectCard({
   tags,
   title,
 }: ProjectCardProps) {
+  const isExternalLink = (href: string) =>
+    href.startsWith('http://') ||
+    href.startsWith('https://') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('tel:');
+
   return (
     <article className="project-card h-100">
       <div className="project-card__top">
@@ -46,11 +53,17 @@ export function ProjectCard({
       </div>
       {links?.length ? (
         <div className="project-links">
-          {links.map((link) => (
-            <a href={siteHref(link.href)} key={link.href} target="_blank" rel="noreferrer">
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            isExternalLink(link.href) ? (
+              <a href={siteHref(link.href)} key={link.href} target="_blank" rel="noreferrer">
+                {link.label}
+              </a>
+            ) : (
+              <Link to={link.href} key={link.href}>
+                {link.label}
+              </Link>
+            ),
+          )}
         </div>
       ) : null}
     </article>
