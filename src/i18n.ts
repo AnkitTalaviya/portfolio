@@ -244,7 +244,7 @@ const englishCopy: AppCopy = {
     ],
     stats: [
       { value: '3+', label: 'years in professional product teams' },
-      { value: '07', label: 'projects across desktop, web, and mobile' },
+      { value: '08', label: 'projects across desktop, web, and mobile' },
       {
         value: '06',
         label: 'core stack: JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
@@ -316,8 +316,26 @@ const englishCopy: AppCopy = {
   projects: {
     kicker: 'Portfolio',
     title: 'Portfolio.',
-    text: 'Selected product and delivery work across Addicted Technologies and Crest Infotech.',
+    text:
+      'Selected independent, product, and delivery work across AI apps, Addicted Technologies, and Crest Infotech.',
     items: [
+      {
+        title: 'DeutschFlow AI',
+        company: 'Independent Project',
+        category: 'Mobile-first learning app',
+        summary:
+          'German learning app with spaced repetition, structured grammar, stories, dictionary tools, phrasebook practice, social learning, and Gemini-only AI features.',
+        highlights: [
+          'Keeps static flashcards, grammar, phrasebook, dictionary, manual cards, and social learning working without any AI key.',
+          'Uses Gemini for stories, grammar deep dives, daily vocabulary, dictionary enrichment, flashcard autofill, themed card generation, and word suggestions.',
+          'Supports multiple local Gemini keys with labels, validation states, default model selection, automatic fallback, cooldowns, and bounded retries.',
+        ],
+        tech: ['React 19', 'TypeScript', 'Appwrite', 'Google Gemini', 'Capacitor 8'],
+        links: [
+          { label: 'View project page', href: '/projects/deutschflow-ai' },
+          { label: 'GitHub repo', href: 'https://github.com/AnkitTalaviya/DeutschFlow' },
+        ],
+      },
       {
         title: '3D-Emp',
         company: 'Addicted Technologies',
@@ -442,6 +460,7 @@ const englishCopy: AppCopy = {
           'Docker',
           'Git',
           'GitHub',
+          'Appwrite',
           'Firebase',
           'Linux',
           'Blender',
@@ -560,7 +579,7 @@ const germanCopy: AppCopy = {
     ],
     stats: [
       { value: '3+', label: 'Jahre Erfahrung in professionellen Produktteams' },
-      { value: '07', label: 'Projekte fÃ¼r Desktop, Web und Mobile' },
+      { value: '08', label: 'Projekte fÃ¼r Desktop, Web und Mobile' },
       {
         value: '06',
         label: 'Kern-Stack: JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
@@ -633,8 +652,25 @@ const germanCopy: AppCopy = {
     kicker: 'Portfolio',
     title: 'Portfolio.',
     text:
-      'Ausgewaehlte Arbeiten aus meiner Zeit bei Addicted Technologies und Crest Infotech.',
+      'Ausgewaehlte eigenstaendige, Produkt- und Delivery-Arbeiten aus KI-App-Projekten, Addicted Technologies und Crest Infotech.',
     items: [
+      {
+        title: 'DeutschFlow AI',
+        company: 'Eigenstaendiges Projekt',
+        category: 'Mobile-first-Lern-App',
+        summary:
+          'Deutschlern-App mit Spaced Repetition, strukturiertem Grammatikpfad, Stories, Woerterbuch-Tools, Phrasebook-Uebungen, Social Learning und Gemini-only-KI-Funktionen.',
+        highlights: [
+          'Statische Flashcards, Grammatik, Phrasebook, Woerterbuch, manuelle Karten und Social Learning funktionieren ohne KI-Key.',
+          'Nutzt Gemini fuer Stories, Grammatik-Deep-Dives, Tagesvokabeln, Woerterbuch-Ergaenzung, Flashcard-Autofill, thematische Kartengenerierung und Wortvorschlaege.',
+          'Unterstuetzt mehrere lokale Gemini-Keys mit Labels, Validierungsstatus, Standardmodell, automatischem Fallback, Cooldowns und begrenzten Retries.',
+        ],
+        tech: ['React 19', 'TypeScript', 'Appwrite', 'Google Gemini', 'Capacitor 8'],
+        links: [
+          { label: 'Projektseite ansehen', href: '/projects/deutschflow-ai' },
+          { label: 'GitHub Repo', href: 'https://github.com/AnkitTalaviya/DeutschFlow' },
+        ],
+      },
       {
         title: '3D-Emp',
         company: 'Addicted Technologies',
@@ -755,7 +791,7 @@ const germanCopy: AppCopy = {
       },
       {
         title: 'Tools & Plattformen',
-        items: ['Docker', 'Git', 'GitHub', 'Firebase', 'Linux', 'Blender', 'Jira', 'Postman', 'Swagger'],
+        items: ['Docker', 'Git', 'GitHub', 'Appwrite', 'Firebase', 'Linux', 'Blender', 'Jira', 'Postman', 'Swagger'],
       },
       {
         title: 'Programmierung',
@@ -868,7 +904,7 @@ const frenchCopy: AppCopy = {
     ],
     stats: [
       { value: '3+', label: 'annees dans des equipes produit professionnelles' },
-      { value: '07', label: 'projets sur desktop, web et mobile' },
+      { value: '08', label: 'projets sur desktop, web et mobile' },
       {
         value: '06',
         label: 'stack principale : JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
@@ -911,7 +947,8 @@ const frenchCopy: AppCopy = {
     ...englishCopy.projects,
     kicker: 'Portfolio',
     title: 'Portfolio.',
-    text: 'Une selection de travaux realises chez Addicted Technologies et Crest Infotech.',
+    text:
+      'Une selection de projets independants, produit et delivery couvrant les apps IA, Addicted Technologies et Crest Infotech.',
   },
   skills: {
     ...englishCopy.skills,
@@ -1005,7 +1042,7 @@ const spanishCopy: AppCopy = {
     ],
     stats: [
       { value: '3+', label: 'anos en equipos de producto profesionales' },
-      { value: '07', label: 'proyectos en desktop, web y mobile' },
+      { value: '08', label: 'proyectos en desktop, web y mobile' },
       {
         value: '06',
         label: 'stack principal: JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
@@ -1048,7 +1085,8 @@ const spanishCopy: AppCopy = {
     ...englishCopy.projects,
     kicker: 'Portafolio',
     title: 'Portafolio.',
-    text: 'Trabajos seleccionados realizados en Addicted Technologies y Crest Infotech.',
+    text:
+      'Trabajos seleccionados independientes, de producto y delivery en apps de IA, Addicted Technologies y Crest Infotech.',
   },
   skills: {
     ...englishCopy.skills,

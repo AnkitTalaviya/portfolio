@@ -1042,6 +1042,8 @@ export function HeroScene({
     });
     renderer.outputColorSpace = SRGBColorSpace;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, scenePixelRatioCap));
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.inset = '0';
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.display = 'block';

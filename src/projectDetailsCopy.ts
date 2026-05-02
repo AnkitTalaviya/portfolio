@@ -1,4 +1,7 @@
-export type ProjectDetailId = 'stockpilot' | 'neural-network-ids-in-p4-bmv2';
+export type ProjectDetailId =
+  | 'stockpilot'
+  | 'neural-network-ids-in-p4-bmv2'
+  | 'deutschflow-ai';
 
 type ProjectDetail = {
   id: ProjectDetailId;
@@ -120,6 +123,76 @@ export const projectDetailsCopy: Record<ProjectDetailId, ProjectDetail> = {
       'Demonstrates practical in-network ML inference with deterministic integer arithmetic.',
       'Enables direct offline quantized vs online BMv2 behavior comparison.',
       'Surfaces deployment-stage effects across larger multi-switch architectures.',
+    ],
+  },
+  'deutschflow-ai': {
+    id: 'deutschflow-ai',
+    category: 'AI language learning app',
+    kind: 'Mobile-first German learning platform',
+    title: 'DeutschFlow AI',
+    summary:
+      'DeutschFlow AI is a mobile-first German learning app with spaced repetition, structured grammar, stories, dictionary tools, phrasebook practice, social learning, and Gemini-only AI features. Static learning flows continue to work without an AI key.',
+    repoUrl: 'https://github.com/AnkitTalaviya/DeutschFlow',
+    stats: [
+      {
+        title: 'Static + AI modes',
+        description: 'flashcards, grammar, phrasebook, dictionary, and social learning work without AI',
+      },
+      {
+        title: 'Gemini-only AI',
+        description: 'story generation, grammar deep dives, dictionary enrichment, and flashcard autofill',
+      },
+      {
+        title: 'Multi-key fallback',
+        description: 'local Gemini key storage with validation states, cooldowns, and bounded retries',
+      },
+    ],
+    overviewTitle: 'What the app does',
+    overviewText:
+      'DeutschFlow AI helps learners practice German through daily review, grammar progression, story reading, phrase practice, dictionary lookup, and social progress sharing. Gemini features are optional and gated behind locally configured user keys.',
+    bullets: [
+      'Includes spaced-repetition flashcards, manual card creation, daily focus, XP, streaks, and weak-area tracking.',
+      'Provides an A1-C2 grammar path with lessons, examples, quizzes, and optional Gemini explanations.',
+      'Supports Gemini story generation, vocabulary extraction, dictionary enrichment, themed flashcards, and word suggestions.',
+      'Stores raw Gemini keys only on the current device while Appwrite keeps non-sensitive setup metadata.',
+    ],
+    modulesTitle: 'Core modules',
+    modules: [
+      {
+        title: 'Learning dashboard',
+        description: 'Tracks streaks, XP, weekly progress, study history, daily focus, and weak areas.',
+      },
+      {
+        title: 'Flashcards and grammar',
+        description: 'Combines SRS vocabulary review with structured CEFR grammar lessons, quizzes, and examples.',
+      },
+      {
+        title: 'Stories, phrasebook, and dictionary',
+        description: 'Offers story reading, vocabulary extraction, scenario phrase practice, audio playback, and public-source dictionary lookups.',
+      },
+      {
+        title: 'Gemini key management',
+        description: 'Manages multiple Gemini keys, labels, validation states, default model selection, and automatic fallback.',
+      },
+      {
+        title: 'Social learning',
+        description: 'Supports following, followers, notifications, mutual-progress visibility, and scalable relationship documents.',
+      },
+    ],
+    stack: [
+      'React 19',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'Appwrite Auth',
+      'Appwrite Database',
+      'Google Gemini',
+      'Capacitor 8',
+    ],
+    outcomes: [
+      'Delivered a production-oriented learning experience that remains fully usable in static mode when AI credentials are unavailable.',
+      'Migrated the backend foundation to Appwrite for authentication, database-backed learning state, and scalable social data management.',
+      'Implemented responsible Gemini integration with local key management, validation states, fallback controls, and clear user-facing availability handling.',
     ],
   },
 };

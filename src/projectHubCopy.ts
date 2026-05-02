@@ -31,6 +31,10 @@ const sharedCards = {
     href: '/projects/stockpilot',
     tech: ['React 19 + Vite', 'Firebase', 'Tailwind CSS'],
   },
+  deutschflow: {
+    href: '/projects/deutschflow-ai',
+    tech: ['React 19 + TypeScript', 'Appwrite', 'Google Gemini', 'Capacitor 8'],
+  },
   housing: {
     href: '/projects/neural-network-ids-in-p4-bmv2',
     tech: ['P4 (BMv2)', 'Python', 'Quantized Neural Networks'],
@@ -57,7 +61,7 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       },
       {
         title: 'Databases and Cloud',
-        items: ['Firebase', 'MongoDB'],
+        items: ['Appwrite', 'Firebase', 'MongoDB'],
       },
       {
         title: 'Tools and Platforms',
@@ -78,6 +82,21 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
+        cta: 'Open project page',
+      },
+      {
+        category: 'AI language learning app',
+        kind: 'Mobile-first German learning platform',
+        title: 'DeutschFlow AI',
+        summary:
+          'A German learning app with spaced repetition, CEFR grammar paths, stories, dictionary tools, phrasebook practice, social learning, and Gemini-only AI features.',
+        highlights: [
+          'Keeps static flashcards, grammar, phrasebook, dictionary, manual cards, and social learning available without any AI key.',
+          'Uses Gemini for story generation, grammar deep dives, daily vocabulary, dictionary enrichment, flashcard autofill, and word suggestions.',
+          'Supports multiple local Gemini keys with labels, validation states, default model selection, automatic fallback, cooldowns, and bounded retries.',
+        ],
+        tech: [...sharedCards.deutschflow.tech],
+        href: sharedCards.deutschflow.href,
         cta: 'Open project page',
       },
       {
@@ -116,7 +135,7 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       },
       {
         title: 'Datenbanken und Cloud',
-        items: ['Firebase', 'MongoDB'],
+        items: ['Appwrite', 'Firebase', 'MongoDB'],
       },
       {
         title: 'Tools und Plattformen',
@@ -137,6 +156,21 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
+        cta: 'Projektseite oeffnen',
+      },
+      {
+        category: 'KI-Sprachlern-App',
+        kind: 'Mobile-first-Plattform fuer Deutschlernen',
+        title: 'DeutschFlow AI',
+        summary:
+          'Eine Deutschlern-App mit Spaced Repetition, CEFR-Grammatikpfad, Stories, Woerterbuch-Tools, Phrasebook-Uebungen, Social Learning und Gemini-only-KI-Funktionen.',
+        highlights: [
+          'Statische Flashcards, Grammatik, Phrasebook, Woerterbuch, manuelle Karten und Social Learning funktionieren ohne KI-Key.',
+          'Nutzt Gemini fuer Story-Generierung, Grammatik-Deep-Dives, Tagesvokabeln, Woerterbuch-Ergaenzung, Flashcard-Autofill und Wortvorschlaege.',
+          'Unterstuetzt mehrere lokale Gemini-Keys mit Labels, Validierungsstatus, Standardmodell, automatischem Fallback, Cooldowns und begrenzten Retries.',
+        ],
+        tech: [...sharedCards.deutschflow.tech],
+        href: sharedCards.deutschflow.href,
         cta: 'Projektseite oeffnen',
       },
       {
@@ -175,7 +209,7 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       },
       {
         title: 'Bases de donnees et cloud',
-        items: ['Firebase', 'MongoDB'],
+        items: ['Appwrite', 'Firebase', 'MongoDB'],
       },
       {
         title: 'Outils et plateformes',
@@ -196,6 +230,21 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
+        cta: 'Ouvrir la page projet',
+      },
+      {
+        category: 'Application d apprentissage avec IA',
+        kind: 'Plateforme mobile-first pour apprendre l allemand',
+        title: 'DeutschFlow AI',
+        summary:
+          'Une app d apprentissage de l allemand avec repetition espacee, parcours grammaire CEFR, histoires, dictionnaire, phrasebook, social learning et IA Gemini-only.',
+        highlights: [
+          'Les flashcards, la grammaire, le phrasebook, le dictionnaire, les cartes manuelles et le social learning restent disponibles sans cle IA.',
+          'Utilise Gemini pour les histoires, les explications de grammaire, le vocabulaire quotidien, l enrichissement dictionnaire, l autofill des flashcards et les suggestions de mots.',
+          'Gere plusieurs cles Gemini locales avec labels, validation, modele par defaut, fallback automatique, cooldowns et retries limites.',
+        ],
+        tech: [...sharedCards.deutschflow.tech],
+        href: sharedCards.deutschflow.href,
         cta: 'Ouvrir la page projet',
       },
       {
@@ -234,7 +283,7 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
       },
       {
         title: 'Bases de datos y cloud',
-        items: ['Firebase', 'MongoDB'],
+        items: ['Appwrite', 'Firebase', 'MongoDB'],
       },
       {
         title: 'Herramientas y plataformas',
@@ -255,6 +304,21 @@ export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
         ],
         tech: [...sharedCards.taskflow.tech],
         href: sharedCards.taskflow.href,
+        cta: 'Abrir pagina del proyecto',
+      },
+      {
+        category: 'App de aprendizaje con IA',
+        kind: 'Plataforma mobile-first para aprender aleman',
+        title: 'DeutschFlow AI',
+        summary:
+          'Una app para aprender aleman con repeticion espaciada, ruta gramatical CEFR, historias, diccionario, practica de frases, aprendizaje social y funciones IA solo con Gemini.',
+        highlights: [
+          'Flashcards, gramatica, phrasebook, diccionario, tarjetas manuales y aprendizaje social siguen disponibles sin clave de IA.',
+          'Usa Gemini para historias, explicaciones gramaticales, vocabulario diario, enriquecimiento del diccionario, autofill de flashcards y sugerencias de palabras.',
+          'Gestiona varias claves Gemini locales con etiquetas, validacion, modelo predeterminado, fallback automatico, cooldowns y reintentos limitados.',
+        ],
+        tech: [...sharedCards.deutschflow.tech],
+        href: sharedCards.deutschflow.href,
         cta: 'Abrir pagina del proyecto',
       },
       {
