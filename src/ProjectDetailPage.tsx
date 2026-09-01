@@ -35,10 +35,12 @@ export default function ProjectDetailPage() {
             <h1 className="section-title">{project.title}</h1>
             <p>{project.summary}</p>
             <div className="project-links">
-              <a href={project.repoUrl} target="_blank" rel="noreferrer">
-                Open GitHub Repo
-              </a>
-              <Link to="/projects">All Projects</Link>
+              {project.links.map((link) => (
+                <a href={link.href} key={link.href} target="_blank" rel="noreferrer">
+                  {link.label}
+                </a>
+              ))}
+              <Link to="/projects">All projects</Link>
             </div>
             <div className="row g-3 mt-1">
               {project.stats.map((stat) => (

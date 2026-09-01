@@ -18,7 +18,7 @@ export const SkillsSection = memo(function SkillsSection({ skillsCopy }: SkillsS
 
         <div className="row g-4">
           {skillsCopy.groups.map((group) => (
-            <div className="col-md-6 col-xl-3" key={group.title}>
+            <div className="col-md-6 col-xl-4" key={group.title}>
               <article className="skill-card h-100">
                 <h3>{group.title}</h3>
                 <div className="tag-row">

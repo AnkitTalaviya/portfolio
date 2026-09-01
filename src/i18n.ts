@@ -1,4 +1,4 @@
-﻿export const languageOptions = [
+export const languageOptions = [
   { code: 'en', nativeLabel: 'English' },
   { code: 'de', nativeLabel: 'Deutsch' },
   { code: 'fr', nativeLabel: 'Francais' },
@@ -86,6 +86,7 @@ export type AppCopy = {
     actions: {
       email: string;
       linkedIn: string;
+      gitHub: string;
       resume: string;
     };
   };
@@ -131,6 +132,7 @@ export type AppCopy = {
     actions: {
       email: string;
       linkedIn: string;
+      gitHub: string;
       backToTop: string;
     };
   };
@@ -157,8 +159,8 @@ export const paletteToneLabels: Record<LanguageCode, Record<string, string>> = {
   de: {
     Blue: 'Blau',
     Neutral: 'Neutral',
-    Bold: 'KrÃ¤ftig',
-    Green: 'GrÃ¼n',
+    Bold: 'Kräftig',
+    Green: 'Grün',
     Light: 'Hell',
   },
   fr: {
@@ -177,9 +179,11 @@ export const paletteToneLabels: Record<LanguageCode, Record<string, string>> = {
   },
 };
 
-export const getInitialLanguage = (): LanguageCode => {
+export const defaultLanguage: LanguageCode = 'en';
+
+export const getPreferredLanguage = (): LanguageCode => {
   if (typeof window === 'undefined') {
-    return 'en';
+    return defaultLanguage;
   }
 
   const savedLanguage = window.localStorage.getItem('portfolio-language');
@@ -198,7 +202,7 @@ export const getInitialLanguage = (): LanguageCode => {
     }
   }
 
-  return 'en';
+  return defaultLanguage;
 };
 
 const englishCopy: AppCopy = {
@@ -207,8 +211,8 @@ const englishCopy: AppCopy = {
     menu: 'Menu',
     about: 'About',
     experience: 'Experience',
-    portfolio: 'Portfolio',
-    project: 'Project',
+    portfolio: 'Projects',
+    project: 'Project pages',
     skills: 'Skills',
     contact: 'Contact',
   },
@@ -233,245 +237,223 @@ const englishCopy: AppCopy = {
     },
   },
   hero: {
-    eyebrow: 'Full Stack Software Developer | M.Sc. Student | TU Ilmenau',
-    title: 'Full stack software developer focused on JavaScript, React, Node.js, and MongoDB.',
+    eyebrow: 'Full-Stack AI Engineer | M.Sc. Student | TU Ilmenau',
+    title:
+      'Full-Stack AI Engineer building LLM applications, RAG pipelines, and machine learning for programmable networks.',
     text:
-      'I am Ankit Talaviya, a master\'s student in Research in Computer and Systems Engineering at TU Ilmenau with hands-on experience in ReactJS, React Native, ElectronJS, Three.js, JavaScript, Node.js, and MongoDB. I work as a full stack software developer and I am currently looking for a working student role in software development where I can keep building practical, high-quality user experiences across both frontend and backend systems.',
+      'I am Ankit Talaviya. I have three years of professional software development experience and I am studying for an M.Sc. in Research in Computer and Systems Engineering at TU Ilmenau. I work on LLM applications with multi-provider failover, RAG pipelines built on ChromaDB and Sentence-Transformers, and quantised neural networks for P4 data planes. My own product, sprako.app, is in beta.',
     quickFacts: [
-      'Based in Ilmenau, Thuringia, Germany',
-      'Open to working student software roles',
-      'Full stack JavaScript developer with Node.js and MongoDB skills',
+      'Based in Erfurt, Germany',
+      'Three years of professional software development',
+      'sprako.app is in beta',
     ],
     stats: [
-      { value: '3+', label: 'years in professional product teams' },
-      { value: '08', label: 'projects across desktop, web, and mobile' },
-      {
-        value: '06',
-        label: 'core stack: JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
-      },
+      { value: '3', label: 'years of professional software development' },
+      { value: '10-15', label: 'beta users on sprako.app' },
+      { value: '2027', label: 'expected M.Sc. completion at TU Ilmenau' },
     ],
     actions: {
       email: 'Email me',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       resume: 'Resume PDF',
     },
   },
   about: {
     kicker: 'About',
-    title: 'Full stack software developer.',
+    title: 'What I work on.',
     text:
-      'I build web, desktop, and mobile applications with JavaScript. My work includes frontend interfaces, backend integration, state management, and product features used by real teams.',
+      'Three years of professional software development, now applied to LLM applications, retrieval pipelines, and machine learning inside network data planes.',
     cards: [
       {
-        title: 'Current focus',
+        title: 'LLM applications',
         copy:
-          'Master\'s student at TU Ilmenau, looking for a working student role in software development.',
+          'Sprako runs on the Google Gemini API. Keys are validated one by one, with automatic failover, cooldowns and bounded retries. The application stays fully usable with no key configured.',
       },
       {
-        title: 'Project types',
+        title: 'RAG and local models',
         copy:
-          'Experience with web applications, React Native mobile apps, Electron desktop software, and Three.js-based 3D interfaces.',
+          'German vocabulary and example sentences indexed in ChromaDB with multilingual Sentence-Transformer embeddings. Generation runs through the Anthropic API, with local Qwen2.5 on Ollama as an offline fallback.',
       },
       {
-        title: 'Full stack work',
+        title: 'ML in programmable networks',
         copy:
-          'Comfortable with React on the frontend and Node.js, REST APIs, and MongoDB on the backend.',
+          'Packet and flow features quantised to fixed point and evaluated directly in the P4 data plane. Covers model training, deployment and runtime metrics under BMv2.',
+      },
+    ],
+  },
+  projects: {
+    kicker: 'Projects',
+    title: 'Projects.',
+    text:
+      'A German learning platform in beta, a RAG chatbot for German vocabulary, and a neural network that runs as an intrusion detection system inside a P4 data plane.',
+    items: [
+      {
+        title: 'DeutschFlow AI / Sprako',
+        company: 'Own project, concept to operation',
+        category: 'German learning platform, A1 to C2',
+        summary:
+          'A German learning platform I built and run myself. It is in beta at sprako.app with 10 to 15 users.',
+        highlights: [
+          'Management of multiple Gemini API keys with per-key validation, automatic failover, cooldowns and bounded retries. The application stays fully usable with no key configured.',
+          'Six-level grammar path from A1 to C2, vocabulary generated via Gemini, and a spaced repetition system with XP, streaks and weak-area tracking.',
+          'Appwrite backend with authentication, learning state, follow function and notifications.',
+        ],
+        tech: [
+          'ReactJS 19',
+          'TypeScript',
+          'Vite',
+          'Tailwind CSS',
+          'Capacitor 8',
+          'Appwrite',
+          'Google Gemini API',
+        ],
+        links: [
+          { label: 'Open sprako.app', href: 'https://sprako.app' },
+          { label: 'Project page', href: '/projects/deutschflow-ai' },
+        ],
+      },
+      {
+        title: 'RAG chatbot for German learning',
+        company: 'Retrieval-Augmented Generation',
+        category: 'German vocabulary, runs offline',
+        summary:
+          'Retrieval-Augmented Generation over German vocabulary. It runs without an internet connection.',
+        highlights: [
+          'Vocabulary and example sentences from OpenThesaurus and Tatoeba indexed in ChromaDB using multilingual Sentence-Transformer embeddings.',
+          'The retrieval pipeline returns semantically similar vocabulary and usage examples for a learner query.',
+          'Generation via the Anthropic API, with local Qwen2.5 through Ollama as an offline fallback.',
+        ],
+        tech: ['Python', 'ChromaDB', 'Sentence-Transformers', 'Anthropic API', 'Ollama', 'Qwen2.5'],
+        links: [
+          { label: 'Open sprako.app', href: 'https://sprako.app' },
+          { label: 'Project page', href: '/projects/rag-chatbot-german' },
+        ],
+      },
+      {
+        title: 'Neural network as in-network IDS in P4 (BMv2)',
+        company: 'Machine learning in programmable data planes',
+        category: 'In-network intrusion detection',
+        summary:
+          'Packet and flow features are quantised to fixed point and classified directly inside the P4 data plane, from model training to runtime metrics under BMv2.',
+        highlights: [
+          'Packet and flow features quantised to fixed point and evaluated directly in the P4 data plane. Covers model training, deployment and collection of runtime metrics under BMv2.',
+          'BMv2 CLI runtime entries generated automatically from the model JSON. Deployed on single-switch and multi-switch topologies.',
+          'Evaluation through reproducible scripts with confusion matrices and a comparison of offline and online metrics.',
+        ],
+        tech: ['Python', 'P4', 'BMv2', 'Mininet', 'PyTorch'],
+        links: [
+          { label: 'GitHub repo', href: 'https://github.com/AnkitTalaviya/nn_p4_nids' },
+          { label: 'Project page', href: '/projects/neural-network-ids-in-p4-bmv2' },
+        ],
       },
     ],
   },
   experience: {
     kicker: 'Experience',
-    title: 'Work experience.',
+    title: 'Professional experience.',
     text:
-      'Professional experience across desktop software, admin systems, mobile apps, and 3D product interfaces.',
+      'Three years as a frontend developer in India, across desktop, web and mobile products.',
     items: [
       {
         company: 'Addicted Technologies',
-        role: 'Frontend Developer, Team Leader',
+        role: 'Frontend Developer & Team Lead',
         period: 'Jul 2023 - Jul 2024',
         location: 'Gandhinagar, India',
-        summary:
-          'Delivered desktop-first product experiences with ReactJS, ElectronJS, and Three.js, including immersive 3D visualization and finance tooling.',
+        summary: 'Desktop products built with ElectronJS, ReactJS and Three.js.',
         achievements: [
-          'Built 3D-Emp, a house remodeling desktop app that loads Blender models, supports wall selection, and updates materials in real time.',
-          'Implemented FiMA finance workflows for expenses, income, categorization, charts, and Google Drive backup inside a React and Electron environment.',
-          'Led a small delivery team and coordinated design, QA, and code reviews to keep releases stable and maintainable.',
+          '3D-Emp (ElectronJS, Three.js): loaded GLTF house models from Blender, wall selection via raycasting and runtime texture swaps (MeshStandardMaterial) without interrupting the render loop. Level of Detail against framerate drops.',
+          'FiMA (ElectronJS, ReactJS): personal finance desktop application with charts, category analysis and backup via the Google Drive API.',
+          'Introduced LLM-assisted development tooling in the team, including code review support and test case generation.',
+          'Led a four-person development team (two developers, one designer, one QA), including sprint planning and code reviews across both products.',
         ],
       },
       {
         company: 'Crest Infotech',
-        role: 'Working Student, Frontend Developer',
+        role: 'Frontend Developer, initially part-time',
         period: 'Jul 2021 - Jun 2023',
         location: 'Ahmedabad, India',
-        summary:
-          'Grew from working student to frontend contributor across ElectronJS, ReactJS, and React Native products, with a strong focus on debugging and shipping practical features.',
+        summary: 'ElectronJS, ReactJS and React Native work across several client products.',
         achievements: [
-          'Maintained CrestPMS activity-tracking software with multi-monitor screenshot capture, auto-logout handling, and stable mouse and keyboard tracking across Linux, Mac, and Windows.',
-          'Built responsive React and Bootstrap admin experiences with real-time chat, notifications, and infinite scrolling in the Pawfect Admin Panel.',
-          'Contributed to ProductY, Room Key, and CrestMeds through React migration, API integration, role-based access, navigation flows, and UI implementation.',
-        ],
-      },
-    ],
-  },
-  projects: {
-    kicker: 'Portfolio',
-    title: 'Portfolio.',
-    text:
-      'Selected independent, product, and delivery work across AI apps, Addicted Technologies, and Crest Infotech.',
-    items: [
-      {
-        title: 'DeutschFlow AI',
-        company: 'Independent Project',
-        category: 'Mobile-first learning app',
-        summary:
-          'German learning app with spaced repetition, structured grammar, stories, dictionary tools, phrasebook practice, social learning, and Gemini-only AI features.',
-        highlights: [
-          'Keeps static flashcards, grammar, phrasebook, dictionary, manual cards, and social learning working without any AI key.',
-          'Uses Gemini for stories, grammar deep dives, daily vocabulary, dictionary enrichment, flashcard autofill, themed card generation, and word suggestions.',
-          'Supports multiple local Gemini keys with labels, validation states, default model selection, automatic fallback, cooldowns, and bounded retries.',
-        ],
-        tech: ['React 19', 'TypeScript', 'Appwrite', 'Google Gemini', 'Capacitor 8'],
-        links: [
-          { label: 'View project page', href: '/projects/deutschflow-ai' },
-          { label: 'GitHub repo', href: 'https://github.com/AnkitTalaviya/DeutschFlow' },
-        ],
-      },
-      {
-        title: '3D-Emp',
-        company: 'Addicted Technologies',
-        category: 'Desktop software',
-        summary:
-          'Interactive house remodeling software that loads Blender-built homes into a Three.js scene so users can preview renovation textures in real time.',
-        highlights: [
-          'Loaded 3D models, added camera controls, and enabled scene exploration.',
-          'Used raycasting to identify wall meshes and update textures dynamically without interrupting the experience.',
-          'Improved rendering performance with lower polygon models, LOD thinking, and profiling-led fixes.',
-        ],
-        tech: ['ReactJS', 'ElectronJS', 'Three.js', 'Blender', 'Redux'],
-      },
-      {
-        title: 'FiMA Finance Management',
-        company: 'Addicted Technologies',
-        category: 'Desktop software',
-        summary:
-          'Personal finance desktop application for tracking income and expenses, categorizing transactions, and visualizing patterns with dynamic charts.',
-        highlights: [
-          'Created the application structure, navigation shell, and responsive layouts for desktop use.',
-          'Built transaction forms, validation, category flows, and chart updates tied to user-entered data and date ranges.',
-          'Added Google Drive backup integration for safer recovery and long-term accessibility.',
-        ],
-        tech: ['ReactJS', 'ElectronJS', 'Redux', 'Charts', 'Google Drive API'],
-      },
-      {
-        title: 'CrestPMS',
-        company: 'Crest Infotech',
-        category: 'Desktop software',
-        summary:
-          'Productivity and project management software that captures screenshots, tracks activity, and helps teams monitor engagement across devices.',
-        highlights: [
-          'Investigated Electron desktopCapturer limitations and rebuilt support for multi-monitor screenshot capture.',
-          'Fixed ioHook-based keyboard and mouse activity tracking across Mac, Linux, and Windows configurations.',
-          'Helped test and stabilize newer Electron builds to improve cross-platform reliability.',
-        ],
-        tech: ['ElectronJS', 'desktopCapturer', 'ioHook', 'Redux'],
-        links: [{ label: 'Visit crestpms.com', href: 'https://www.crestpms.com/' }],
-      },
-      {
-        title: 'Pawfect Admin Panel',
-        company: 'Crest Infotech',
-        category: 'Web application',
-        summary:
-          'Responsive admin dashboard for customer and employee management, built around real-time communication and operational visibility.',
-        highlights: [
-          'Set up the project structure and implemented the UI with ReactJS and Bootstrap from scratch.',
-          'Integrated ioSocket for instant chat and notifications between administrators, employees, and customers.',
-          'Added infinite scrolling and resolved production issues to keep large datasets usable and responsive.',
-        ],
-        tech: ['ReactJS', 'Bootstrap', 'ioSocket', 'Redux'],
-      },
-      {
-        title: 'CrestMeds Clone',
-        company: 'Crest Infotech',
-        category: 'Mobile application',
-        summary:
-          'React Native pharmacy clone inspired by Netmeds, designed to support browsing, search, cart flows, and a polished cross-platform layout.',
-        highlights: [
-          'Initialized the mobile architecture and configured key development dependencies.',
-          'Implemented React Navigation stacks, tab flows, and screen transitions for an intuitive mobile experience.',
-          'Translated product and account journeys into responsive React Native UI components.',
-        ],
-        tech: ['React Native', 'React Navigation', 'Redux'],
-        links: [
-          {
-            label: 'View project page',
-            href: 'https://www.crestinfotech.com/netmeds-pharmacy-clone-app/',
-          },
-        ],
-      },
-      {
-        title: 'Room Key Hotel Management System',
-        company: 'Crest Infotech',
-        category: 'Web application',
-        summary:
-          'Hotel booking and room management platform for admins and branch managers with role-aware workflows and centralized room data.',
-        highlights: [
-          'Integrated room and booking APIs to keep availability and booking data synchronized with the frontend.',
-          'Used Redux to coordinate complex shared state and dynamic updates across the application.',
-          'Implemented role-based access so administrators and branch managers only saw the actions relevant to them.',
-        ],
-        tech: ['ReactJS', 'Redux', 'API Integration', 'Access Control'],
-      },
-      {
-        title: 'ProductY',
-        company: 'Crest Infotech',
-        category: 'Web application',
-        summary:
-          'Web-based product and catalog management platform that helps teams create, manage, and publish product information online.',
-        highlights: [
-          'Started with bug resolution work and grew into broader product development and optimization.',
-          'Contributed to the project\'s migration into ReactJS for better maintainability and performance.',
-          'Built a vector graphics editor and full CRUD pages for product data management.',
-        ],
-        tech: ['ReactJS', 'Redux', 'CRUD', 'Vector Graphics'],
-        links: [
-          { label: 'Product website', href: 'https://producty.com/' },
-          { label: 'Open app', href: 'https://app.producty.com/' },
+          "CrestPMS: fixed multi-monitor screenshot failures by reconfiguring Electron's desktopCapturer API. Restored keyboard and mouse tracking via ioHook on macOS (M1 and Intel), Linux and Windows.",
+          "CrestMeds: built entirely in React Native with React Navigation stacks, tab flows and deep linking. Submitted as bachelor's final project.",
+          'Pawfect Admin Panel (ReactJS, Socket.IO): real-time chat, infinite scrolling, booking API and role-based access control.',
+          'Contributed to the Room Key hotel management system, migrated ProductY to ReactJS and built an SVG vector graphics editor.',
+          'Integrated external AI APIs for image and text processing into client projects, including OCR-based document capture.',
         ],
       },
     ],
   },
   skills: {
-    kicker: 'Technical Skills',
+    kicker: 'Skills',
     title: 'Skills.',
-    text:
-      'Main technologies: JavaScript, TypeScript, React, Node.js, Express.js, MongoDB, React Native, ElectronJS, Three.js, and REST APIs.',
+    text: 'Grouped the same way as on my CV.',
     groups: [
       {
-        title: 'Frontend',
-        items: ['ReactJS', 'React Native', 'Three.js', 'ElectronJS', 'Bootstrap', 'Redux'],
-      },
-      {
-        title: 'Backend',
-        items: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'API Integration'],
-      },
-      {
-        title: 'Tools & Platforms',
+        title: 'AI, ML & LLM',
         items: [
-          'Docker',
-          'Git',
-          'GitHub',
-          'Appwrite',
-          'Firebase',
-          'Linux',
-          'Blender',
-          'Jira',
-          'Postman',
-          'Swagger',
+          'Machine Learning',
+          'Google Gemini (multi-key, failover)',
+          'Anthropic API',
+          'Prompt and context engineering',
+          'Model quantisation',
         ],
       },
       {
-        title: 'Programming',
-        items: ['JavaScript', 'TypeScript', 'HTML', 'CSS', 'C++'],
+        title: 'RAG & local models',
+        items: [
+          'ChromaDB',
+          'Sentence-Transformers (multilingual)',
+          'Embeddings',
+          'Retrieval pipelines',
+          'Ollama (Qwen2.5)',
+        ],
+      },
+      {
+        title: 'Programming & frontend',
+        items: [
+          'Python',
+          'JavaScript',
+          'TypeScript',
+          'C++',
+          'HTML/CSS',
+          'ReactJS',
+          'React Native',
+          'Three.js',
+          'ElectronJS',
+          'Capacitor 8',
+          'Vite',
+          'Tailwind CSS',
+          'Redux',
+        ],
+      },
+      {
+        title: 'Backend & data',
+        items: [
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'PostgreSQL',
+          'MySQL',
+          'Appwrite',
+          'Firebase',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'DevOps & networking',
+        items: [
+          'Git',
+          'GitHub',
+          'Docker',
+          'Docker Compose',
+          'Linux',
+          'Jira',
+          'P4',
+          'BMv2',
+          'Mininet',
+        ],
       },
     ],
   },
@@ -481,46 +463,45 @@ const englishCopy: AppCopy = {
     items: [
       {
         title: 'M.Sc. Research in Computer and Systems Engineering',
-        place: 'Technische Universitat Ilmenau',
-        period: 'Oct 2024 - Present',
+        place: 'Technische Universität Ilmenau',
+        period: 'Oct 2024 - expected 2027',
         notes: [
-          'Currently studying in Ilmenau, Germany.',
-          'Member of Internationale Ingenieure fur Thuringen, a BMBF-funded initiative.',
+          'Focus on network intrusion detection systems and machine learning in programmable networks.',
+          'Member of the BMBF-funded programme Internationale Ingenieure für Thüringen.',
         ],
       },
       {
         title: 'B.E. Computer Science and Engineering',
-        place: 'Government Engineering College, Patan / Gujarat Technological University',
+        place: 'Gujarat Technological University, India',
         period: 'Jul 2019 - Jun 2023',
         notes: [
-          'Graduated with a 2.1 GPA equivalent.',
-          'Bachelor project: CrestMeds clone in React Native.',
+          'CGPA 7,8 out of 10, First Class with Distinction. German equivalent about 2,3.',
         ],
       },
     ],
     languagesTitle: 'Languages',
     spokenLanguages: [
+      'German - B1, working towards B2',
       'English - C1',
-      'German - A2, currently improving',
       'Hindi - Native',
       'Gujarati - Native',
     ],
     documentsTitle: 'Documents',
-    documentsText: 'Resume and project details.',
+    documentsText: 'CV and project details.',
     documents: [
-      { label: 'Resume PDF', href: '/documents/ankit-talaviya-resume.pdf' },
+      { label: 'CV PDF', href: '/documents/ankit-talaviya-resume.pdf' },
       { label: 'Project details PDF', href: '/documents/ankit-talaviya-project-details.pdf' },
     ],
   },
   contact: {
     kicker: 'Contact',
-    title: 'Open to software development opportunities.',
-    text:
-      'If you are hiring for a working student role or a full stack software role, I would be happy to connect.',
-    location: 'Ilmenau, Thuringia, Germany',
+    title: 'Open to Full-Stack AI Engineer roles.',
+    text: 'Email is the quickest way to reach me.',
+    location: 'Erfurt, Germany',
     actions: {
       email: 'Send email',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       backToTop: 'Back to top',
     },
   },
@@ -539,11 +520,11 @@ const englishCopy: AppCopy = {
 const germanCopy: AppCopy = {
   htmlLang: 'de',
   nav: {
-    menu: 'MenÃ¼',
-    about: 'Ãœber mich',
+    menu: 'Menü',
+    about: 'Über mich',
     experience: 'Erfahrung',
-    portfolio: 'Portfolio',
-    project: 'Projekt',
+    portfolio: 'Projekte',
+    project: 'Projektseiten',
     skills: 'Skills',
     contact: 'Kontakt',
   },
@@ -554,63 +535,129 @@ const germanCopy: AppCopy = {
   theme: {
     label: 'Thema',
     panelTitle: 'Themen',
-    selectorAriaLabel: 'Thema auswÃ¤hlen',
+    selectorAriaLabel: 'Thema auswählen',
     groups: {
       dark: 'Dunkel',
       light: 'Hell',
     },
     tones: {
       warm: 'Warm',
-      cool: 'KÃ¼hl',
+      cool: 'Kühl',
       calm: 'Ruhig',
       clean: 'Klar',
-      earthy: 'NatÃ¼rlich',
+      earthy: 'Natürlich',
     },
   },
   hero: {
-    eyebrow: 'Full-Stack-Softwareentwickler | M.Sc.-Student | TU Ilmenau',
-    title: 'Full-Stack-Softwareentwickler mit Fokus auf JavaScript, React, Node.js und MongoDB.',
+    eyebrow: 'Full-Stack AI Engineer | M.Sc.-Student | TU Ilmenau',
+    title:
+      'Full-Stack AI Engineer für LLM-Anwendungen, RAG-Pipelines und maschinelles Lernen in programmierbaren Netzen.',
     text:
-      'Ich bin Ankit Talaviya, Masterstudent im Studiengang Research in Computer and Systems Engineering an der TU Ilmenau. Ich habe praktische Erfahrung mit ReactJS, React Native, ElectronJS, Three.js, JavaScript, Node.js und MongoDB. Aktuell suche ich eine Werkstudentenstelle in der Softwareentwicklung, in der ich weiterhin praxisnahe und hochwertige Nutzererlebnisse im Frontend und Backend entwickeln kann.',
+      'Ich bin Ankit Talaviya. Ich habe drei Jahre Berufserfahrung in der Softwareentwicklung und studiere im M.Sc. Research in Computer and Systems Engineering an der TU Ilmenau. Ich arbeite an LLM-Anwendungen mit Multi-Provider-Failover, RAG-Pipelines auf Basis von ChromaDB und Sentence-Transformers sowie quantisierten neuronalen Netzen für P4-Datenebenen. Mein eigenes Produkt, sprako.app, ist in der Beta.',
     quickFacts: [
-      'Wohnhaft in Ilmenau, ThÃ¼ringen, Deutschland',
-      'Offen fÃ¼r Werkstudentenstellen in der Softwareentwicklung',
-      'Full-Stack-JavaScript-Entwickler mit Kenntnissen in Node.js und MongoDB',
+      'Wohnhaft in Erfurt, Deutschland',
+      'Drei Jahre Berufserfahrung in der Softwareentwicklung',
+      'sprako.app ist in der Beta',
     ],
     stats: [
-      { value: '3+', label: 'Jahre Erfahrung in professionellen Produktteams' },
-      { value: '08', label: 'Projekte fÃ¼r Desktop, Web und Mobile' },
-      {
-        value: '06',
-        label: 'Kern-Stack: JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
-      },
+      { value: '3', label: 'Jahre Berufserfahrung in der Softwareentwicklung' },
+      { value: '10-15', label: 'Beta-Nutzer auf sprako.app' },
+      { value: '2027', label: 'voraussichtlicher M.Sc.-Abschluss an der TU Ilmenau' },
     ],
     actions: {
       email: 'E-Mail senden',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       resume: 'Lebenslauf PDF',
     },
   },
   about: {
-    kicker: 'Ãœber mich',
-    title: 'Full-Stack-Softwareentwickler.',
+    kicker: 'Über mich',
+    title: 'Woran ich arbeite.',
     text:
-      'Ich entwickle Web-, Desktop- und Mobile-Anwendungen mit JavaScript. Meine Arbeit umfasst Frontend-OberflÃ¤chen, Backend-Integration, State Management und Produktfunktionen, die von echten Teams genutzt werden.',
+      'Drei Jahre Berufserfahrung in der Softwareentwicklung, heute angewendet auf LLM-Anwendungen, Retrieval-Pipelines und maschinelles Lernen in Netzwerk-Datenebenen.',
     cards: [
       {
-        title: 'Aktueller Fokus',
+        title: 'LLM-Anwendungen',
         copy:
-          'Masterstudent an der TU Ilmenau und auf der Suche nach einer Werkstudentenstelle in der Softwareentwicklung.',
+          'Sprako läuft über die Google-Gemini-API. Schlüssel werden einzeln validiert, mit automatischem Failover, Cooldowns und begrenzten Retries. Die Anwendung bleibt ohne konfigurierten Schlüssel vollständig nutzbar.',
       },
       {
-        title: 'Projekttypen',
+        title: 'RAG und lokale Modelle',
         copy:
-          'Erfahrung mit Webanwendungen, React-Native-Apps, Electron-Desktop-Software und 3D-OberflÃ¤chen auf Basis von Three.js.',
+          'Deutscher Wortschatz und Beispielsätze werden mit mehrsprachigen Sentence-Transformer-Embeddings in ChromaDB indexiert. Die Generierung läuft über die Anthropic-API, mit lokalem Qwen2.5 über Ollama als Offline-Fallback.',
       },
       {
-        title: 'Full-Stack-Arbeit',
+        title: 'ML in programmierbaren Netzen',
         copy:
-          'Sicher im Umgang mit React im Frontend sowie Node.js, REST-APIs und MongoDB im Backend.',
+          'Paket- und Flow-Features werden auf Festkomma quantisiert und direkt in der P4-Datenebene ausgewertet. Umfasst Modelltraining, Deployment und Laufzeitmetriken unter BMv2.',
+      },
+    ],
+  },
+  projects: {
+    kicker: 'Projekte',
+    title: 'Projekte.',
+    text:
+      'Eine Deutschlernplattform in der Beta, ein RAG-Chatbot für deutschen Wortschatz und ein neuronales Netz, das als Intrusion Detection System in einer P4-Datenebene läuft.',
+    items: [
+      {
+        title: 'DeutschFlow AI / Sprako',
+        company: 'Eigenes Projekt, von der Idee bis zum Betrieb',
+        category: 'Deutschlernplattform, A1 bis C2',
+        summary:
+          'Eine Deutschlernplattform, die ich selbst gebaut habe und betreibe. Sie ist als Beta unter sprako.app mit 10 bis 15 Nutzern erreichbar.',
+        highlights: [
+          'Verwaltung mehrerer Gemini-API-Schlüssel mit Validierung pro Schlüssel, automatischem Failover, Cooldowns und begrenzten Retries. Die Anwendung bleibt ohne konfigurierten Schlüssel vollständig nutzbar.',
+          'Sechsstufiger Grammatikpfad von A1 bis C2, über Gemini generierter Wortschatz und ein Spaced-Repetition-System mit XP, Streaks und Tracking schwacher Bereiche.',
+          'Appwrite-Backend mit Authentifizierung, Lernstand, Follow-Funktion und Benachrichtigungen.',
+        ],
+        tech: [
+          'ReactJS 19',
+          'TypeScript',
+          'Vite',
+          'Tailwind CSS',
+          'Capacitor 8',
+          'Appwrite',
+          'Google Gemini API',
+        ],
+        links: [
+          { label: 'sprako.app öffnen', href: 'https://sprako.app' },
+          { label: 'Projektseite', href: '/projects/deutschflow-ai' },
+        ],
+      },
+      {
+        title: 'RAG-Chatbot für das Deutschlernen',
+        company: 'Retrieval-Augmented Generation',
+        category: 'Deutscher Wortschatz, offline lauffähig',
+        summary:
+          'Retrieval-Augmented Generation über deutschen Wortschatz. Läuft ohne Internetverbindung.',
+        highlights: [
+          'Wortschatz und Beispielsätze aus OpenThesaurus und Tatoeba werden mit mehrsprachigen Sentence-Transformer-Embeddings in ChromaDB indexiert.',
+          'Die Retrieval-Pipeline liefert semantisch ähnlichen Wortschatz und Verwendungsbeispiele zu einer Lernanfrage.',
+          'Generierung über die Anthropic-API, mit lokalem Qwen2.5 über Ollama als Offline-Fallback.',
+        ],
+        tech: ['Python', 'ChromaDB', 'Sentence-Transformers', 'Anthropic API', 'Ollama', 'Qwen2.5'],
+        links: [
+          { label: 'sprako.app öffnen', href: 'https://sprako.app' },
+          { label: 'Projektseite', href: '/projects/rag-chatbot-german' },
+        ],
+      },
+      {
+        title: 'Neuronales Netz als In-Network-IDS in P4 (BMv2)',
+        company: 'Maschinelles Lernen in programmierbaren Datenebenen',
+        category: 'In-Network Intrusion Detection',
+        summary:
+          'Paket- und Flow-Features werden auf Festkomma quantisiert und direkt in der P4-Datenebene klassifiziert, vom Modelltraining bis zu Laufzeitmetriken unter BMv2.',
+        highlights: [
+          'Paket- und Flow-Features auf Festkomma quantisiert und direkt in der P4-Datenebene ausgewertet. Umfasst Modelltraining, Deployment und Erhebung von Laufzeitmetriken unter BMv2.',
+          'BMv2-CLI-Runtime-Einträge werden automatisch aus dem Modell-JSON erzeugt. Deployment auf Single-Switch- und Multi-Switch-Topologien.',
+          'Evaluation über reproduzierbare Skripte mit Confusion-Matrizen und einem Vergleich von Offline- und Online-Metriken.',
+        ],
+        tech: ['Python', 'P4', 'BMv2', 'Mininet', 'PyTorch'],
+        links: [
+          { label: 'GitHub-Repo', href: 'https://github.com/AnkitTalaviya/nn_p4_nids' },
+          { label: 'Projektseite', href: '/projects/neural-network-ids-in-p4-bmv2' },
+        ],
       },
     ],
   },
@@ -618,184 +665,107 @@ const germanCopy: AppCopy = {
     kicker: 'Erfahrung',
     title: 'Berufserfahrung.',
     text:
-      'Berufserfahrung in Desktop-Software, Admin-Systemen, mobilen Apps und 3D-ProduktoberflÃ¤chen.',
+      'Drei Jahre als Frontend-Entwickler in Indien, für Desktop-, Web- und Mobile-Produkte.',
     items: [
       {
         company: 'Addicted Technologies',
-        role: 'Frontend Developer, Team Leader',
+        role: 'Frontend Developer & Team Lead',
         period: 'Jul 2023 - Jul 2024',
         location: 'Gandhinagar, Indien',
-        summary:
-          'Entwicklung von Desktop-orientierten Produkterlebnissen mit ReactJS, ElectronJS und Three.js, einschlieÃŸlich immersiver 3D-Visualisierung und Finance-Tools.',
+        summary: 'Desktop-Produkte mit ElectronJS, ReactJS und Three.js.',
         achievements: [
-          '3D-Emp entwickelt, eine Desktop-App fÃ¼r Hausumbau, die Blender-Modelle lÃ¤dt, WÃ¤nde auswÃ¤hlbar macht und Materialien in Echtzeit aktualisiert.',
-          'FiMA-Workflows fÃ¼r Ausgaben, Einnahmen, Kategorisierung, Diagramme und Google-Drive-Backup in einer React- und Electron-Umgebung umgesetzt.',
-          'Ein kleines Team geleitet sowie Design, QA und Code Reviews koordiniert, um Releases stabil und wartbar zu halten.',
+          '3D-Emp (ElectronJS, Three.js): GLTF-Hausmodelle aus Blender geladen, Wandauswahl per Raycasting und Texturwechsel zur Laufzeit (MeshStandardMaterial), ohne die Render-Schleife zu unterbrechen. Level of Detail gegen Framerate-Einbrüche.',
+          'FiMA (ElectronJS, ReactJS): Desktop-Anwendung für persönliche Finanzen mit Diagrammen, Kategorienanalyse und Backup über die Google-Drive-API.',
+          'LLM-gestützte Entwicklungswerkzeuge im Team eingeführt, unter anderem für Code-Review-Unterstützung und Testfallgenerierung.',
+          'Ein vierköpfiges Entwicklungsteam geleitet (zwei Entwickler, ein Designer, ein QA), inklusive Sprint-Planung und Code Reviews über beide Produkte hinweg.',
         ],
       },
       {
         company: 'Crest Infotech',
-        role: 'Werkstudent, Frontend Developer',
+        role: 'Frontend Developer, initially part-time',
         period: 'Jul 2021 - Jun 2023',
         location: 'Ahmedabad, Indien',
-        summary:
-          'Vom Werkstudenten zum Frontend-Entwickler fÃ¼r ElectronJS-, ReactJS- und React-Native-Produkte gewachsen, mit starkem Fokus auf Debugging und praxisnahe Features.',
+        summary: 'ElectronJS-, ReactJS- und React-Native-Arbeit an mehreren Kundenprodukten.',
         achievements: [
-          'CrestPMS gepflegt, inklusive Multi-Monitor-Screenshot-Erfassung, Auto-Logout-Handling sowie stabiler Maus- und Tastaturverfolgung unter Linux, Mac und Windows.',
-          'Responsive Admin-OberflÃ¤chen mit React und Bootstrap aufgebaut, inklusive Echtzeit-Chat, Benachrichtigungen und Infinite Scrolling im Pawfect Admin Panel.',
-          'Zu ProductY, Room Key und CrestMeds durch React-Migration, API-Integration, rollenbasierte Zugriffe, NavigationsflÃ¼sse und UI-Implementierung beigetragen.',
-        ],
-      },
-    ],
-  },
-  projects: {
-    kicker: 'Portfolio',
-    title: 'Portfolio.',
-    text:
-      'Ausgewaehlte eigenstaendige, Produkt- und Delivery-Arbeiten aus KI-App-Projekten, Addicted Technologies und Crest Infotech.',
-    items: [
-      {
-        title: 'DeutschFlow AI',
-        company: 'Eigenstaendiges Projekt',
-        category: 'Mobile-first-Lern-App',
-        summary:
-          'Deutschlern-App mit Spaced Repetition, strukturiertem Grammatikpfad, Stories, Woerterbuch-Tools, Phrasebook-Uebungen, Social Learning und Gemini-only-KI-Funktionen.',
-        highlights: [
-          'Statische Flashcards, Grammatik, Phrasebook, Woerterbuch, manuelle Karten und Social Learning funktionieren ohne KI-Key.',
-          'Nutzt Gemini fuer Stories, Grammatik-Deep-Dives, Tagesvokabeln, Woerterbuch-Ergaenzung, Flashcard-Autofill, thematische Kartengenerierung und Wortvorschlaege.',
-          'Unterstuetzt mehrere lokale Gemini-Keys mit Labels, Validierungsstatus, Standardmodell, automatischem Fallback, Cooldowns und begrenzten Retries.',
-        ],
-        tech: ['React 19', 'TypeScript', 'Appwrite', 'Google Gemini', 'Capacitor 8'],
-        links: [
-          { label: 'Projektseite ansehen', href: '/projects/deutschflow-ai' },
-          { label: 'GitHub Repo', href: 'https://github.com/AnkitTalaviya/DeutschFlow' },
-        ],
-      },
-      {
-        title: '3D-Emp',
-        company: 'Addicted Technologies',
-        category: 'Desktop-Software',
-        summary:
-          'Interaktive Software fÃ¼r Hausumbau, die mit Blender erstellte HÃ¤user in eine Three.js-Szene lÃ¤dt, damit Nutzer Renovierungstexturen in Echtzeit sehen kÃ¶nnen.',
-        highlights: [
-          '3D-Modelle geladen, Kamerasteuerung ergÃ¤nzt und die Szenenerkundung ermÃ¶glicht.',
-          'Raycasting genutzt, um Wand-Meshes zu identifizieren und Texturen dynamisch zu aktualisieren.',
-          'Rendering-Leistung durch polygonÃ¤rmere Modelle, LOD-AnsÃ¤tze und profilgestÃ¼tzte Optimierungen verbessert.',
-        ],
-        tech: ['ReactJS', 'ElectronJS', 'Three.js', 'Blender', 'Redux'],
-      },
-      {
-        title: 'FiMA Finance Management',
-        company: 'Addicted Technologies',
-        category: 'Desktop-Software',
-        summary:
-          'Desktop-Anwendung fÃ¼r persÃ¶nliche Finanzen zum Erfassen von Einnahmen und Ausgaben, Kategorisieren von Transaktionen und Visualisieren von Mustern mit dynamischen Diagrammen.',
-        highlights: [
-          'Anwendungsstruktur, Navigation und responsive Layouts fÃ¼r den Desktop erstellt.',
-          'Transaktionsformulare, Validierung, KategorienflÃ¼sse und Diagrammaktualisierungen anhand von Benutzerdaten und Datumsbereichen entwickelt.',
-          'Google-Drive-Backup fÃ¼r sicherere Wiederherstellung und langfristige VerfÃ¼gbarkeit integriert.',
-        ],
-        tech: ['ReactJS', 'ElectronJS', 'Redux', 'Charts', 'Google Drive API'],
-      },
-      {
-        title: 'CrestPMS',
-        company: 'Crest Infotech',
-        category: 'Desktop-Software',
-        summary:
-          'ProduktivitÃ¤ts- und Projektmanagement-Software, die Screenshots erfasst, AktivitÃ¤t verfolgt und Teams bei der Beobachtung der Nutzung auf verschiedenen GerÃ¤ten unterstÃ¼tzt.',
-        highlights: [
-          'EinschrÃ¤nkungen von Electron desktopCapturer untersucht und die UnterstÃ¼tzung fÃ¼r Multi-Monitor-Screenshots neu aufgebaut.',
-          'Maus- und Tastaturtracking mit ioHook fÃ¼r Mac, Linux und Windows stabilisiert.',
-          'Neuere Electron-Versionen getestet und stabilisiert, um die plattformÃ¼bergreifende ZuverlÃ¤ssigkeit zu verbessern.',
-        ],
-        tech: ['ElectronJS', 'desktopCapturer', 'ioHook', 'Redux'],
-        links: [{ label: 'crestpms.com besuchen', href: 'https://www.crestpms.com/' }],
-      },
-      {
-        title: 'Pawfect Admin Panel',
-        company: 'Crest Infotech',
-        category: 'Webanwendung',
-        summary:
-          'Responsives Admin-Dashboard fÃ¼r Kunden- und Mitarbeitermanagement mit Fokus auf Echtzeitkommunikation und operative Transparenz.',
-        highlights: [
-          'Projektstruktur aufgebaut und die UI mit ReactJS und Bootstrap von Grund auf umgesetzt.',
-          'ioSocket fÃ¼r Sofort-Chat und Benachrichtigungen zwischen Administratoren, Mitarbeitenden und Kunden integriert.',
-          'Infinite Scrolling ergÃ¤nzt und Produktionsprobleme behoben, damit groÃŸe Datenmengen performant nutzbar bleiben.',
-        ],
-        tech: ['ReactJS', 'Bootstrap', 'ioSocket', 'Redux'],
-      },
-      {
-        title: 'CrestMeds Clone',
-        company: 'Crest Infotech',
-        category: 'Mobile Anwendung',
-        summary:
-          'React-Native-Apothekenklon nach dem Vorbild von Netmeds, entwickelt fÃ¼r Browsing, Suche, WarenkorbablÃ¤ufe und ein sauberes plattformÃ¼bergreifendes Layout.',
-        highlights: [
-          'Mobile Architektur initialisiert und zentrale EntwicklungsabhÃ¤ngigkeiten konfiguriert.',
-          'React-Navigation-Stacks, Tabs und BildschirmÃ¼bergÃ¤nge fÃ¼r eine intuitive mobile Nutzung umgesetzt.',
-          'Produkt- und Account-Journeys in responsive React-Native-Komponenten Ã¼bersetzt.',
-        ],
-        tech: ['React Native', 'React Navigation', 'Redux'],
-        links: [
-          {
-            label: 'Projektseite ansehen',
-            href: 'https://www.crestinfotech.com/netmeds-pharmacy-clone-app/',
-          },
-        ],
-      },
-      {
-        title: 'Room Key Hotel Management System',
-        company: 'Crest Infotech',
-        category: 'Webanwendung',
-        summary:
-          'Plattform fÃ¼r Hotelbuchung und Zimmermanagement fÃ¼r Administratoren und Filialleiter mit rollenbasierten AblÃ¤ufen und zentralen Zimmordaten.',
-        highlights: [
-          'Zimmer- und Buchungs-APIs integriert, damit VerfÃ¼gbarkeit und Buchungsdaten mit dem Frontend synchron bleiben.',
-          'Redux verwendet, um komplexen gemeinsamen State und dynamische Aktualisierungen in der Anwendung zu steuern.',
-          'Rollenbasierte Zugriffe umgesetzt, damit Administratoren und Filialleiter nur relevante Aktionen sehen.',
-        ],
-        tech: ['ReactJS', 'Redux', 'API Integration', 'Access Control'],
-      },
-      {
-        title: 'ProductY',
-        company: 'Crest Infotech',
-        category: 'Webanwendung',
-        summary:
-          'Webbasierte Plattform fÃ¼r Produkt- und Katalogmanagement, mit der Teams Produktinformationen erstellen, verwalten und verÃ¶ffentlichen kÃ¶nnen.',
-        highlights: [
-          'Mit Fehlerbehebung gestartet und anschlieÃŸend an breiterer Produktentwicklung und Optimierung mitgearbeitet.',
-          'Zur Migration des Projekts nach ReactJS beigetragen, um Wartbarkeit und Performance zu verbessern.',
-          'Einen Vektorgrafik-Editor und vollstÃ¤ndige CRUD-Seiten fÃ¼r das Produktdatenmanagement entwickelt.',
-        ],
-        tech: ['ReactJS', 'Redux', 'CRUD', 'Vector Graphics'],
-        links: [
-          { label: 'Produktwebsite', href: 'https://producty.com/' },
-          { label: 'App Ã¶ffnen', href: 'https://app.producty.com/' },
+          'CrestPMS: Fehler bei Multi-Monitor-Screenshots durch Neukonfiguration der desktopCapturer-API von Electron behoben. Tastatur- und Maus-Tracking über ioHook auf macOS (M1 und Intel), Linux und Windows wiederhergestellt.',
+          'CrestMeds: vollständig in React Native gebaut, mit React-Navigation-Stacks, Tab-Flows und Deep Linking. Eingereicht als Bachelor-Abschlussprojekt.',
+          'Pawfect Admin Panel (ReactJS, Socket.IO): Echtzeit-Chat, Infinite Scrolling, Buchungs-API und rollenbasierte Zugriffskontrolle.',
+          'Am Room-Key-Hotelmanagementsystem mitgearbeitet, ProductY nach ReactJS migriert und einen SVG-Vektorgrafik-Editor gebaut.',
+          'Externe KI-APIs für Bild- und Textverarbeitung in Kundenprojekte integriert, unter anderem OCR-gestützte Dokumentenerfassung.',
         ],
       },
     ],
   },
   skills: {
-    kicker: 'Technische Skills',
+    kicker: 'Skills',
     title: 'Skills.',
-    text:
-      'Wichtige Technologien: JavaScript, TypeScript, React, Node.js, Express.js, MongoDB, React Native, ElectronJS, Three.js und REST-APIs.',
+    text: 'Gruppiert wie in meinem Lebenslauf.',
     groups: [
       {
-        title: 'Frontend',
-        items: ['ReactJS', 'React Native', 'Three.js', 'ElectronJS', 'Bootstrap', 'Redux'],
+        title: 'AI, ML & LLM',
+        items: [
+          'Machine Learning',
+          'Google Gemini (Multi-Key, Failover)',
+          'Anthropic API',
+          'Prompt- und Context-Engineering',
+          'Modellquantisierung',
+        ],
       },
       {
-        title: 'Backend',
-        items: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'API Integration'],
+        title: 'RAG & lokale Modelle',
+        items: [
+          'ChromaDB',
+          'Sentence-Transformers (mehrsprachig)',
+          'Embeddings',
+          'Retrieval-Pipelines',
+          'Ollama (Qwen2.5)',
+        ],
       },
       {
-        title: 'Tools & Plattformen',
-        items: ['Docker', 'Git', 'GitHub', 'Appwrite', 'Firebase', 'Linux', 'Blender', 'Jira', 'Postman', 'Swagger'],
+        title: 'Programmierung & Frontend',
+        items: [
+          'Python',
+          'JavaScript',
+          'TypeScript',
+          'C++',
+          'HTML/CSS',
+          'ReactJS',
+          'React Native',
+          'Three.js',
+          'ElectronJS',
+          'Capacitor 8',
+          'Vite',
+          'Tailwind CSS',
+          'Redux',
+        ],
       },
       {
-        title: 'Programmierung',
-        items: ['JavaScript', 'TypeScript', 'HTML', 'CSS', 'C++'],
+        title: 'Backend & Daten',
+        items: [
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'PostgreSQL',
+          'MySQL',
+          'Appwrite',
+          'Firebase',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'DevOps & Netzwerke',
+        items: [
+          'Git',
+          'GitHub',
+          'Docker',
+          'Docker Compose',
+          'Linux',
+          'Jira',
+          'P4',
+          'BMv2',
+          'Mininet',
+        ],
       },
     ],
   },
@@ -805,27 +775,26 @@ const germanCopy: AppCopy = {
     items: [
       {
         title: 'M.Sc. Research in Computer and Systems Engineering',
-        place: 'Technische UniversitÃ¤t Ilmenau',
-        period: 'Okt 2024 - Heute',
+        place: 'Technische Universität Ilmenau',
+        period: 'Okt 2024 - voraussichtlich 2027',
         notes: [
-          'Derzeit Studium in Ilmenau, Deutschland.',
-          'Mitglied bei Internationale Ingenieure fÃ¼r ThÃ¼ringen, einer vom BMBF gefÃ¶rderten Initiative.',
+          'Schwerpunkt Network Intrusion Detection Systems und maschinelles Lernen in programmierbaren Netzen.',
+          'Mitglied im BMBF-geförderten Programm Internationale Ingenieure für Thüringen.',
         ],
       },
       {
         title: 'B.E. Computer Science and Engineering',
-        place: 'Government Engineering College, Patan / Gujarat Technological University',
+        place: 'Gujarat Technological University, Indien',
         period: 'Jul 2019 - Jun 2023',
         notes: [
-          'Abschluss mit einem GPA-Ã„quivalent von 2,1.',
-          'Bachelorprojekt: CrestMeds Clone in React Native.',
+          'CGPA 7,8 von 10, First Class with Distinction. Deutsche Entsprechung etwa 2,3.',
         ],
       },
     ],
     languagesTitle: 'Sprachen',
     spokenLanguages: [
+      'Deutsch - B1, auf dem Weg zu B2',
       'Englisch - C1',
-      'Deutsch - A2, aktuell im Ausbau',
       'Hindi - Muttersprache',
       'Gujarati - Muttersprache',
     ],
@@ -838,25 +807,25 @@ const germanCopy: AppCopy = {
   },
   contact: {
     kicker: 'Kontakt',
-    title: 'Offen fÃ¼r MÃ¶glichkeiten in der Softwareentwicklung.',
-    text:
-      'Wenn Sie eine Werkstudentenstelle oder eine Full-Stack-Softwareposition besetzen, freue ich mich Ã¼ber eine Nachricht.',
-    location: 'Ilmenau, ThÃ¼ringen, Deutschland',
+    title: 'Offen für Rollen als Full-Stack AI Engineer.',
+    text: 'Per E-Mail erreichen Sie mich am schnellsten.',
+    location: 'Erfurt, Deutschland',
     actions: {
       email: 'E-Mail senden',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       backToTop: 'Nach oben',
     },
   },
   scene: {
-    paletteAriaLabel: 'Farbpaletten fÃ¼r den Avatar',
+    paletteAriaLabel: 'Farbpaletten für den Avatar',
     paletteSuffix: 'Palette',
-    maximize: 'Ansicht vergroessern',
+    maximize: 'Ansicht vergrößern',
     restore: 'Ansicht wiederherstellen',
     loading: '3D-Modell wird geladen...',
     error: 'Das 3D-Modell konnte nicht geladen werden.',
     tailoringTitle: 'Outfit wird angepasst',
-    tailoringText: 'Deine ausgewÃ¤hlte Palette wird angewendet',
+    tailoringText: 'Deine ausgewählte Palette wird angewendet',
   },
 };
 
@@ -867,8 +836,8 @@ const frenchCopy: AppCopy = {
     menu: 'Menu',
     about: 'A propos',
     experience: 'Experience',
-    portfolio: 'Portfolio',
-    project: 'Projet',
+    portfolio: 'Projets',
+    project: 'Pages projet',
     skills: 'Competences',
     contact: 'Contact',
   },
@@ -893,46 +862,48 @@ const frenchCopy: AppCopy = {
     },
   },
   hero: {
-    eyebrow: 'Developpeur logiciel full stack | Etudiant en M.Sc. | TU Ilmenau',
-    title: 'Developpeur logiciel full stack axe sur JavaScript, React, Node.js et MongoDB.',
+    eyebrow: 'Full-Stack AI Engineer | Etudiant en M.Sc. | TU Ilmenau',
+    title:
+      'Full-Stack AI Engineer sur les applications LLM, les pipelines RAG et le machine learning dans les reseaux programmables.',
     text:
-      "Je suis Ankit Talaviya, etudiant en master en Research in Computer and Systems Engineering a TU Ilmenau. J'ai une experience pratique avec ReactJS, React Native, ElectronJS, Three.js, JavaScript, Node.js et MongoDB. Je recherche actuellement un poste de working student en developpement logiciel pour continuer a creer des experiences utiles et de haute qualite cote frontend et backend.",
+      "Je suis Ankit Talaviya. J'ai trois ans d'experience professionnelle en developpement logiciel et je prepare un M.Sc. Research in Computer and Systems Engineering a TU Ilmenau. Je travaille sur des applications LLM avec bascule multi-fournisseurs, des pipelines RAG bases sur ChromaDB et Sentence-Transformers, et des reseaux de neurones quantifies pour les plans de donnees P4. Mon produit, sprako.app, est en beta.",
     quickFacts: [
-      'Base a Ilmenau, Thuringe, Allemagne',
-      'Ouvert aux postes de working student en developpement logiciel',
-      'Developpeur JavaScript full stack avec competences Node.js et MongoDB',
+      'Base a Erfurt, Allemagne',
+      'Trois ans d experience professionnelle en developpement logiciel',
+      'sprako.app est en beta',
     ],
     stats: [
-      { value: '3+', label: 'annees dans des equipes produit professionnelles' },
-      { value: '08', label: 'projets sur desktop, web et mobile' },
-      {
-        value: '06',
-        label: 'stack principale : JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
-      },
+      { value: '3', label: 'ans d experience professionnelle en developpement logiciel' },
+      { value: '10-15', label: 'utilisateurs beta sur sprako.app' },
+      { value: '2027', label: 'fin de M.Sc. prevue a TU Ilmenau' },
     ],
     actions: {
       email: "M'envoyer un email",
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       resume: 'CV PDF',
     },
   },
   about: {
     kicker: 'A propos',
-    title: 'Developpeur logiciel full stack.',
+    title: 'Sur quoi je travaille.',
     text:
-      "Je construis des applications web, desktop et mobiles avec JavaScript. Mon travail couvre les interfaces frontend, l'integration backend, le state management et des fonctionnalites produit utilisees par de vraies equipes.",
+      'Trois ans de developpement logiciel professionnel, appliques aujourd hui aux applications LLM, aux pipelines de recherche et au machine learning dans les plans de donnees reseau.',
     cards: [
       {
-        title: 'Focus actuel',
-        copy: "Etudiant en master a TU Ilmenau, a la recherche d'un poste de working student en developpement logiciel.",
+        title: 'Applications LLM',
+        copy:
+          "Sprako fonctionne avec l'API Google Gemini. Les cles sont validees une par une, avec bascule automatique, cooldowns et retries limites. L'application reste entierement utilisable sans cle configuree.",
       },
       {
-        title: 'Types de projets',
-        copy: 'Experience avec les applications web, les apps mobiles React Native, les logiciels desktop Electron et les interfaces 3D basees sur Three.js.',
+        title: 'RAG et modeles locaux',
+        copy:
+          "Vocabulaire allemand et phrases d'exemple indexes dans ChromaDB avec des embeddings Sentence-Transformer multilingues. La generation passe par l'API Anthropic, avec Qwen2.5 en local via Ollama comme repli hors ligne.",
       },
       {
-        title: 'Travail full stack',
-        copy: 'A l aise avec React au frontend et avec Node.js, les API REST et MongoDB au backend.',
+        title: 'ML dans les reseaux programmables',
+        copy:
+          'Features de paquets et de flux quantifiees en virgule fixe et evaluees directement dans le plan de donnees P4. Couvre entrainement, deploiement et metriques runtime sous BMv2.',
       },
     ],
   },
@@ -940,22 +911,20 @@ const frenchCopy: AppCopy = {
     ...englishCopy.experience,
     kicker: 'Experience',
     title: 'Experience professionnelle.',
-    text:
-      'Experience professionnelle sur les logiciels desktop, les systemes admin, les apps mobiles et les interfaces produit 3D.',
+    text: 'Trois ans comme developpeur frontend en Inde, sur des produits desktop, web et mobiles.',
   },
   projects: {
     ...englishCopy.projects,
-    kicker: 'Portfolio',
-    title: 'Portfolio.',
+    kicker: 'Projets',
+    title: 'Projets.',
     text:
-      'Une selection de projets independants, produit et delivery couvrant les apps IA, Addicted Technologies et Crest Infotech.',
+      'Une plateforme d apprentissage de l allemand en beta, un chatbot RAG pour le vocabulaire allemand, et un reseau de neurones qui fait office de systeme de detection d intrusion dans un plan de donnees P4.',
   },
   skills: {
     ...englishCopy.skills,
-    kicker: 'Competences techniques',
+    kicker: 'Competences',
     title: 'Competences.',
-    text:
-      'Technologies principales : JavaScript, TypeScript, React, Node.js, Express.js, MongoDB, React Native, ElectronJS, Three.js et API REST.',
+    text: 'Groupees comme sur mon CV.',
   },
   education: {
     ...englishCopy.education,
@@ -963,8 +932,8 @@ const frenchCopy: AppCopy = {
     title: 'Formation et langues.',
     languagesTitle: 'Langues',
     spokenLanguages: [
+      'Allemand - B1, en route vers B2',
       'Anglais - C1',
-      'Allemand - A2, en progression',
       'Hindi - langue maternelle',
       'Gujarati - langue maternelle',
     ],
@@ -977,13 +946,13 @@ const frenchCopy: AppCopy = {
   },
   contact: {
     kicker: 'Contact',
-    title: 'Disponible pour des opportunites en developpement logiciel.',
-    text:
-      "Si vous recrutez pour un poste de working student ou un role full stack software, je serais heureux d'echanger.",
-    location: 'Ilmenau, Thuringe, Allemagne',
+    title: 'Ouvert aux postes de Full-Stack AI Engineer.',
+    text: 'Le plus simple est de me joindre par email.',
+    location: 'Erfurt, Allemagne',
     actions: {
       email: 'Envoyer un email',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       backToTop: 'Retour en haut',
     },
   },
@@ -998,6 +967,7 @@ const frenchCopy: AppCopy = {
     tailoringText: 'Application de la palette selectionnee',
   },
 };
+
 const spanishCopy: AppCopy = {
   ...englishCopy,
   htmlLang: 'es',
@@ -1005,8 +975,8 @@ const spanishCopy: AppCopy = {
     menu: 'Menu',
     about: 'Sobre mi',
     experience: 'Experiencia',
-    portfolio: 'Portafolio',
-    project: 'Proyecto',
+    portfolio: 'Proyectos',
+    project: 'Paginas de proyecto',
     skills: 'Habilidades',
     contact: 'Contacto',
   },
@@ -1031,46 +1001,48 @@ const spanishCopy: AppCopy = {
     },
   },
   hero: {
-    eyebrow: 'Desarrollador de software full stack | Estudiante de M.Sc. | TU Ilmenau',
-    title: 'Desarrollador de software full stack enfocado en JavaScript, React, Node.js y MongoDB.',
+    eyebrow: 'Full-Stack AI Engineer | Estudiante de M.Sc. | TU Ilmenau',
+    title:
+      'Full-Stack AI Engineer en aplicaciones LLM, pipelines RAG y machine learning en redes programables.',
     text:
-      'Soy Ankit Talaviya, estudiante de master en Research in Computer and Systems Engineering en TU Ilmenau. Tengo experiencia practica con ReactJS, React Native, ElectronJS, Three.js, JavaScript, Node.js y MongoDB. Actualmente busco un puesto de working student en desarrollo de software para seguir creando experiencias utiles y de alta calidad tanto en frontend como en backend.',
+      'Soy Ankit Talaviya. Tengo tres anos de experiencia profesional en desarrollo de software y estudio el M.Sc. Research in Computer and Systems Engineering en TU Ilmenau. Trabajo en aplicaciones LLM con conmutacion entre varios proveedores, pipelines RAG basados en ChromaDB y Sentence-Transformers, y redes neuronales cuantizadas para planos de datos P4. Mi propio producto, sprako.app, esta en beta.',
     quickFacts: [
-      'Ubicado en Ilmenau, Turingia, Alemania',
-      'Disponible para puestos de working student en software',
-      'Desarrollador JavaScript full stack con experiencia en Node.js y MongoDB',
+      'Ubicado en Erfurt, Alemania',
+      'Tres anos de experiencia profesional en desarrollo de software',
+      'sprako.app esta en beta',
     ],
     stats: [
-      { value: '3+', label: 'anos en equipos de producto profesionales' },
-      { value: '08', label: 'proyectos en desktop, web y mobile' },
-      {
-        value: '06',
-        label: 'stack principal: JavaScript, React, Node.js, MongoDB, ElectronJS, Three.js',
-      },
+      { value: '3', label: 'anos de experiencia profesional en desarrollo de software' },
+      { value: '10-15', label: 'usuarios beta en sprako.app' },
+      { value: '2027', label: 'finalizacion prevista del M.Sc. en TU Ilmenau' },
     ],
     actions: {
       email: 'Enviar email',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       resume: 'CV PDF',
     },
   },
   about: {
     kicker: 'Sobre mi',
-    title: 'Desarrollador de software full stack.',
+    title: 'En que trabajo.',
     text:
-      'Construyo aplicaciones web, desktop y mobile con JavaScript. Mi trabajo incluye interfaces frontend, integracion backend, gestion de estado y funcionalidades de producto usadas por equipos reales.',
+      'Tres anos de desarrollo de software profesional, aplicados hoy a aplicaciones LLM, pipelines de recuperacion y machine learning dentro de planos de datos de red.',
     cards: [
       {
-        title: 'Enfoque actual',
-        copy: 'Estudiante de master en TU Ilmenau, buscando un puesto de working student en desarrollo de software.',
+        title: 'Aplicaciones LLM',
+        copy:
+          'Sprako funciona sobre la API de Google Gemini. Las claves se validan una a una, con conmutacion automatica, cooldowns y reintentos limitados. La aplicacion sigue siendo plenamente utilizable sin ninguna clave configurada.',
       },
       {
-        title: 'Tipos de proyectos',
-        copy: 'Experiencia con aplicaciones web, apps moviles React Native, software desktop con Electron e interfaces 3D basadas en Three.js.',
+        title: 'RAG y modelos locales',
+        copy:
+          'Vocabulario aleman y frases de ejemplo indexados en ChromaDB con embeddings multilingues de Sentence-Transformers. La generacion pasa por la API de Anthropic, con Qwen2.5 local mediante Ollama como respaldo sin conexion.',
       },
       {
-        title: 'Trabajo full stack',
-        copy: 'Comodo con React en frontend y con Node.js, APIs REST y MongoDB en backend.',
+        title: 'ML en redes programables',
+        copy:
+          'Caracteristicas de paquetes y flujos cuantizadas a punto fijo y evaluadas directamente en el plano de datos P4. Cubre entrenamiento, despliegue y metricas de ejecucion en BMv2.',
       },
     ],
   },
@@ -1078,22 +1050,20 @@ const spanishCopy: AppCopy = {
     ...englishCopy.experience,
     kicker: 'Experiencia',
     title: 'Experiencia profesional.',
-    text:
-      'Experiencia profesional en software desktop, sistemas admin, apps moviles e interfaces de producto 3D.',
+    text: 'Tres anos como desarrollador frontend en India, en productos desktop, web y moviles.',
   },
   projects: {
     ...englishCopy.projects,
-    kicker: 'Portafolio',
-    title: 'Portafolio.',
+    kicker: 'Proyectos',
+    title: 'Proyectos.',
     text:
-      'Trabajos seleccionados independientes, de producto y delivery en apps de IA, Addicted Technologies y Crest Infotech.',
+      'Una plataforma para aprender aleman en beta, un chatbot RAG para vocabulario aleman y una red neuronal que funciona como sistema de deteccion de intrusiones dentro de un plano de datos P4.',
   },
   skills: {
     ...englishCopy.skills,
-    kicker: 'Habilidades tecnicas',
+    kicker: 'Habilidades',
     title: 'Habilidades.',
-    text:
-      'Tecnologias principales: JavaScript, TypeScript, React, Node.js, Express.js, MongoDB, React Native, ElectronJS, Three.js y APIs REST.',
+    text: 'Agrupadas igual que en mi CV.',
   },
   education: {
     ...englishCopy.education,
@@ -1101,8 +1071,8 @@ const spanishCopy: AppCopy = {
     title: 'Educacion e idiomas.',
     languagesTitle: 'Idiomas',
     spokenLanguages: [
+      'Aleman - B1, camino a B2',
       'Ingles - C1',
-      'Aleman - A2, en mejora continua',
       'Hindi - lengua materna',
       'Gujarati - lengua materna',
     ],
@@ -1115,13 +1085,13 @@ const spanishCopy: AppCopy = {
   },
   contact: {
     kicker: 'Contacto',
-    title: 'Disponible para oportunidades en desarrollo de software.',
-    text:
-      'Si estas contratando para un puesto de working student o un rol full stack software, estare encantado de conectar.',
-    location: 'Ilmenau, Turingia, Alemania',
+    title: 'Abierto a puestos de Full-Stack AI Engineer.',
+    text: 'La via mas rapida para contactarme es el email.',
+    location: 'Erfurt, Alemania',
     actions: {
       email: 'Enviar email',
       linkedIn: 'LinkedIn',
+      gitHub: 'GitHub',
       backToTop: 'Volver arriba',
     },
   },
@@ -1136,6 +1106,7 @@ const spanishCopy: AppCopy = {
     tailoringText: 'Aplicando la paleta seleccionada',
   },
 };
+
 export const appCopy: Record<LanguageCode, AppCopy> = {
   en: englishCopy,
   de: germanCopy,

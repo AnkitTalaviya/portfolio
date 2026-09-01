@@ -11,7 +11,7 @@ export const ProjectsSection = memo(function ProjectsSection({
   projectsCopy,
 }: ProjectsSectionProps) {
   return (
-    <section className="section section-soft" id="portfolio">
+    <section className="section" id="portfolio">
       <div className="container">
         <SectionHeading
           kicker={projectsCopy.kicker}
@@ -20,8 +20,8 @@ export const ProjectsSection = memo(function ProjectsSection({
         />
 
         <div className="row g-4">
-          {projectsCopy.items.map((project) => (
-            <div className="col-lg-6" key={project.title}>
+          {projectsCopy.items.map((project, index) => (
+            <div className={index === 0 ? 'col-12' : 'col-lg-6'} key={project.title}>
               <ProjectCard
                 eyebrow={project.company}
                 meta={project.category}

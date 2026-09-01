@@ -121,6 +121,14 @@ export const HeroSection = memo(function HeroSection({
                 </a>
                 <a
                   className="btn btn-ghost btn-lg"
+                  href={siteProfile.gitHubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {heroCopy.actions.gitHub}
+                </a>
+                <a
+                  className="btn btn-ghost btn-lg"
                   href={documentUrl(siteDocuments.resume)}
                   target="_blank"
                   rel="noreferrer"

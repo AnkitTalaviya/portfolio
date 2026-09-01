@@ -22,7 +22,7 @@ export const ProjectHubGallerySection = memo(function ProjectHubGallerySection({
                 summary={project.summary}
                 highlights={project.highlights}
                 tags={project.tech}
-                links={[{ label: project.cta, href: project.href }]}
+                links={project.links}
               />
             </div>
           ))}

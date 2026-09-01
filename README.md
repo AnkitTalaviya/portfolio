@@ -1,34 +1,44 @@
 # Ankit Talaviya Portfolio
 
-A multi-page portfolio site built with React, TypeScript, Vite, and Three.js.
+Portfolio site for Ankit Talaviya, Full-Stack AI Engineer. Built with React, TypeScript, Vite and Three.js, and prerendered to static HTML at build time.
 
 Live site: https://ankittalaviya.github.io/portfolio/
 
-This project is designed as a portfolio experience rather than a single static landing page. It combines a customizable 3D hero scene, multilingual content, theme switching, and project detail pages that showcase product thinking as well as frontend execution.
-
 ## What This Includes
 
-- A modular React portfolio home page with dedicated hero, about, experience, projects, skills, education, and contact sections
-- A real-time 3D hero scene built with Three.js and `OrbitControls`
-- Keyboard and mobile movement controls for the hero scene
+- A portfolio home page with hero, about, projects, experience, skills, education and contact sections, in that order
+- Three project pages: DeutschFlow AI / Sprako, the RAG chatbot for German learning, and the neural network IDS in P4
+- Build-time prerendering, so every route ships as complete HTML instead of an empty `<div id="root">`
+- A real-time 3D hero scene built with Three.js and `OrbitControls`, lazy-loaded after the page renders
 - Theme switching with persisted user preference
-- Outfit palette switching for the hero character
-- Multilingual content support for English, German, French, and Spanish
-- A separate project hub page with focused project cards and detail links
+- Content in English, German, French and Spanish
 - GitHub Pages deployment from the `development` branch
 
-## Experience Highlights
+## Prerendering
 
-- The home page is componentized instead of being kept in one large file, which makes the portfolio easier to maintain and extend
-- The heavy hero scene is lazy-loaded so the main portfolio bundle stays lighter on initial load
-- Character animations are consolidated into a shared animation pack instead of shipping duplicate full GLB files
-- Asset and document URLs are GitHub Pages-safe through shared base-path helpers
-- Mobile interaction has dedicated touch controls and iPhone-specific scene fixes for smoother use
+`npm run build` runs three steps after the type check:
+
+1. `vite build` produces the client bundle and `dist/index.html`
+2. `vite build --ssr src/entry-server.tsx` produces `dist-ssr/entry-server.js`
+3. `scripts/prerender.mjs` renders every route in `src/data/routeMeta.ts` with `renderToString`, injects the markup into `dist/index.html`, rewrites the per-route title, description, canonical URL and social tags, and writes one `index.html` per route
+
+The browser then hydrates that markup instead of discarding it (`src/main.tsx`). Two consequences to keep in mind when editing:
+
+- The first client render has to match the prerendered markup, so state that depends on `localStorage` or `navigator` starts on its default value and is corrected in an effect. See `useActiveLanguage`, `useThemePreference` and `useOutfitTransition`.
+- The stored theme is applied by a small boot script in `index.html` before the first paint, which is why the hook skips its first apply pass.
+
+To add a route, add it to `src/data/routeMeta.ts` and to the `Routes` in `src/RouterApp.tsx`.
 
 ## Pages
 
-- `/` or `index.html`: main portfolio site
-- `/projects` route: project hub with concept builds and workflow projects
+- `/` main portfolio page
+- `/projects` project hub
+- `/projects/deutschflow-ai`
+- `/projects/rag-chatbot-german`
+- `/projects/neural-network-ids-in-p4-bmv2`
+
+Each of these is a real directory with its own `index.html` in `dist`, so GitHub Pages serves deep links directly.
+
 ## Stack
 
 - React 19
@@ -45,15 +55,22 @@ npm install
 npm run dev
 ```
 
-The dev script also rebuilds the shared hero animation pack before starting Vite.
+The dev server renders on the client only; prerendering runs in the production build. To check the prerendered output locally:
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Scripts
 
 ```bash
 npm run dev
 npm run build
-npm run preview
 npm run build:hero-animations
+npm run build:ssr
+npm run prerender
+npm run preview
 ```
 
 ## Project Structure
@@ -63,18 +80,23 @@ npm run build:hero-animations
 |-- public/
 |   |-- documents/
 |   |-- models/
-|   `-- projects/
+|   `-- og-image.svg
 |-- scripts/
-|   `-- build-hero-animation-pack.mjs
+|   |-- build-hero-animation-pack.mjs
+|   `-- prerender.mjs
 |-- src/
 |   |-- components/
 |   |   |-- portfolio/
 |   |   `-- project-hub/
 |   |-- data/
+|   |   |-- routeMeta.ts
+|   |   `-- siteConfig.ts
 |   |-- lib/
 |   |-- App.tsx
 |   |-- HeroScene.tsx
-|   `-- ProjectsPage.tsx
+|   |-- RouterApp.tsx
+|   |-- entry-server.tsx
+|   `-- main.tsx
 `-- .github/workflows/deploy.yml
 ```
 
@@ -82,7 +104,7 @@ npm run build:hero-animations
 
 This repo is configured for GitHub Pages.
 
-- The site is built with the correct project-site base path for `/portfolio/`
+- The site is built with the project-site base path `/portfolio/`
 - GitHub Actions deploys automatically when code is pushed to the `development` branch
 - The deployment workflow lives in [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
 
@@ -92,7 +114,4 @@ This repo is configured for GitHub Pages.
 - Shared animation clips are packed into `public/models/HeroAnimations.glb`
 - Source animation files used to generate the animation pack are kept under `tools/source-models/hero/`
 - If animations are updated, rerun `npm run build:hero-animations`
-
-## Why This Portfolio Is Different
-
-This portfolio is built to feel like a product, not just a resume page. The goal is to present engineering work through interaction, motion, case studies, and system design choices that show both implementation skill and product thinking.
+- `public/og-image.svg` is the link-preview image. Most social crawlers do not render SVG, so exporting it to a 1200x630 PNG and pointing the `og:image` and `twitter:image` tags at that file is the remaining step for rich previews.

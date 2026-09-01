@@ -81,8 +81,8 @@ function App() {
         onToggleExpanded={() => setIsSceneExpanded((current) => !current)}
       />
       <AboutSection aboutCopy={copy.about} />
-      <ExperienceSection experienceCopy={copy.experience} />
       <ProjectsSection projectsCopy={copy.projects} />
+      <ExperienceSection experienceCopy={copy.experience} />
       <SkillsSection skillsCopy={copy.skills} />
       <EducationSection educationCopy={copy.education} />
       <ContactSection contactCopy={copy.contact} />

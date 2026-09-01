@@ -34,10 +34,10 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const navItems = [
     { id: 'about', href: hrefs.about, label: copy.nav.about },
-    { id: 'experience', href: hrefs.experience, label: copy.nav.experience },
     { id: 'portfolio', href: hrefs.portfolio, label: copy.nav.portfolio },
-    { id: 'project', href: hrefs.project, label: copy.nav.project },
+    { id: 'experience', href: hrefs.experience, label: copy.nav.experience },
     { id: 'skills', href: hrefs.skills, label: copy.nav.skills },
+    { id: 'project', href: hrefs.project, label: copy.nav.project },
     { id: 'contact', href: hrefs.contact, label: copy.nav.contact },
   ] as const;
 

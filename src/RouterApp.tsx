@@ -23,9 +23,10 @@ function ScrollRestoration() {
   return null;
 }
 
-export default function RouterApp() {
+/** Router-agnostic tree, shared by the browser entry and the prerender entry. */
+export function SiteRoutes() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <>
       <ScrollRestoration />
       <Routes>
         <Route path="/" element={<App />} />
@@ -33,6 +34,14 @@ export default function RouterApp() {
         <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+    </>
+  );
+}
+
+export default function RouterApp() {
+  return (
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <SiteRoutes />
     </BrowserRouter>
   );
 }

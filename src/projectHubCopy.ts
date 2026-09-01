@@ -1,5 +1,10 @@
 import type { LanguageCode } from './i18n';
 
+export type ProjectHubCardLink = {
+  label: string;
+  href: string;
+};
+
 export type ProjectHubCard = {
   category: string;
   kind: string;
@@ -7,8 +12,7 @@ export type ProjectHubCard = {
   summary: string;
   highlights: string[];
   tech: string[];
-  href: string;
-  cta: string;
+  links: ProjectHubCardLink[];
 };
 
 export type ProjectHubSkillGroup = {
@@ -26,315 +30,546 @@ export type ProjectHubCopy = {
   cards: ProjectHubCard[];
 };
 
-const sharedCards = {
-  taskflow: {
-    href: '/projects/stockpilot',
-    tech: ['React 19 + Vite', 'Firebase', 'Tailwind CSS'],
-  },
-  deutschflow: {
-    href: '/projects/deutschflow-ai',
-    tech: ['React 19 + TypeScript', 'Appwrite', 'Google Gemini', 'Capacitor 8'],
-  },
-  housing: {
-    href: '/projects/neural-network-ids-in-p4-bmv2',
-    tech: ['P4 (BMv2)', 'Python', 'Quantized Neural Networks'],
-  },
+const projectPaths = {
+  deutschflow: '/projects/deutschflow-ai',
+  ragChatbot: '/projects/rag-chatbot-german',
+  p4Ids: '/projects/neural-network-ids-in-p4-bmv2',
 } as const;
+
+const projectStacks = {
+  deutschflow: [
+    'ReactJS 19',
+    'TypeScript',
+    'Vite',
+    'Tailwind CSS',
+    'Capacitor 8',
+    'Appwrite',
+    'Google Gemini API',
+  ],
+  ragChatbot: ['Python', 'ChromaDB', 'Sentence-Transformers', 'Anthropic API', 'Ollama', 'Qwen2.5'],
+  p4Ids: ['Python', 'P4', 'BMv2', 'Mininet', 'PyTorch'],
+} as const;
+
+const repoUrls = {
+  p4Ids: 'https://github.com/AnkitTalaviya/nn_p4_nids',
+} as const;
+
+const productUrl = 'https://sprako.app';
 
 export const projectHubCopy: Record<LanguageCode, ProjectHubCopy> = {
   en: {
-    kicker: 'Projects',
-    title: 'Mini products, experiments, and workflow builds.',
+    kicker: 'Project pages',
+    title: 'LLM applications, retrieval pipelines, and machine learning in the data plane.',
     text:
-      'A small collection of concept builds and workflow tools. Each card opens a dedicated project tab with its own focused layout.',
-    skillsHeading: 'Tech Stack and Skills',
-    skillsText:
-      'Core technologies and tools I actively use across frontend, backend, networking, automation, and delivery workflows.',
+      'The three projects from my CV, each with its own page. The first is a product in beta, the second a retrieval pipeline that runs offline, the third a neural network that classifies packets inside a P4 switch.',
+    skillsHeading: 'Tech stack and skills',
+    skillsText: 'Grouped the same way as on my CV.',
     skillGroups: [
       {
-        title: 'Programming Languages',
-        items: ['JavaScript', 'TypeScript', 'Python', 'P4'],
+        title: 'AI, ML & LLM',
+        items: [
+          'Machine Learning',
+          'Google Gemini (multi-key, failover)',
+          'Anthropic API',
+          'Prompt and context engineering',
+          'Model quantisation',
+        ],
       },
       {
-        title: 'Frameworks and Libraries',
-        items: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js', 'Redux', 'React Native', 'Three.js'],
+        title: 'RAG & local models',
+        items: [
+          'ChromaDB',
+          'Sentence-Transformers (multilingual)',
+          'Embeddings',
+          'Retrieval pipelines',
+          'Ollama (Qwen2.5)',
+        ],
       },
       {
-        title: 'Databases and Cloud',
-        items: ['Appwrite', 'Firebase', 'MongoDB'],
+        title: 'Programming & frontend',
+        items: [
+          'Python',
+          'JavaScript',
+          'TypeScript',
+          'C++',
+          'HTML/CSS',
+          'ReactJS',
+          'React Native',
+          'Three.js',
+          'ElectronJS',
+          'Capacitor 8',
+          'Vite',
+          'Tailwind CSS',
+          'Redux',
+        ],
       },
       {
-        title: 'Tools and Platforms',
-        items: ['BMv2', 'p4c-bm2-ss', 'ElectronJS', 'Jupyter', 'Postman', 'Docker', 'GitHub'],
+        title: 'Backend & data',
+        items: [
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'PostgreSQL',
+          'MySQL',
+          'Appwrite',
+          'Firebase',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'DevOps & networking',
+        items: [
+          'Git',
+          'GitHub',
+          'Docker',
+          'Docker Compose',
+          'Linux',
+          'Jira',
+          'P4',
+          'BMv2',
+          'Mininet',
+        ],
       },
     ],
     cards: [
       {
-        category: 'Inventory operations app',
-        kind: 'Stock management platform',
-        title: 'StockPilot',
+        category: 'Own project, concept to operation',
+        kind: 'German learning platform, A1 to C2',
+        title: 'DeutschFlow AI / Sprako',
         summary:
-          'A modern inventory operations app for small teams that centralizes stock, purchase orders, suppliers, alerts, audit logs, and team access in one workspace.',
+          'A German learning platform I built and run myself. It is in beta at sprako.app with 10 to 15 users.',
         highlights: [
-          'Supports inventory CRUD, stock receive/issue/adjust flows, and PO status tracking across none, ordered, partial, received, and cancelled.',
-          'Adds supplier directory management, lead-time visibility, low-stock and overdue receipt notifications, and a complete transaction history.',
-          'Implements team access with admin/manager/viewer roles, approval flows, CSV import/export, JSON export, and light-dark themes.',
+          'Management of multiple Gemini API keys with per-key validation, automatic failover, cooldowns and bounded retries. The application stays fully usable with no key configured.',
+          'Six-level grammar path from A1 to C2, vocabulary generated via Gemini, and a spaced repetition system with XP, streaks and weak-area tracking.',
+          'Appwrite backend with authentication, learning state, follow function and notifications.',
         ],
-        tech: [...sharedCards.taskflow.tech],
-        href: sharedCards.taskflow.href,
-        cta: 'Open project page',
+        tech: [...projectStacks.deutschflow],
+        links: [
+          { label: 'Open sprako.app', href: productUrl },
+          { label: 'Project page', href: projectPaths.deutschflow },
+        ],
       },
       {
-        category: 'AI language learning app',
-        kind: 'Mobile-first German learning platform',
-        title: 'DeutschFlow AI',
+        category: 'Retrieval-Augmented Generation',
+        kind: 'German vocabulary, runs offline',
+        title: 'RAG chatbot for German learning',
         summary:
-          'A German learning app with spaced repetition, CEFR grammar paths, stories, dictionary tools, phrasebook practice, social learning, and Gemini-only AI features.',
+          'Retrieval-Augmented Generation over German vocabulary. It runs without an internet connection.',
         highlights: [
-          'Keeps static flashcards, grammar, phrasebook, dictionary, manual cards, and social learning available without any AI key.',
-          'Uses Gemini for story generation, grammar deep dives, daily vocabulary, dictionary enrichment, flashcard autofill, and word suggestions.',
-          'Supports multiple local Gemini keys with labels, validation states, default model selection, automatic fallback, cooldowns, and bounded retries.',
+          'Vocabulary and example sentences from OpenThesaurus and Tatoeba indexed in ChromaDB using multilingual Sentence-Transformer embeddings.',
+          'The retrieval pipeline returns semantically similar vocabulary and usage examples for a learner query.',
+          'Generation via the Anthropic API, with local Qwen2.5 through Ollama as an offline fallback.',
         ],
-        tech: [...sharedCards.deutschflow.tech],
-        href: sharedCards.deutschflow.href,
-        cta: 'Open project page',
+        tech: [...projectStacks.ragChatbot],
+        links: [
+          { label: 'Open sprako.app', href: productUrl },
+          { label: 'Project page', href: projectPaths.ragChatbot },
+        ],
       },
       {
-        category: 'Network security research',
-        kind: 'In-network ML IDS',
-        title: 'Neural-Network IDS in P4 (BMv2)',
+        category: 'Machine learning in programmable data planes',
+        kind: 'In-network intrusion detection',
+        title: 'Neural network as in-network IDS in P4 (BMv2)',
         summary:
-          'An end-to-end IDS repository where packet and flow features are quantized to fixed-point values and evaluated directly inside P4 data planes, from model training to BMv2 runtime metrics.',
+          'Packet and flow features are quantised to fixed point and classified directly inside the P4 data plane, from model training to runtime metrics under BMv2.',
         highlights: [
-          'Combines quantized neural-network model families with dynamic command generation from model JSON to BMv2 CLI entries.',
-          'Supports both single-switch and multi-switch BMv2 deployments, including profile-aware dynamic runtime templates.',
-          'Provides reproducible evaluation scripts with confusion-matrix outputs and side-by-side offline versus online metric comparison.',
+          'Packet and flow features quantised to fixed point and evaluated directly in the P4 data plane. Covers model training, deployment and collection of runtime metrics under BMv2.',
+          'BMv2 CLI runtime entries generated automatically from the model JSON. Deployed on single-switch and multi-switch topologies.',
+          'Evaluation through reproducible scripts with confusion matrices and a comparison of offline and online metrics.',
         ],
-        tech: [...sharedCards.housing.tech],
-        href: sharedCards.housing.href,
-        cta: 'Open project page',
+        tech: [...projectStacks.p4Ids],
+        links: [
+          { label: 'GitHub repo', href: repoUrls.p4Ids },
+          { label: 'Project page', href: projectPaths.p4Ids },
+        ],
       },
     ],
   },
   de: {
-    kicker: 'Projekte',
-    title: 'Kleine Produkte, Experimente und Workflow-Bausteine.',
+    kicker: 'Projektseiten',
+    title: 'LLM-Anwendungen, Retrieval-Pipelines und maschinelles Lernen in der Datenebene.',
     text:
-      'Eine kleine Sammlung aus Konzeptprojekten und Workflow-Tools. Jede Karte oeffnet ein eigenes Projekt in einem neuen Tab mit fokussiertem Layout.',
+      'Die drei Projekte aus meinem Lebenslauf, jeweils mit eigener Seite. Das erste ist ein Produkt in der Beta, das zweite eine Retrieval-Pipeline, die offline läuft, das dritte ein neuronales Netz, das Pakete direkt in einem P4-Switch klassifiziert.',
     skillsHeading: 'Tech-Stack und Skills',
-    skillsText:
-      'Zentrale Technologien und Tools, die ich in Frontend-, Backend-, Netzwerk-, Automatisierungs- und Delivery-Workflows nutze.',
+    skillsText: 'Gruppiert wie in meinem Lebenslauf.',
     skillGroups: [
       {
-        title: 'Programmiersprachen',
-        items: ['JavaScript', 'TypeScript', 'Python', 'P4'],
+        title: 'AI, ML & LLM',
+        items: [
+          'Machine Learning',
+          'Google Gemini (Multi-Key, Failover)',
+          'Anthropic API',
+          'Prompt- und Context-Engineering',
+          'Modellquantisierung',
+        ],
       },
       {
-        title: 'Frameworks und Bibliotheken',
-        items: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js', 'Redux', 'React Native', 'Three.js'],
+        title: 'RAG & lokale Modelle',
+        items: [
+          'ChromaDB',
+          'Sentence-Transformers (mehrsprachig)',
+          'Embeddings',
+          'Retrieval-Pipelines',
+          'Ollama (Qwen2.5)',
+        ],
       },
       {
-        title: 'Datenbanken und Cloud',
-        items: ['Appwrite', 'Firebase', 'MongoDB'],
+        title: 'Programmierung & Frontend',
+        items: [
+          'Python',
+          'JavaScript',
+          'TypeScript',
+          'C++',
+          'HTML/CSS',
+          'ReactJS',
+          'React Native',
+          'Three.js',
+          'ElectronJS',
+          'Capacitor 8',
+          'Vite',
+          'Tailwind CSS',
+          'Redux',
+        ],
       },
       {
-        title: 'Tools und Plattformen',
-        items: ['BMv2', 'p4c-bm2-ss', 'ElectronJS', 'Jupyter', 'Postman', 'Docker', 'GitHub'],
+        title: 'Backend & Daten',
+        items: [
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'PostgreSQL',
+          'MySQL',
+          'Appwrite',
+          'Firebase',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'DevOps & Netzwerke',
+        items: [
+          'Git',
+          'GitHub',
+          'Docker',
+          'Docker Compose',
+          'Linux',
+          'Jira',
+          'P4',
+          'BMv2',
+          'Mininet',
+        ],
       },
     ],
     cards: [
       {
-        category: 'Inventory-Ops-Anwendung',
-        kind: 'Bestandsmanagement-Plattform',
-        title: 'StockPilot',
+        category: 'Eigenes Projekt, von der Idee bis zum Betrieb',
+        kind: 'Deutschlernplattform, A1 bis C2',
+        title: 'DeutschFlow AI / Sprako',
         summary:
-          'Eine moderne Inventory-Ops-Anwendung fuer kleine Teams, die Bestand, Bestellungen, Lieferanten, Alerts, Audit-Log und Teamzugriff in einem Workspace vereint.',
+          'Eine Deutschlernplattform, die ich selbst gebaut habe und betreibe. Sie ist als Beta unter sprako.app mit 10 bis 15 Nutzern erreichbar.',
         highlights: [
-          'Unterstuetzt Inventory-CRUD, Wareneingang, Ausgabe und Korrekturen sowie PO-Status von none bis cancelled.',
-          'Bietet Lieferantenverwaltung mit Lead Times, Low-Stock und Overdue Alerts sowie vollstaendige Transaktionshistorie.',
-          'Enthaelt Rollen und Zugriffsfreigaben fuer admin, manager und viewer plus CSV-Import/Export, JSON-Export und Light-Dark-Mode.',
+          'Verwaltung mehrerer Gemini-API-Schlüssel mit Validierung pro Schlüssel, automatischem Failover, Cooldowns und begrenzten Retries. Die Anwendung bleibt ohne konfigurierten Schlüssel vollständig nutzbar.',
+          'Sechsstufiger Grammatikpfad von A1 bis C2, über Gemini generierter Wortschatz und ein Spaced-Repetition-System mit XP, Streaks und Tracking schwacher Bereiche.',
+          'Appwrite-Backend mit Authentifizierung, Lernstand, Follow-Funktion und Benachrichtigungen.',
         ],
-        tech: [...sharedCards.taskflow.tech],
-        href: sharedCards.taskflow.href,
-        cta: 'Projektseite oeffnen',
+        tech: [...projectStacks.deutschflow],
+        links: [
+          { label: 'sprako.app öffnen', href: productUrl },
+          { label: 'Projektseite', href: projectPaths.deutschflow },
+        ],
       },
       {
-        category: 'KI-Sprachlern-App',
-        kind: 'Mobile-first-Plattform fuer Deutschlernen',
-        title: 'DeutschFlow AI',
+        category: 'Retrieval-Augmented Generation',
+        kind: 'Deutscher Wortschatz, offline lauffähig',
+        title: 'RAG-Chatbot für das Deutschlernen',
         summary:
-          'Eine Deutschlern-App mit Spaced Repetition, CEFR-Grammatikpfad, Stories, Woerterbuch-Tools, Phrasebook-Uebungen, Social Learning und Gemini-only-KI-Funktionen.',
+          'Retrieval-Augmented Generation über deutschen Wortschatz. Läuft ohne Internetverbindung.',
         highlights: [
-          'Statische Flashcards, Grammatik, Phrasebook, Woerterbuch, manuelle Karten und Social Learning funktionieren ohne KI-Key.',
-          'Nutzt Gemini fuer Story-Generierung, Grammatik-Deep-Dives, Tagesvokabeln, Woerterbuch-Ergaenzung, Flashcard-Autofill und Wortvorschlaege.',
-          'Unterstuetzt mehrere lokale Gemini-Keys mit Labels, Validierungsstatus, Standardmodell, automatischem Fallback, Cooldowns und begrenzten Retries.',
+          'Wortschatz und Beispielsätze aus OpenThesaurus und Tatoeba werden mit mehrsprachigen Sentence-Transformer-Embeddings in ChromaDB indexiert.',
+          'Die Retrieval-Pipeline liefert semantisch ähnlichen Wortschatz und Verwendungsbeispiele zu einer Lernanfrage.',
+          'Generierung über die Anthropic-API, mit lokalem Qwen2.5 über Ollama als Offline-Fallback.',
         ],
-        tech: [...sharedCards.deutschflow.tech],
-        href: sharedCards.deutschflow.href,
-        cta: 'Projektseite oeffnen',
+        tech: [...projectStacks.ragChatbot],
+        links: [
+          { label: 'sprako.app öffnen', href: productUrl },
+          { label: 'Projektseite', href: projectPaths.ragChatbot },
+        ],
       },
       {
-        category: 'Netzwerksicherheitsforschung',
-        kind: 'In-Network-ML-IDS',
-        title: 'Neural-Network IDS in P4 (BMv2)',
+        category: 'Maschinelles Lernen in programmierbaren Datenebenen',
+        kind: 'In-Network Intrusion Detection',
+        title: 'Neuronales Netz als In-Network-IDS in P4 (BMv2)',
         summary:
-          'Ein End-to-End-IDS-Repository, bei dem Paket- und Flow-Features in Fixed-Point-Werte quantisiert und direkt in P4-Datenebenen ausgewertet werden, von Training bis BMv2-Runtime-Metriken.',
+          'Paket- und Flow-Features werden auf Festkomma quantisiert und direkt in der P4-Datenebene klassifiziert, vom Modelltraining bis zu Laufzeitmetriken unter BMv2.',
         highlights: [
-          'Kombiniert quantisierte neuronale Modelle mit dynamischer Kommando-Generierung von Model-JSON zu BMv2-CLI-Eintraegen.',
-          'Unterstuetzt Single-Switch- und Multi-Switch-BMv2-Deployments inklusive profilbasierter dynamischer Runtime-Templates.',
-          'Bietet reproduzierbare Evaluationsskripte mit Confusion-Matrix-Ausgaben und Vergleich von Offline- zu Online-Metriken.',
+          'Paket- und Flow-Features auf Festkomma quantisiert und direkt in der P4-Datenebene ausgewertet. Umfasst Modelltraining, Deployment und Erhebung von Laufzeitmetriken unter BMv2.',
+          'BMv2-CLI-Runtime-Einträge werden automatisch aus dem Modell-JSON erzeugt. Deployment auf Single-Switch- und Multi-Switch-Topologien.',
+          'Evaluation über reproduzierbare Skripte mit Confusion-Matrizen und einem Vergleich von Offline- und Online-Metriken.',
         ],
-        tech: [...sharedCards.housing.tech],
-        href: sharedCards.housing.href,
-        cta: 'Projektseite oeffnen',
+        tech: [...projectStacks.p4Ids],
+        links: [
+          { label: 'GitHub-Repo', href: repoUrls.p4Ids },
+          { label: 'Projektseite', href: projectPaths.p4Ids },
+        ],
       },
     ],
   },
   fr: {
-    kicker: 'Projets',
-    title: 'Mini-produits, experiences et outils de workflow.',
+    kicker: 'Pages projet',
+    title: 'Applications LLM, pipelines de recherche et machine learning dans le plan de donnees.',
     text:
-      'Une petite collection de projets conceptuels et doutils de workflow. Chaque carte ouvre un projet dedie dans un nouvel onglet avec une mise en page propre.',
+      'Les trois projets de mon CV, chacun avec sa page. Le premier est un produit en beta, le deuxieme un pipeline de recherche qui fonctionne hors ligne, le troisieme un reseau de neurones qui classe les paquets dans un switch P4.',
     skillsHeading: 'Stack technique et competences',
-    skillsText:
-      'Technologies et outils principaux utilises au quotidien sur des workflows frontend, backend, reseau, automatisation et delivery.',
+    skillsText: 'Groupees comme sur mon CV.',
     skillGroups: [
       {
-        title: 'Langages de programmation',
-        items: ['JavaScript', 'TypeScript', 'Python', 'P4'],
+        title: 'AI, ML & LLM',
+        items: [
+          'Machine Learning',
+          'Google Gemini (multi-cles, bascule)',
+          'Anthropic API',
+          'Prompt et context engineering',
+          'Quantification de modeles',
+        ],
       },
       {
-        title: 'Frameworks et bibliotheques',
-        items: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js', 'Redux', 'React Native', 'Three.js'],
+        title: 'RAG et modeles locaux',
+        items: [
+          'ChromaDB',
+          'Sentence-Transformers (multilingue)',
+          'Embeddings',
+          'Pipelines de recherche',
+          'Ollama (Qwen2.5)',
+        ],
       },
       {
-        title: 'Bases de donnees et cloud',
-        items: ['Appwrite', 'Firebase', 'MongoDB'],
+        title: 'Programmation et frontend',
+        items: [
+          'Python',
+          'JavaScript',
+          'TypeScript',
+          'C++',
+          'HTML/CSS',
+          'ReactJS',
+          'React Native',
+          'Three.js',
+          'ElectronJS',
+          'Capacitor 8',
+          'Vite',
+          'Tailwind CSS',
+          'Redux',
+        ],
       },
       {
-        title: 'Outils et plateformes',
-        items: ['BMv2', 'p4c-bm2-ss', 'ElectronJS', 'Jupyter', 'Postman', 'Docker', 'GitHub'],
+        title: 'Backend et donnees',
+        items: [
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'PostgreSQL',
+          'MySQL',
+          'Appwrite',
+          'Firebase',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'DevOps et reseau',
+        items: [
+          'Git',
+          'GitHub',
+          'Docker',
+          'Docker Compose',
+          'Linux',
+          'Jira',
+          'P4',
+          'BMv2',
+          'Mininet',
+        ],
       },
     ],
     cards: [
       {
-        category: 'Application operations stock',
-        kind: 'Plateforme de gestion inventaire',
-        title: 'StockPilot',
+        category: 'Projet personnel, de l idee a l exploitation',
+        kind: 'Plateforme d apprentissage de l allemand, A1 a C2',
+        title: 'DeutschFlow AI / Sprako',
         summary:
-          'Une application moderne pour petites equipes qui regroupe stock, bons de commande, fournisseurs, alertes, historique et acces equipe dans un seul espace.',
+          'Une plateforme d apprentissage de l allemand que j ai construite et que j exploite moi-meme. Elle est en beta sur sprako.app avec 10 a 15 utilisateurs.',
         highlights: [
-          'Couvre CRUD inventaire, reception, sortie, ajustement de stock et suivi de statut PO.',
-          'Ajoute annuaire fournisseurs avec lead times, notifications low stock et retards de reception, et historique complet.',
-          'Gere les roles admin, manager, viewer avec approbation d acces, export CSV/JSON et mode clair/sombre.',
+          "Gestion de plusieurs cles d API Gemini avec validation par cle, bascule automatique, cooldowns et retries limites. L'application reste entierement utilisable sans cle configuree.",
+          'Parcours de grammaire a six niveaux de A1 a C2, vocabulaire genere via Gemini, et un systeme de repetition espacee avec XP, series et suivi des points faibles.',
+          'Backend Appwrite avec authentification, etat d apprentissage, fonction de suivi et notifications.',
         ],
-        tech: [...sharedCards.taskflow.tech],
-        href: sharedCards.taskflow.href,
-        cta: 'Ouvrir la page projet',
+        tech: [...projectStacks.deutschflow],
+        links: [
+          { label: 'Ouvrir sprako.app', href: productUrl },
+          { label: 'Page projet', href: projectPaths.deutschflow },
+        ],
       },
       {
-        category: 'Application d apprentissage avec IA',
-        kind: 'Plateforme mobile-first pour apprendre l allemand',
-        title: 'DeutschFlow AI',
+        category: 'Retrieval-Augmented Generation',
+        kind: 'Vocabulaire allemand, fonctionne hors ligne',
+        title: 'Chatbot RAG pour apprendre l allemand',
         summary:
-          'Une app d apprentissage de l allemand avec repetition espacee, parcours grammaire CEFR, histoires, dictionnaire, phrasebook, social learning et IA Gemini-only.',
+          'Retrieval-Augmented Generation sur du vocabulaire allemand. Fonctionne sans connexion internet.',
         highlights: [
-          'Les flashcards, la grammaire, le phrasebook, le dictionnaire, les cartes manuelles et le social learning restent disponibles sans cle IA.',
-          'Utilise Gemini pour les histoires, les explications de grammaire, le vocabulaire quotidien, l enrichissement dictionnaire, l autofill des flashcards et les suggestions de mots.',
-          'Gere plusieurs cles Gemini locales avec labels, validation, modele par defaut, fallback automatique, cooldowns et retries limites.',
+          'Vocabulaire et phrases d exemple d OpenThesaurus et Tatoeba indexes dans ChromaDB avec des embeddings Sentence-Transformer multilingues.',
+          'Le pipeline de recherche renvoie du vocabulaire et des exemples d usage semantiquement proches de la requete.',
+          "Generation via l'API Anthropic, avec Qwen2.5 en local via Ollama comme repli hors ligne.",
         ],
-        tech: [...sharedCards.deutschflow.tech],
-        href: sharedCards.deutschflow.href,
-        cta: 'Ouvrir la page projet',
+        tech: [...projectStacks.ragChatbot],
+        links: [
+          { label: 'Ouvrir sprako.app', href: productUrl },
+          { label: 'Page projet', href: projectPaths.ragChatbot },
+        ],
       },
       {
-        category: 'Recherche securite reseau',
-        kind: 'IDS ML in-network',
-        title: 'Neural-Network IDS in P4 (BMv2)',
+        category: 'Machine learning dans les plans de donnees programmables',
+        kind: 'Detection d intrusion in-network',
+        title: 'Reseau de neurones comme IDS in-network en P4 (BMv2)',
         summary:
-          'Un depot IDS de bout en bout ou les features paquets et flux sont quantifiees en fixed-point et evaluees directement dans le plan de donnees P4, du training aux metriques BMv2.',
+          'Les features de paquets et de flux sont quantifiees en virgule fixe et classees directement dans le plan de donnees P4, de l entrainement aux metriques runtime sous BMv2.',
         highlights: [
-          'Combine des familles de modeles quantifies avec generation dynamique de commandes depuis model JSON vers BMv2 CLI.',
-          'Supporte des deploiements BMv2 single-switch et multi-switch avec templates runtime dynamiques par profil.',
-          'Fournit des scripts reproductibles avec sorties confusion-matrix et comparaison metriques offline versus online.',
+          'Features de paquets et de flux quantifiees en virgule fixe et evaluees directement dans le plan de donnees P4. Couvre entrainement, deploiement et collecte de metriques runtime sous BMv2.',
+          'Entrees runtime BMv2 CLI generees automatiquement a partir du JSON du modele. Deploye sur des topologies single-switch et multi-switch.',
+          'Evaluation par scripts reproductibles avec matrices de confusion et comparaison des metriques offline et online.',
         ],
-        tech: [...sharedCards.housing.tech],
-        href: sharedCards.housing.href,
-        cta: 'Ouvrir la page projet',
+        tech: [...projectStacks.p4Ids],
+        links: [
+          { label: 'Depot GitHub', href: repoUrls.p4Ids },
+          { label: 'Page projet', href: projectPaths.p4Ids },
+        ],
       },
     ],
   },
   es: {
-    kicker: 'Proyectos',
-    title: 'Mini productos, experimentos y herramientas de flujo de trabajo.',
+    kicker: 'Paginas de proyecto',
+    title: 'Aplicaciones LLM, pipelines de recuperacion y machine learning en el plano de datos.',
     text:
-      'Una pequena coleccion de proyectos conceptuales y herramientas de flujo de trabajo. Cada tarjeta abre un proyecto dedicado en una nueva pestana con su propio diseno.',
+      'Los tres proyectos de mi CV, cada uno con su pagina. El primero es un producto en beta, el segundo un pipeline de recuperacion que funciona sin conexion, el tercero una red neuronal que clasifica paquetes dentro de un switch P4.',
     skillsHeading: 'Stack tecnico y habilidades',
-    skillsText:
-      'Tecnologias y herramientas principales que uso en flujos de frontend, backend, redes, automatizacion y entrega.',
+    skillsText: 'Agrupadas igual que en mi CV.',
     skillGroups: [
       {
-        title: 'Lenguajes de programacion',
-        items: ['JavaScript', 'TypeScript', 'Python', 'P4'],
+        title: 'AI, ML & LLM',
+        items: [
+          'Machine Learning',
+          'Google Gemini (multiclave, conmutacion)',
+          'Anthropic API',
+          'Prompt y context engineering',
+          'Cuantizacion de modelos',
+        ],
       },
       {
-        title: 'Frameworks y bibliotecas',
-        items: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js', 'Redux', 'React Native', 'Three.js'],
+        title: 'RAG y modelos locales',
+        items: [
+          'ChromaDB',
+          'Sentence-Transformers (multilingue)',
+          'Embeddings',
+          'Pipelines de recuperacion',
+          'Ollama (Qwen2.5)',
+        ],
       },
       {
-        title: 'Bases de datos y cloud',
-        items: ['Appwrite', 'Firebase', 'MongoDB'],
+        title: 'Programacion y frontend',
+        items: [
+          'Python',
+          'JavaScript',
+          'TypeScript',
+          'C++',
+          'HTML/CSS',
+          'ReactJS',
+          'React Native',
+          'Three.js',
+          'ElectronJS',
+          'Capacitor 8',
+          'Vite',
+          'Tailwind CSS',
+          'Redux',
+        ],
       },
       {
-        title: 'Herramientas y plataformas',
-        items: ['BMv2', 'p4c-bm2-ss', 'ElectronJS', 'Jupyter', 'Postman', 'Docker', 'GitHub'],
+        title: 'Backend y datos',
+        items: [
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'PostgreSQL',
+          'MySQL',
+          'Appwrite',
+          'Firebase',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'DevOps y redes',
+        items: [
+          'Git',
+          'GitHub',
+          'Docker',
+          'Docker Compose',
+          'Linux',
+          'Jira',
+          'P4',
+          'BMv2',
+          'Mininet',
+        ],
       },
     ],
     cards: [
       {
-        category: 'Aplicacion de operaciones de inventario',
-        kind: 'Plataforma de gestion de stock',
-        title: 'StockPilot',
+        category: 'Proyecto propio, de la idea a la operacion',
+        kind: 'Plataforma para aprender aleman, A1 a C2',
+        title: 'DeutschFlow AI / Sprako',
         summary:
-          'Una app moderna para equipos pequenos que unifica inventario, ordenes de compra, proveedores, alertas, historial y acceso del equipo en un solo lugar.',
+          'Una plataforma para aprender aleman que construi y opero yo mismo. Esta en beta en sprako.app con 10 a 15 usuarios.',
         highlights: [
-          'Incluye CRUD de inventario, flujos de recibir/emitir/ajustar stock y seguimiento del estado de PO.',
-          'Agrega directorio de proveedores con lead times, alertas de bajo stock y recepciones retrasadas, e historial completo.',
-          'Soporta roles admin/manager/viewer, aprobaciones de acceso, importacion-exportacion CSV, exportacion JSON y modo claro/oscuro.',
+          'Gestion de varias claves de la API de Gemini con validacion por clave, conmutacion automatica, cooldowns y reintentos limitados. La aplicacion sigue siendo plenamente utilizable sin ninguna clave configurada.',
+          'Ruta de gramatica de seis niveles de A1 a C2, vocabulario generado con Gemini y un sistema de repeticion espaciada con XP, rachas y seguimiento de puntos debiles.',
+          'Backend en Appwrite con autenticacion, estado de aprendizaje, funcion de seguir y notificaciones.',
         ],
-        tech: [...sharedCards.taskflow.tech],
-        href: sharedCards.taskflow.href,
-        cta: 'Abrir pagina del proyecto',
+        tech: [...projectStacks.deutschflow],
+        links: [
+          { label: 'Abrir sprako.app', href: productUrl },
+          { label: 'Pagina del proyecto', href: projectPaths.deutschflow },
+        ],
       },
       {
-        category: 'App de aprendizaje con IA',
-        kind: 'Plataforma mobile-first para aprender aleman',
-        title: 'DeutschFlow AI',
+        category: 'Retrieval-Augmented Generation',
+        kind: 'Vocabulario aleman, funciona sin conexion',
+        title: 'Chatbot RAG para aprender aleman',
         summary:
-          'Una app para aprender aleman con repeticion espaciada, ruta gramatical CEFR, historias, diccionario, practica de frases, aprendizaje social y funciones IA solo con Gemini.',
+          'Retrieval-Augmented Generation sobre vocabulario aleman. Funciona sin conexion a internet.',
         highlights: [
-          'Flashcards, gramatica, phrasebook, diccionario, tarjetas manuales y aprendizaje social siguen disponibles sin clave de IA.',
-          'Usa Gemini para historias, explicaciones gramaticales, vocabulario diario, enriquecimiento del diccionario, autofill de flashcards y sugerencias de palabras.',
-          'Gestiona varias claves Gemini locales con etiquetas, validacion, modelo predeterminado, fallback automatico, cooldowns y reintentos limitados.',
+          'Vocabulario y frases de ejemplo de OpenThesaurus y Tatoeba indexados en ChromaDB con embeddings multilingues de Sentence-Transformers.',
+          'El pipeline de recuperacion devuelve vocabulario y ejemplos de uso semanticamente similares a la consulta.',
+          'Generacion mediante la API de Anthropic, con Qwen2.5 local a traves de Ollama como respaldo sin conexion.',
         ],
-        tech: [...sharedCards.deutschflow.tech],
-        href: sharedCards.deutschflow.href,
-        cta: 'Abrir pagina del proyecto',
+        tech: [...projectStacks.ragChatbot],
+        links: [
+          { label: 'Abrir sprako.app', href: productUrl },
+          { label: 'Pagina del proyecto', href: projectPaths.ragChatbot },
+        ],
       },
       {
-        category: 'Investigacion de seguridad de red',
-        kind: 'IDS ML in-network',
-        title: 'Neural-Network IDS in P4 (BMv2)',
+        category: 'Machine learning en planos de datos programables',
+        kind: 'Deteccion de intrusiones in-network',
+        title: 'Red neuronal como IDS in-network en P4 (BMv2)',
         summary:
-          'Un repositorio IDS de extremo a extremo donde las caracteristicas de paquetes y flujos se cuantizan a fixed-point y se evalua la inferencia dentro del plano de datos P4, del entrenamiento a metricas BMv2.',
+          'Las caracteristicas de paquetes y flujos se cuantizan a punto fijo y se clasifican directamente dentro del plano de datos P4, del entrenamiento a las metricas de ejecucion en BMv2.',
         highlights: [
-          'Combina familias de modelos cuantizados con generacion dinamica de comandos desde model JSON hacia BMv2 CLI.',
-          'Soporta despliegues BMv2 single-switch y multi-switch con plantillas runtime dinamicas segun perfil.',
-          'Incluye scripts reproducibles con salidas de confusion matrix y comparacion de metricas offline frente a online.',
+          'Caracteristicas de paquetes y flujos cuantizadas a punto fijo y evaluadas directamente en el plano de datos P4. Cubre entrenamiento, despliegue y recogida de metricas de ejecucion en BMv2.',
+          'Entradas de runtime de la CLI de BMv2 generadas automaticamente a partir del JSON del modelo. Desplegado en topologias de un switch y de varios switches.',
+          'Evaluacion mediante scripts reproducibles con matrices de confusion y comparacion de metricas offline y online.',
         ],
-        tech: [...sharedCards.housing.tech],
-        href: sharedCards.housing.href,
-        cta: 'Abrir pagina del proyecto',
+        tech: [...projectStacks.p4Ids],
+        links: [
+          { label: 'Repositorio GitHub', href: repoUrls.p4Ids },
+          { label: 'Pagina del proyecto', href: projectPaths.p4Ids },
+        ],
       },
     ],
   },

@@ -10,7 +10,7 @@ export const ExperienceSection = memo(function ExperienceSection({
   experienceCopy,
 }: ExperienceSectionProps) {
   return (
-    <section className="section" id="experience">
+    <section className="section section-soft" id="experience">
       <div className="container">
         <SectionHeading
           kicker={experienceCopy.kicker}

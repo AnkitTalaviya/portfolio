@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "npm run build:hero-animations && vite",
-    "build": "npm run build:hero-animations && tsc && vite build",
+    "build": "npm run build:hero-animations && tsc && vite build && npm run build:ssr && npm run prerender",
     "build:hero-animations": "node scripts/build-hero-animation-pack.mjs",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
+    "prerender": "node scripts/prerender.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {

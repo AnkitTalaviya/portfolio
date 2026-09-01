@@ -15,8 +15,11 @@ function getStoredOutfitId() {
 }
 
 export function useOutfitTransition() {
-  const [activeOutfitId, setActiveOutfitId] = useState<OutfitPaletteId>(getStoredOutfitId);
+  // Starts on the fallback palette so the first client render matches the prerendered
+  // markup, then picks up the stored palette once hydration is done.
+  const [activeOutfitId, setActiveOutfitId] = useState<OutfitPaletteId>(fallbackOutfitId);
   const [isOutfitTransitioning, setIsOutfitTransitioning] = useState(false);
+  const isFirstPersistRun = useRef(true);
   const outfitTransitionStartRef = useRef(0);
   const outfitTransitionTimerRef = useRef<number | null>(null);
   const activePalette =
@@ -57,6 +60,15 @@ export function useOutfitTransition() {
   };
 
   useEffect(() => {
+    setActiveOutfitId(getStoredOutfitId());
+  }, []);
+
+  useEffect(() => {
+    if (isFirstPersistRun.current) {
+      isFirstPersistRun.current = false;
+      return;
+    }
+
     window.localStorage.setItem('portfolio-outfit-palette', activeOutfitId);
   }, [activeOutfitId]);
 

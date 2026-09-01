@@ -1,7 +1,12 @@
 export type ProjectDetailId =
-  | 'stockpilot'
-  | 'neural-network-ids-in-p4-bmv2'
-  | 'deutschflow-ai';
+  | 'deutschflow-ai'
+  | 'rag-chatbot-german'
+  | 'neural-network-ids-in-p4-bmv2';
+
+type ProjectDetailLink = {
+  label: string;
+  href: string;
+};
 
 type ProjectDetail = {
   id: ProjectDetailId;
@@ -9,7 +14,7 @@ type ProjectDetail = {
   kind: string;
   title: string;
   summary: string;
-  repoUrl: string;
+  links: ProjectDetailLink[];
   stats: Array<{ title: string; description: string }>;
   overviewTitle: string;
   overviewText: string;
@@ -20,179 +25,190 @@ type ProjectDetail = {
   outcomes: string[];
 };
 
+export const projectDetailOrder: ProjectDetailId[] = [
+  'deutschflow-ai',
+  'rag-chatbot-german',
+  'neural-network-ids-in-p4-bmv2',
+];
+
 export const projectDetailsCopy: Record<ProjectDetailId, ProjectDetail> = {
-  stockpilot: {
-    id: 'stockpilot',
-    category: 'Inventory operations app',
-    kind: 'Stock management platform',
-    title: 'StockPilot',
-    summary:
-      'StockPilot is a modern inventory operations app for small teams. It helps teams track stock levels, purchase orders, suppliers, alerts, and workspace access in one practical system with clear day-to-day workflows.',
-    repoUrl: 'https://github.com/AnkitTalaviya/StockPilot',
-    stats: [
-      {
-        title: 'Inventory control',
-        description: 'on-hand and on-order tracking with receive, issue, and adjust operations',
-      },
-      {
-        title: 'PO + supplier ops',
-        description: 'PO lifecycle, supplier lead times, and overdue receiving visibility',
-      },
-      {
-        title: 'Team + alerts',
-        description: 'role-based access, approval flows, notifications, and audit history',
-      },
-    ],
-    overviewTitle: 'What the project does',
-    overviewText:
-      'StockPilot centralizes inventory and purchasing operations. Teams can manage items, monitor low-stock risks, track purchase order progress, review receiving timelines, and maintain a full transaction record for accountability.',
-    bullets: [
-      'Includes signup and login with Firebase Authentication and role-aware workspace access.',
-      'Supports inventory CRUD, stock movement operations, and PO statuses from ordered to received.',
-      'Adds CSV import/export, JSON export, and notifications for low stock and overdue receipts.',
-    ],
-    modulesTitle: 'Core modules',
-    modules: [
-      {
-        title: 'Inventory workspace',
-        description: 'Teams create, edit, and manage stock while tracking on-hand and on-order quantities.',
-      },
-      {
-        title: 'Suppliers and purchase orders',
-        description: 'Supplier contacts, lead times, and PO status changes keep procurement work organized.',
-      },
-      {
-        title: 'Notifications and audit log',
-        description: 'Low-stock and delayed-delivery alerts plus transaction history improve daily operations.',
-      },
-    ],
-    stack: ['React 19', 'Vite', 'Tailwind CSS', 'TanStack Query', 'Firebase'],
-    outcomes: [
-      'Improves stock visibility and receiving coordination for small operations teams.',
-      'Connects authentication, role-based access, and Firestore data into one practical workflow.',
-      'Provides an extensible base for alerts, forecasting, barcode workflows, and reporting.',
-    ],
-  },
-  'neural-network-ids-in-p4-bmv2': {
-    id: 'neural-network-ids-in-p4-bmv2',
-    category: 'Network security research',
-    kind: 'In-network ML IDS',
-    title: 'Neural-Network IDS in P4 (BMv2)',
-    summary:
-      'This repository implements an intrusion detection system where packet and flow features are converted into fixed-point values and evaluated directly in P4 data planes. It connects training, quantization, command generation, BMv2 deployment, and runtime metrics.',
-    repoUrl: 'https://github.com/AnkitTalaviya/nn_p4_nids',
-    stats: [
-      {
-        title: 'Inline IDS',
-        description: 'classification inside BMv2 pipeline instead of external ML service',
-      },
-      {
-        title: 'Model families',
-        description: 'from compact 5-4-1 to larger 9-32-16-1 profiles',
-      },
-      {
-        title: 'Reproducible runs',
-        description: 'single-switch and multi-switch scripts with confusion-matrix outputs',
-      },
-    ],
-    overviewTitle: 'What the repository contains',
-    overviewText:
-      'The project provides end-to-end artifacts for practical in-network ML inference in P4. Models are trained and quantized in Python, translated to BMv2 CLI commands, and then evaluated in single-switch and multi-switch runtime setups.',
-    bullets: [
-      'Model families: 5-4-1, 9-4-1, 9-8-1, 9-8-4-1, 9_32_1, and 9_32_16_1.',
-      'Dynamic runtime template for profile-aware command and stage generation.',
-      'Evaluation outputs with logs, CSV files, and confusion-matrix-driven metrics.',
-    ],
-    modulesTitle: 'End-to-end pipeline',
-    modules: [
-      {
-        title: 'Train and quantize',
-        description: 'Train/export neural models in notebooks and write quantized model JSON files.',
-      },
-      {
-        title: 'Generate and deploy',
-        description: 'Convert model JSON to BMv2 CLI commands, compile P4, and deploy simple_switch stages.',
-      },
-      {
-        title: 'Replay and evaluate',
-        description: 'Execute sample replays, collect runtime logs and CSVs, and compare offline and online metrics.',
-      },
-    ],
-    stack: ['P4 (BMv2)', 'Python', 'Jupyter', 'p4c-bm2-ss', 'Fixed-point inference'],
-    outcomes: [
-      'Demonstrates practical in-network ML inference with deterministic integer arithmetic.',
-      'Enables direct offline quantized vs online BMv2 behavior comparison.',
-      'Surfaces deployment-stage effects across larger multi-switch architectures.',
-    ],
-  },
   'deutschflow-ai': {
     id: 'deutschflow-ai',
-    category: 'AI language learning app',
-    kind: 'Mobile-first German learning platform',
-    title: 'DeutschFlow AI',
+    category: 'Own project, concept to operation',
+    kind: 'German learning platform, A1 to C2',
+    title: 'DeutschFlow AI / Sprako',
     summary:
-      'DeutschFlow AI is a mobile-first German learning app with spaced repetition, structured grammar, stories, dictionary tools, phrasebook practice, social learning, and Gemini-only AI features. Static learning flows continue to work without an AI key.',
-    repoUrl: 'https://github.com/AnkitTalaviya/DeutschFlow',
+      'A German learning platform I built and run myself. It is in beta at sprako.app with 10 to 15 users. The app pairs a six-level grammar path with a spaced repetition system and optional Gemini-generated content.',
+    links: [{ label: 'Open sprako.app', href: 'https://sprako.app' }],
     stats: [
       {
-        title: 'Static + AI modes',
-        description: 'flashcards, grammar, phrasebook, dictionary, and social learning work without AI',
+        title: 'Multi-key Gemini access',
+        description: 'per-key validation, automatic failover, cooldowns and bounded retries',
       },
       {
-        title: 'Gemini-only AI',
-        description: 'story generation, grammar deep dives, dictionary enrichment, and flashcard autofill',
+        title: 'A1 to C2 grammar path',
+        description: 'six levels, Gemini-generated vocabulary, spaced repetition with XP and streaks',
       },
       {
-        title: 'Multi-key fallback',
-        description: 'local Gemini key storage with validation states, cooldowns, and bounded retries',
+        title: 'Appwrite backend',
+        description: 'authentication, learning state, follow function and notifications',
       },
     ],
     overviewTitle: 'What the app does',
     overviewText:
-      'DeutschFlow AI helps learners practice German through daily review, grammar progression, story reading, phrase practice, dictionary lookup, and social progress sharing. Gemini features are optional and gated behind locally configured user keys.',
+      'Learners work through a grammar path from A1 to C2, review vocabulary on a spaced repetition schedule, and track XP, streaks and weak areas. Gemini generates vocabulary and explanations. Every key is validated on its own, and the application stays fully usable when no key is configured.',
     bullets: [
-      'Includes spaced-repetition flashcards, manual card creation, daily focus, XP, streaks, and weak-area tracking.',
-      'Provides an A1-C2 grammar path with lessons, examples, quizzes, and optional Gemini explanations.',
-      'Supports Gemini story generation, vocabulary extraction, dictionary enrichment, themed flashcards, and word suggestions.',
-      'Stores raw Gemini keys only on the current device while Appwrite keeps non-sensitive setup metadata.',
+      'Management of multiple Gemini API keys with per-key validation, automatic failover, cooldowns and bounded retries.',
+      'Six-level grammar path from A1 to C2, with vocabulary generated via Gemini.',
+      'Spaced repetition system with XP, streaks and weak-area tracking.',
+      'Appwrite backend with authentication, learning state, follow function and notifications.',
     ],
     modulesTitle: 'Core modules',
     modules: [
       {
-        title: 'Learning dashboard',
-        description: 'Tracks streaks, XP, weekly progress, study history, daily focus, and weak areas.',
+        title: 'Grammar path',
+        description: 'Six levels from A1 to C2, with lessons and exercises per level.',
       },
       {
-        title: 'Flashcards and grammar',
-        description: 'Combines SRS vocabulary review with structured CEFR grammar lessons, quizzes, and examples.',
-      },
-      {
-        title: 'Stories, phrasebook, and dictionary',
-        description: 'Offers story reading, vocabulary extraction, scenario phrase practice, audio playback, and public-source dictionary lookups.',
+        title: 'Spaced repetition',
+        description: 'Review scheduling for vocabulary, with XP, streaks and weak-area tracking.',
       },
       {
         title: 'Gemini key management',
-        description: 'Manages multiple Gemini keys, labels, validation states, default model selection, and automatic fallback.',
+        description:
+          'Several keys are held locally, validated one by one, and swapped automatically on failure with cooldowns and bounded retries.',
       },
       {
-        title: 'Social learning',
-        description: 'Supports following, followers, notifications, mutual-progress visibility, and scalable relationship documents.',
+        title: 'Appwrite backend',
+        description:
+          'Authentication, learning state, the follow function between learners, and notifications.',
       },
     ],
     stack: [
-      'React 19',
+      'ReactJS 19',
       'TypeScript',
       'Vite',
       'Tailwind CSS',
-      'Appwrite Auth',
-      'Appwrite Database',
-      'Google Gemini',
       'Capacitor 8',
+      'Appwrite',
+      'Google Gemini API',
     ],
     outcomes: [
-      'Delivered a production-oriented learning experience that remains fully usable in static mode when AI credentials are unavailable.',
-      'Migrated the backend foundation to Appwrite for authentication, database-backed learning state, and scalable social data management.',
-      'Implemented responsible Gemini integration with local key management, validation states, fallback controls, and clear user-facing availability handling.',
+      'The application is in beta at sprako.app with 10 to 15 users.',
+      'Learning stays available when no Gemini key is configured, so the app does not depend on an AI provider being reachable.',
+      'Built and operated end to end, from concept through to running the deployed app.',
+    ],
+  },
+  'rag-chatbot-german': {
+    id: 'rag-chatbot-german',
+    category: 'Retrieval-Augmented Generation',
+    kind: 'German vocabulary, runs offline',
+    title: 'RAG chatbot for German learning',
+    summary:
+      'Retrieval-Augmented Generation over German vocabulary. Vocabulary and example sentences are indexed in ChromaDB with multilingual Sentence-Transformer embeddings, and the chatbot runs without an internet connection.',
+    links: [{ label: 'Open sprako.app', href: 'https://sprako.app' }],
+    stats: [
+      {
+        title: 'Vector index',
+        description: 'OpenThesaurus and Tatoeba data in ChromaDB',
+      },
+      {
+        title: 'Multilingual embeddings',
+        description: 'Sentence-Transformer embeddings for semantic retrieval',
+      },
+      {
+        title: 'Offline fallback',
+        description: 'local Qwen2.5 through Ollama when the Anthropic API is not reachable',
+      },
+    ],
+    overviewTitle: 'What the project does',
+    overviewText:
+      'A learner asks a question about a German word or phrase. The retrieval pipeline searches the vector index and returns semantically similar vocabulary and usage examples. Those results are passed to the generation step, which answers the question.',
+    bullets: [
+      'Vocabulary and example sentences from OpenThesaurus and Tatoeba indexed in ChromaDB using multilingual Sentence-Transformer embeddings.',
+      'The retrieval pipeline returns semantically similar vocabulary and usage examples for a learner query.',
+      'Generation via the Anthropic API, with local Qwen2.5 through Ollama as an offline fallback.',
+      'Runs without an internet connection.',
+    ],
+    modulesTitle: 'Pipeline',
+    modules: [
+      {
+        title: 'Index',
+        description:
+          'OpenThesaurus and Tatoeba entries are embedded with a multilingual Sentence-Transformer model and written to ChromaDB.',
+      },
+      {
+        title: 'Retrieve',
+        description:
+          'A learner query is embedded with the same model and matched against the index for semantically similar vocabulary and usage examples.',
+      },
+      {
+        title: 'Generate',
+        description:
+          'Retrieved context is passed to the Anthropic API, or to local Qwen2.5 through Ollama when running offline.',
+      },
+    ],
+    stack: ['Python', 'ChromaDB', 'Sentence-Transformers', 'Anthropic API', 'Ollama', 'Qwen2.5'],
+    outcomes: [
+      'Answers are grounded in retrieved vocabulary and real example sentences rather than in the model alone.',
+      'The same pipeline runs against a hosted API or a local model, so it works without an internet connection.',
+    ],
+  },
+  'neural-network-ids-in-p4-bmv2': {
+    id: 'neural-network-ids-in-p4-bmv2',
+    category: 'Machine learning in programmable data planes',
+    kind: 'In-network intrusion detection',
+    title: 'Neural network as in-network IDS in P4 (BMv2)',
+    summary:
+      'Packet and flow features are quantised to fixed point and evaluated directly in the P4 data plane. The project covers model training, deployment and the collection of runtime metrics under BMv2.',
+    links: [{ label: 'GitHub repo', href: 'https://github.com/AnkitTalaviya/nn_p4_nids' }],
+    stats: [
+      {
+        title: 'Inference in the data plane',
+        description: 'fixed-point classification inside the BMv2 pipeline',
+      },
+      {
+        title: 'Generated runtime entries',
+        description: 'BMv2 CLI entries produced automatically from the model JSON',
+      },
+      {
+        title: 'Reproducible evaluation',
+        description: 'confusion matrices and offline versus online metric comparison',
+      },
+    ],
+    overviewTitle: 'What the project does',
+    overviewText:
+      'A neural network is trained in Python and quantised to fixed point. The weights are turned into BMv2 CLI runtime entries, which are loaded into a P4 program so that classification happens inside the switch pipeline instead of in an external service.',
+    bullets: [
+      'Packet and flow features quantised to fixed point and evaluated directly in the P4 data plane.',
+      'Covers model training, deployment and collection of runtime metrics under BMv2.',
+      'BMv2 CLI runtime entries generated automatically from the model JSON.',
+      'Deployed on single-switch and multi-switch topologies.',
+      'Evaluation through reproducible scripts with confusion matrices and a comparison of offline and online metrics.',
+    ],
+    modulesTitle: 'End-to-end pipeline',
+    modules: [
+      {
+        title: 'Train and quantise',
+        description:
+          'The model is trained in PyTorch and its weights are quantised to fixed point, then written to a model JSON file.',
+      },
+      {
+        title: 'Generate and deploy',
+        description:
+          'BMv2 CLI runtime entries are generated from the model JSON, the P4 program is compiled, and the switch is loaded on single-switch and multi-switch topologies in Mininet.',
+      },
+      {
+        title: 'Replay and evaluate',
+        description:
+          'Reproducible scripts replay traffic, collect runtime metrics, and produce confusion matrices comparing offline and online results.',
+      },
+    ],
+    stack: ['Python', 'P4', 'BMv2', 'Mininet', 'PyTorch'],
+    outcomes: [
+      'Classification runs inside the switch pipeline with fixed-point integer arithmetic instead of in an external service.',
+      'Offline quantised results and online BMv2 results can be compared directly from the same scripts.',
+      'The same model deploys on single-switch and multi-switch topologies.',
     ],
   },
 };

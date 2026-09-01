@@ -25,6 +25,12 @@ export const ContactSection = memo(function ContactSection({
             <div className="contact-list">
               <a href={siteProfile.emailHref}>{siteProfile.email}</a>
               <a href={siteProfile.phoneHref}>{siteProfile.phoneLabel}</a>
+              <a href={siteProfile.gitHubUrl} target="_blank" rel="noreferrer">
+                {siteProfile.gitHubLabel}
+              </a>
+              <a href={siteProfile.productUrl} target="_blank" rel="noreferrer">
+                {siteProfile.productLabel}
+              </a>
               <span>{contactCopy.location}</span>
             </div>
           </div>
@@ -40,6 +46,14 @@ export const ContactSection = memo(function ContactSection({
               rel="noreferrer"
             >
               {contactCopy.actions.linkedIn}
+            </a>
+            <a
+              className="btn btn-ghost"
+              href={siteProfile.gitHubUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {contactCopy.actions.gitHub}
             </a>
             <a className="btn btn-ghost" href="#top">
               {contactCopy.actions.backToTop}
